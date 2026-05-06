@@ -16,26 +16,35 @@ def admin_data():
     stock_data = {'Bekasi': {}, 'Jakarta Utara': {}, 'Cikarang': {}}
     all_inventories = Inventory.query.all()
     
-    # Pre-calculate demand for all products (Last 30 days avg)
-    demand_ref_date = datetime.now() - timedelta(days=30)
-    product_demands = {}
+    # Pre-calculate demand PER LOKASI (Benchmark April 2026)
+    ref_start = datetime(2026, 4, 1, 0, 0, 0)
+    ref_end = datetime(2026, 4, 30, 23, 59, 59)
     
-    # Get all sold items in last 30 days
-    recent_sales = db.session.query(OrderItem.product_name, db.func.sum(OrderItem.qty_kg)).join(Order).filter(
-        Order.status.in_(['Serahkan ke Jasa Kirim', 'Selesai']),
-        Order.created_at >= demand_ref_date
-    ).group_by(OrderItem.product_name).all()
+    # Ambil penjualan per produk PER LOKASI
+    loc_product_demands = {loc: {} for loc in stock_data.keys()}
+    recent_sales = db.session.query(
+        Order.warehouse_location, 
+        OrderItem.product_name, 
+        db.func.sum(OrderItem.qty_kg)
+    ).join(Order).filter(
+        Order.created_at >= ref_start,
+        Order.created_at <= ref_end
+    ).group_by(Order.warehouse_location, OrderItem.product_name).all()
     
-    for prod, total_qty in recent_sales:
-        product_demands[prod] = total_qty
+    for loc, prod, total_qty in recent_sales:
+        if loc in loc_product_demands:
+            loc_product_demands[loc][prod] = total_qty
         
     for inv in all_inventories:
         if inv.product_name not in stock_data[inv.warehouse_location]:
+            # Ambil demand spesifik untuk lokasi ini
+            loc_demand = loc_product_demands.get(inv.warehouse_location, {}).get(inv.product_name, 800.0)
+            
             stock_data[inv.warehouse_location][inv.product_name] = {
                 "stock": 0, 
                 "zone": inv.zone, 
                 "rack": inv.rack,
-                "demand": product_demands.get(inv.product_name, 800.0), # Default 800 if no sales
+                "demand": loc_demand,
                 "batches": []
             }
         

@@ -32,37 +32,34 @@ def batch_assign():
 @warehouse_bp.route('/api/warehouse/update_status', methods=['POST'])
 def warehouse_update_status():
     if session.get('role') not in ['wh_supervisor', 'wh_operator']: return jsonify({"error": "Unauthorized"}), 401
+    
+    from routes.utils import validate_order_transition, deduct_stock_fifo, is_authorized_for_location
     data = request.get_json()
     order = Order.query.get(data['order_id'])
-    if order and order.warehouse_location == session.get('location'):
-        order.status = data['status']
+    
+    if not order: return jsonify({"error": "Order not found"}), 404
+    
+    # 1. Validasi Keamanan Lokasi
+    if not is_authorized_for_location(session, order.warehouse_location):
+        return jsonify({"error": "Akses Ditolak. Anda tidak bertugas di gudang ini."}), 403
         
-        # Potong stok fisik saat diserahkan ke Jasa Kirim (FIFO System)
-        if data['status'] == 'Serahkan ke Jasa Kirim':
-            for item in order.items:
-                # Ambil semua batch produk yang ada, urutkan berdasarkan tanggal masuk (FIFO)
-                batches = Inventory.query.filter_by(
-                    product_name=item.product_name, 
-                    warehouse_location=order.warehouse_location
-                ).order_by(Inventory.inbound_date.asc()).all()
+    # 2. Validasi Alur Status (State Machine)
+    if not validate_order_transition(order.status, data['status']):
+        return jsonify({"error": f"Status tidak valid. Tidak bisa mengubah dari {order.status} ke {data['status']}"}), 400
+
+    old_status = order.status
+    order.status = data['status']
+    
+    # 3. Eksekusi FIFO saat barang keluar (Status Akhir)
+    if data['status'] == 'Selesai' and old_status != 'Selesai':
+        for item in order.items:
+            success, msg = deduct_stock_fifo(order.warehouse_location, item.product_name, item.qty_kg)
+            if not success:
+                db.session.rollback()
+                return jsonify({"error": msg}), 400
                 
-                remaining_to_deduct = item.qty_kg
-                for batch in batches:
-                    if remaining_to_deduct <= 0: break
-                    
-                    if batch.stock_kg >= remaining_to_deduct:
-                        batch.stock_kg -= remaining_to_deduct
-                        remaining_to_deduct = 0
-                    else:
-                        remaining_to_deduct -= batch.stock_kg
-                        batch.stock_kg = 0
-                
-                # Opsional: Hapus batch yang stoknya 0 (kecuali mungkin yang terakhir agar rack tetap terdeteksi)
-                # Di sini kita biarkan saja agar data rack tetap ada untuk UI.
-                    
-        db.session.commit()
-        return jsonify({"success": True})
-    return jsonify({"success": False}), 403
+    db.session.commit()
+    return jsonify({"success": True})
 
 @warehouse_bp.route('/api/warehouse/batch_update', methods=['POST'])
 def warehouse_batch_update():
@@ -125,15 +122,9 @@ def update_inbound_status():
         if task.status != 'Selesai Inbound':  # Prevent double addition
             task.status = data['status']
             if task.status == 'Selesai Inbound':
-                # Re-check capacity before finalizing (Sum all batches)
-                CAPACITY = 1600.0
-                total_stock = db.session.query(db.func.sum(Inventory.stock_kg)).filter_by(
-                    product_name=task.product_name, 
-                    warehouse_location=task.warehouse_location
-                ).scalar() or 0.0
-                
-                if (total_stock + task.qty_kg) > CAPACITY:
-                    return jsonify({"error": f"Kapasitas tidak mencukupi! Maksimal {CAPACITY} Kg."}), 400
+                from routes.utils import check_warehouse_capacity
+                if not check_warehouse_capacity(task.warehouse_location, task.product_name, task.qty_kg):
+                    return jsonify({"error": "Kapasitas tidak mencukupi! Maksimal 1600kg."}), 400
                 
                 # Cari batch yang ada untuk ambil data zone/rack
                 existing = Inventory.query.filter_by(
