@@ -1,0 +1,285 @@
+<div id="page-landing" class="page-wrapper active">
+    <div class="min-h-screen flex flex-col bg-accent-cream selection:bg-accent-gold/30">
+        
+        <!-- Premium Navigation -->
+        <nav class="fixed top-0 w-full z-50 transition-all duration-700 px-6 py-8" id="landing-nav">
+            <div class="container mx-auto flex justify-between items-center bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] px-10 py-5 shadow-2xl shadow-black/5">
+                <a href="#" class="flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-coffee-950 rounded-2xl flex items-center justify-center text-accent-gold shadow-2xl shadow-black/20 group-hover:rotate-12 transition-transform duration-700">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M4 19h16v2H4zM20 3H4v10c0 2.21-1.79 4-4 4h6c-2.21 0-4-1.79-4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm-2 7h-2V5h2v5zM5 5h11v8c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V5z"/></svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-black text-white tracking-tighter leading-none uppercase font-display drop-shadow-sm">Sebiji Kopi</span>
+                        <span class="text-[8px] font-black text-accent-gold uppercase tracking-[0.5em] mt-1">Origin Supply</span>
+                    </div>
+                </a>
+                
+                <div class="hidden lg:flex items-center gap-12">
+                    <a href="#filosofi" class="text-[10px] font-black text-coffee-400 hover:text-coffee-950 uppercase tracking-[0.3em] transition-all hover-gold">Filosofi</a>
+                    <a href="#katalog" class="text-[10px] font-black text-coffee-400 hover:text-coffee-950 uppercase tracking-[0.3em] transition-all hover-gold">Koleksi Biji</a>
+                    <a href="#kemitraan" class="text-[10px] font-black text-coffee-400 hover:text-coffee-950 uppercase tracking-[0.3em] transition-all hover-gold">Kemitraan</a>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <button onclick="navigateTo('page-login')" class="group relative px-8 py-4 bg-coffee-950 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl shadow-coffee-950/20 hover:bg-black transition-all duration-500 overflow-hidden btn-premium">
+                        <span class="relative z-10">Partner Portal</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Cinematic Hero -->
+        <header class="relative h-screen flex items-center justify-center overflow-hidden bg-coffee-950">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-cover bg-center opacity-25 animate-slow-zoom" 
+                     style="background-image: url('/static/images/reference_beans.png');"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-coffee-950/70 via-transparent to-coffee-950"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <div class="inline-block px-8 py-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full mb-12 animate-fade-in-up" style="animation-delay: 0.2s">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.5em] uppercase">The Art of Pure Origin</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-[9rem] font-black text-white leading-[0.85] mb-12 tracking-tighter font-display uppercase animate-fade-in-up" style="animation-delay: 0.4s">
+                    Taste the <br> <span class="text-accent-gold italic font-light tracking-normal lowercase">Untouched</span> Earth.
+                </h1>
+                
+                <p class="text-lg md:text-xl text-coffee-100/60 max-w-2xl mx-auto mb-16 font-medium leading-relaxed animate-fade-in-up" style="animation-delay: 0.6s">
+                    Kami tidak hanya mengirimkan biji kopi; kami membawa sepenggal cerita dari dataran tinggi Nusantara langsung ke dalam setiap cangkir Anda.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style="animation-delay: 0.8s">
+                    <a href="#katalog" class="bg-accent-gold text-coffee-950 px-12 py-6 rounded-[2.5rem] font-black text-[11px] uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 shadow-2xl shadow-accent-gold/20 flex items-center gap-4 group">
+                        Jelajahi Koleksi
+                        <svg class="w-4 h-4 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+
+        </header>
+
+        <!-- Filosofi Section -->
+        <section id="filosofi" class="py-40 bg-white relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-1/3 h-full bg-accent-cream/50 -skew-x-12 translate-x-1/2"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                    <div class="relative">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
+                        </div>
+                        <div class="absolute -bottom-12 -right-12 w-64 h-64 bg-accent-gold p-12 rounded-[2.5rem] hidden md:flex flex-col justify-end shadow-2xl animate-float">
+                            <span class="text-4xl font-black text-coffee-950 leading-none mb-4">100%</span>
+                            <span class="text-[10px] font-black text-coffee-950 uppercase tracking-widest leading-tight">Ethically Sourced Direct from Farmers</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-12">
+                        <div class="space-y-6">
+                            <span class="text-accent-gold text-[10px] font-black tracking-[0.5em] uppercase">Sebuah Dedikasi</span>
+                            <h2 class="text-5xl md:text-7xl font-black text-coffee-950 font-display leading-[0.9] uppercase tracking-tighter">Kurasi Biji <br> Tanpa Kompromi.</h2>
+                        </div>
+                        <p class="text-lg text-coffee-500 leading-relaxed font-medium">
+                            Di Sebiji Kopi, kami percaya bahwa kualitas rasa dimulai dari rasa hormat terhadap tanah dan petani. Setiap biji yang kami sediakan telah melewati proses kurasi ketat—mulai dari pemilihan ceri merah hingga proses pasca-panen yang presisi. Kami adalah jembatan antara keajaiban alam dan standar bisnis Anda.
+                        </p>
+                        <div class="grid grid-cols-2 gap-8 pt-8">
+                            <div>
+                                <h4 class="text-2xl font-black text-coffee-950 mb-2">Single Origin</h4>
+                                <p class="text-[10px] font-bold text-coffee-400 uppercase tracking-widest">Karakter otentik tiap daerah</p>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-black text-coffee-950 mb-2">Small Batches</h4>
+                                <p class="text-[10px] font-bold text-coffee-400 uppercase tracking-widest">Kesegaran yang selalu terjaga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Gallery -->
+        <section id="katalog" class="py-40 bg-accent-cream relative">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+                    <div class="space-y-6">
+                        <span class="text-accent-gold text-[10px] font-black tracking-[0.5em] uppercase">Koleksi Terbatas</span>
+                        <h2 class="text-5xl md:text-7xl font-black text-coffee-950 font-display leading-[0.9] uppercase tracking-tighter">Biji Pilihan <br> Musim Ini.</h2>
+                    </div>
+                    <p class="text-coffee-400 font-bold max-w-sm text-[11px] uppercase tracking-widest leading-loose">
+                        Kami menghadirkan varietas unggulan dengan profil rasa yang unik, siap menjadi identitas baru bagi kedai kopi Anda.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Arabika Gayo Specialty -->
+                    <div class="group cursor-pointer">
+                        <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-700">
+                            <img src="https://images.pexels.com/photos/33220158/pexels-photo-33220158.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt="Arabika Gayo Specialty">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all"></div>
+                            <div class="absolute bottom-6 left-6 flex flex-col gap-2">
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">Specialty</span>
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">Aceh Gayo</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-black text-coffee-950 uppercase tracking-tighter">Arabika Gayo Specialty</h3>
+                            <p class="text-[10px] text-coffee-400 font-medium leading-relaxed italic line-clamp-2">
+                                Aroma floral yang kuat dengan tingkat keasaman yang seimbang dan sweet finish.
+                            </p>
+                            <div class="flex justify-between items-baseline pt-2">
+                                <p class="text-coffee-950 text-[11px] font-black uppercase tracking-widest">Rp 120K<span class="text-[8px] opacity-50 ml-1">/kg</span></p>
+                                <svg class="w-4 h-4 text-accent-gold opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Robusta Dampit Premium -->
+                    <div class="group cursor-pointer">
+                        <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-700">
+                            <img src="https://images.pexels.com/photos/34085/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt="Robusta Dampit Premium">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all"></div>
+                            <div class="absolute bottom-6 left-6 flex flex-col gap-2">
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">Premium</span>
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">Malang Dampit</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-black text-coffee-950 uppercase tracking-tighter">Robusta Dampit Premium</h3>
+                            <p class="text-[10px] text-coffee-400 font-medium leading-relaxed italic line-clamp-2">
+                                Karakter body yang tebal dengan sentuhan rasa cokelat dan kacang yang dominan.
+                            </p>
+                            <div class="flex justify-between items-baseline pt-2">
+                                <p class="text-coffee-950 text-[11px] font-black uppercase tracking-widest">Rp 85K<span class="text-[8px] opacity-50 ml-1">/kg</span></p>
+                                <svg class="w-4 h-4 text-accent-gold opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Liberika Jambi Eksotik -->
+                    <div class="group cursor-pointer">
+                        <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-700">
+                            <img src="https://images.pexels.com/photos/4109743/pexels-photo-4109743.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt="Liberika Jambi Eksotik">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all"></div>
+                            <div class="absolute bottom-6 left-6 flex flex-col gap-2">
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">Exotic</span>
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">Jambi</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-black text-coffee-950 uppercase tracking-tighter">Liberika Jambi Eksotik</h3>
+                            <p class="text-[10px] text-coffee-400 font-medium leading-relaxed italic line-clamp-2">
+                                Sensasi rasa nangka yang unik dengan aroma woody yang menenangkan.
+                            </p>
+                            <div class="flex justify-between items-baseline pt-2">
+                                <p class="text-coffee-950 text-[11px] font-black uppercase tracking-widest">Rp 150K<span class="text-[8px] opacity-50 ml-1">/kg</span></p>
+                                <svg class="w-4 h-4 text-accent-gold opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Excelsa House Blend -->
+                    <div class="group cursor-pointer">
+                        <div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-700">
+                            <img src="https://images.pexels.com/photos/7859464/pexels-photo-7859464.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt="Excelsa House Blend">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all"></div>
+                            <div class="absolute bottom-6 left-6 flex flex-col gap-2">
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">House Blend</span>
+                                <span class="w-fit bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-lg text-[7px] font-black uppercase tracking-widest border border-white/20">Mixed Origin</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-black text-coffee-950 uppercase tracking-tighter">Excelsa House Blend</h3>
+                            <p class="text-[10px] text-coffee-400 font-medium leading-relaxed italic line-clamp-2">
+                                Perpaduan harmonis antara Excelsa dan Arabika dengan profil rasa kompleks.
+                            </p>
+                            <div class="flex justify-between items-baseline pt-2">
+                                <p class="text-coffee-950 text-[11px] font-black uppercase tracking-widest">Rp 95K<span class="text-[8px] opacity-50 ml-1">/kg</span></p>
+                                <svg class="w-4 h-4 text-accent-gold opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-24 text-center">
+                    <button onclick="navigateTo('page-login')" class="inline-flex items-center gap-6 px-12 py-6 bg-white border border-coffee-100 rounded-[2.5rem] font-black text-[11px] uppercase tracking-[0.3em] text-coffee-950 hover:bg-coffee-950 hover:text-white transition-all duration-700 shadow-xl shadow-black/5 group">
+                        Unduh Katalog Partner 2026
+                        <svg class="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kemitraan Section -->
+        <section id="kemitraan" class="pt-24 pb-32 bg-coffee-950 text-white overflow-hidden relative">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-cover bg-center opacity-25 bg-fixed" 
+                     style="background-image: url('/static/images/reference_beans.png');"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-coffee-950/70 via-transparent to-coffee-950"></div>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <div class="max-w-4xl mx-auto space-y-12">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.6em] uppercase">Partner Excellence</span>
+                    <h2 class="text-6xl md:text-[8rem] font-black leading-[0.85] tracking-tighter font-display uppercase">Tumbuh Bersama <br> Setiap Biji.</h2>
+                    <p class="text-xl text-coffee-300 leading-relaxed font-medium max-w-2xl mx-auto">
+                        Kami melayani lebih dari sekadar pengiriman. Kami menyediakan ekosistem pasokan yang stabil, transparan, dan terkurasi untuk kesuksesan bisnis kopi Anda.
+                    </p>
+                    <div class="pt-12">
+                        <button onclick="navigateTo('page-login')" class="bg-white text-coffee-950 px-16 py-8 rounded-[3rem] font-black text-[12px] uppercase tracking-[0.4em] hover:bg-accent-gold transition-all duration-700 shadow-3xl shadow-white/5 active:scale-95 btn-premium">
+                            Daftar Menjadi Partner
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mt-20 pt-20 border-t border-white/5 opacity-50 text-[10px] font-black uppercase tracking-[0.3em]">
+                    <div class="space-y-4">
+                        <span class="text-accent-gold text-3xl">500+</span>
+                        <p>Kemitraan B2B</p>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-accent-gold text-3xl">12k+</span>
+                        <p>Ton Terdistribusi</p>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-accent-gold text-3xl">100%</span>
+                        <p>Traceability</p>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-accent-gold text-3xl">24h</span>
+                        <p>Response Time</p>
+                    </div>
+                </div>
+                <!-- Unified Footer -->
+                <div class="mt-40 pt-12 border-t border-white/10 opacity-40">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                        <p class="text-[9px] font-black uppercase tracking-[0.4em]">&copy; 2026 Sebiji Kopi Indonesia. All rights reserved.</p>
+                        <div class="flex gap-10 text-[9px] font-black uppercase tracking-[0.4em]">
+                            <a href="#" class="hover:text-accent-gold transition">Terms</a>
+                            <a href="#" class="hover:text-accent-gold transition">Privacy</a>
+                            <a href="#" class="hover:text-accent-gold transition">Instagram</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('landing-nav');
+        if (window.scrollY > 50) {
+            nav.classList.remove('py-8');
+            nav.classList.add('py-4');
+        } else {
+            nav.classList.remove('py-4');
+            nav.classList.add('py-8');
+        }
+    });
+</script>

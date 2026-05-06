@@ -1,0 +1,415 @@
+<div id="page-warehouse" class="page-wrapper">
+    <div class="flex h-screen bg-accent-cream overflow-hidden relative selection:bg-accent-gold/30">
+
+        <!-- Sidebar Warehouse -->
+        <aside id="wh-sidebar" class="w-72 overflow-hidden whitespace-nowrap bg-coffee-950 text-coffee-100 flex flex-col flex-shrink-0 transition-all duration-700 shadow-3xl z-30">
+            <div id="wh-sidebar-header" class="p-6 text-white flex flex-col justify-center border-b border-white/5 h-24">
+                <div class="text-[9px] uppercase tracking-[0.5em] text-accent-gold mb-2 font-black opacity-80 font-display">Logistics Hub &bull; <span id="warehouse-role-display" class="text-white">Role</span></div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center backdrop-blur-2xl border border-white/10 text-accent-gold shadow-2xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <span id="warehouse-loc-display" class="text-xl font-display font-black tracking-tight uppercase">Center</span>
+                </div>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto py-6 px-6 space-y-1">
+                <div id="warehouse-user-greeting" class="px-4 mb-4 text-[8px] font-black text-accent-gold uppercase tracking-[0.3em] border-b border-white/5 pb-3 opacity-60 italic whitespace-normal leading-relaxed">Authenticating...</div>
+                
+                <div class="text-[9px] font-black text-coffee-500 uppercase tracking-[0.4em] px-4 mb-4">Operations</div>
+                <button onclick="switchWhTab('tab-picking')" id="btn-tab-picking" class="wh-nav-btn active flex items-center gap-4 w-full px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 opacity-50 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg> Dispatch & Pack
+                </button>
+                <button onclick="switchWhTab('tab-inbound')" id="btn-tab-inbound" class="wh-nav-btn flex items-center gap-4 w-full px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 opacity-50 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg> Stock Intake
+                </button>
+
+                <div id="sidebar-header-master" class="text-[9px] font-black text-coffee-500 uppercase tracking-[0.4em] px-4 mb-4 mt-6">Management</div>
+                <button onclick="switchWhTab('tab-layout')" id="btn-tab-layout" class="wh-nav-btn flex items-center gap-4 w-full px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 opacity-50 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg> Facility Map
+                </button>
+                <button onclick="switchWhTab('tab-opname')" id="btn-tab-opname" class="wh-nav-btn flex items-center gap-4 w-full px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 opacity-50 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg> Audit Check
+                </button>
+                <button onclick="switchWhTab('tab-sdm')" id="btn-tab-sdm" class="wh-nav-btn flex items-center gap-4 w-full px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 opacity-50 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg> Workforce
+                </button>
+                <button onclick="switchWhTab('tab-reports')" id="btn-tab-reports" class="wh-nav-btn flex items-center gap-4 w-full px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 opacity-50 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> Analytics
+                </button>
+                <button onclick="switchWhTab('tab-ai')" id="btn-tab-ai" class="wh-nav-btn flex items-center gap-4 w-full px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 opacity-50 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg> AI Predict
+                </button>
+            </nav>
+
+            <div class="p-6 border-t border-white/5 space-y-3">
+                <div class="live-clock text-[9px] font-black text-center text-accent-gold/60 bg-white/5 border border-white/10 px-5 py-4 rounded-2xl shadow-inner uppercase tracking-[0.3em] flex flex-col items-center justify-center gap-2 font-display"></div>
+                <button onclick="safeLogout()" class="w-full flex justify-center items-center gap-3 bg-red-500/5 text-red-500 hover:bg-red-500 hover:text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 active:scale-95 border border-red-500/20">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg> End Session
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Warehouse -->
+        <main class="flex-1 overflow-y-auto p-6 md:p-12 relative bg-accent-cream w-full transition-all duration-700">
+
+            <!-- 1. Picking Tab -->
+            <div id="tab-picking" class="wh-tab-content active transition-all duration-500">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                    <div class="flex items-center gap-6">
+                        <button onclick="toggleSidebar()" class="p-4 bg-white rounded-2xl shadow-xl shadow-black/5 border border-coffee-100 hover:bg-coffee-950 hover:text-white transition-all group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                        <div class="flex flex-col">
+                            <h2 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Order Fulfillment</h2>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">Active picking and packing queue</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-2 rounded-2xl border border-coffee-50 shadow-xl shadow-black/5">
+                        <label for="wh-picking-month" class="text-[9px] font-black text-coffee-300 uppercase tracking-widest pl-4 hidden sm:block">Fulfillment Cycle</label>
+                        <input type="month" id="wh-picking-month" onchange="loadWarehouseData('picking')" class="border-none rounded-xl px-5 py-3 text-[11px] font-black text-coffee-950 uppercase tracking-widest outline-none bg-accent-cream/50 hover:bg-accent-cream transition-all">
+                    </div>
+                </div>
+
+                <div id="batch-controls-container" class="bg-coffee-950 text-white p-6 rounded-[2rem] shadow-3xl mb-12 flex flex-col md:flex-row items-center justify-between gap-8 sticky top-0 z-50 hidden border border-white/5 backdrop-blur-3xl bg-opacity-95">
+                    <div class="flex items-center gap-5 w-full md:w-auto">
+                        <input type="checkbox" id="check-all-orders" onchange="toggleAllOrders(this)" class="w-6 h-6 rounded-lg cursor-pointer bg-white/10 border-white/20 text-accent-gold focus:ring-accent-gold">
+                        <span class="text-[11px] font-black uppercase tracking-widest">Select All (Batch Action)</span>
+                    </div>
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <select id="batch-status-select" class="bg-white border border-coffee-100 text-coffee-950 text-[10px] font-black uppercase tracking-widest rounded-xl focus:ring-accent-gold focus:border-accent-gold block px-6 py-4 outline-none appearance-none cursor-pointer shadow-inner">
+                            <option value="" disabled selected>Update Status...</option>
+                            <option value="Ambil Barang">🏃‍♂️ Pick Items</option>
+                            <option value="Packing">📦 Secure Pack</option>
+                            <option value="QC">🔍 Quality Check</option>
+                            <option value="Minta Persetujuan/Approval Pengiriman">✅ Request Approval</option>
+                            <option value="Serahkan ke Jasa Kirim">🚚 Courier Handover</option>
+                        </select>
+                        <button onclick="executeBatchUpdate()" class="bg-accent-gold hover:bg-white text-coffee-950 px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl transition-all active:scale-95 btn-premium">Apply</button>
+                    </div>
+                </div>
+
+                <div id="warehouse-orders-grid" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10"></div>
+                <div id="pagination-wh-orders" class="mt-16"></div>
+                <div id="empty-warehouse-state" class="hidden text-center py-24 bg-white rounded-[4rem] shadow-3xl shadow-black/5 border border-coffee-50 mt-12">
+                    <div class="w-20 h-20 bg-accent-gold/10 text-accent-gold rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h3 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display mb-4">Operational Clear!</h3>
+                    <p class="text-coffee-300 font-bold uppercase text-[10px] tracking-widest">No pending tasks for the current cycle.</p>
+                </div>
+            </div>
+
+            <!-- 2. Inbound Tab -->
+            <div id="tab-inbound" class="wh-tab-content hidden transition-all duration-500">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                    <div class="flex items-center gap-6">
+                        <button onclick="toggleSidebar()" class="p-4 bg-white rounded-2xl shadow-xl shadow-black/5 border border-coffee-100 hover:bg-coffee-950 hover:text-white transition-all group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                        <div class="flex flex-col">
+                            <h2 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Supply Intake</h2>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">Managing incoming origin stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="warehouse-stock-management-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16"></div>
+                
+                <div class="mt-16 pt-16 border-t border-coffee-50">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                        <div class="flex flex-col">
+                            <h3 class="text-2xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Intake Tracking</h3>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">Historical intake audit trail</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-2 rounded-2xl border border-coffee-50 shadow-xl shadow-black/5">
+                            <label for="wh-inbound-month" class="text-[9px] font-black text-coffee-300 uppercase tracking-widest pl-4 hidden sm:block">Intake Period</label>
+                            <input type="month" id="wh-inbound-month" onchange="loadWarehouseData('inbound')" class="border-none rounded-xl px-5 py-3 text-[11px] font-black text-coffee-950 uppercase tracking-widest outline-none bg-accent-cream/50 hover:bg-accent-cream transition-all">
+                        </div>
+                    </div>
+                    <div id="inbound-tasks-grid" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10"></div>
+                    <div id="pagination-wh-inbound" class="mt-16"></div>
+                    <div id="empty-inbound-state" class="hidden text-center py-24 bg-white rounded-[4rem] shadow-3xl shadow-black/5 border border-coffee-50 mt-12">
+                        <p class="text-coffee-300 font-black uppercase text-[10px] tracking-widest">No intake operations recorded for this period.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Layout Tab -->
+            <div id="tab-layout" class="wh-tab-content hidden transition-all duration-500">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                    <div class="flex items-center gap-6">
+                        <button onclick="toggleSidebar()" class="p-4 bg-white rounded-2xl shadow-xl shadow-black/5 border border-coffee-100 hover:bg-coffee-950 hover:text-white transition-all group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                        <div class="flex flex-col">
+                            <h2 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Spatial Architecture</h2>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">Facility layout and volume distribution</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row gap-6 items-end lg:items-center">
+                        <div class="text-[9px] font-black uppercase tracking-[0.2em] bg-coffee-950 text-accent-gold px-6 py-3 rounded-2xl shadow-2xl border border-white/5 leading-loose">
+                            Capacity: <span class="text-white font-black">6.5 Ton</span> &bull; <span class="text-white font-black">1.6 Ton/Zone</span> &bull; <span class="text-white font-black">400 Kg/Block</span>
+                        </div>
+                        <div class="flex gap-6 text-[9px] font-black uppercase tracking-widest bg-white px-6 py-3 rounded-2xl shadow-xl shadow-black/5 border border-coffee-50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-yellow-400 rounded-sm border border-coffee-950 border-dashed"></div> Heavy Traffic
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-green-200 rounded-sm"></div> Personnel Flow
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-coffee-100/50 p-8 md:p-12 rounded-[4rem] border-2 border-black shadow-inner relative overflow-x-auto">
+                    <div class="min-w-[1000px]">
+
+                        <div class="flex min-h-[350px] mb-8 gap-8 items-stretch">
+                            <div class="w-1/5 bg-white/80 border-2 border-black border-dashed rounded-[2.5rem] p-6 flex flex-col justify-center items-center text-coffee-400 relative group">
+                                <div class="absolute inset-0 bg-coffee-950/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-[2.5rem]"></div>
+                                <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-6 h-32 bg-black rounded-xl flex items-center justify-center z-20">
+                                    <span class="text-accent-gold text-[9px] font-black -rotate-90 whitespace-nowrap tracking-[0.5em] uppercase">Primary Gate</span>
+                                </div>
+                                <svg class="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                                <span class="font-black text-[11px] uppercase tracking-[0.3em] text-center leading-relaxed text-black">Loading Dock</span>
+                            </div>
+
+                            <div class="w-1/4 bg-white p-8 rounded-[3rem] shadow-2xl shadow-black/5 border-2 border-black flex flex-col">
+                                <div class="text-center mb-6 border-b border-black/10 pb-6">
+                                    <h4 class="font-black text-coffee-950 uppercase text-xs tracking-widest">Zona A</h4>
+                                    <p class="text-[10px] text-coffee-950 font-black uppercase mt-2">Arabika Gayo</p>
+                                </div>
+                                <div id="zone-A-blocks" class="grid grid-cols-2 gap-4 flex-grow"></div>
+                            </div>
+                            
+                            <div class="w-1/12 bg-green-200/40 rounded-full border-x-4 border-white flex flex-col items-center justify-center relative">
+                                <span class="text-green-800 text-[10px] -rotate-90 font-black tracking-[0.5em] uppercase whitespace-nowrap">Personnel Path</span>
+                            </div>
+
+                            <div class="w-1/4 bg-white p-8 rounded-[3rem] shadow-2xl shadow-black/5 border-2 border-black flex flex-col">
+                                <div class="text-center mb-6 border-b border-black/10 pb-6">
+                                    <h4 class="font-black text-coffee-950 uppercase text-xs tracking-widest">Zona C</h4>
+                                    <p class="text-[10px] text-coffee-950 font-black uppercase mt-2">Liberika Jambi</p>
+                                </div>
+                                <div id="zone-C-blocks" class="grid grid-cols-2 gap-4 flex-grow"></div>
+                            </div>
+
+                            <div class="w-1/5 bg-accent-gold/10 border-2 border-black rounded-[2.5rem] p-6 flex flex-col justify-center items-center text-accent-gold group">
+                                <svg class="w-12 h-12 mb-4 opacity-40 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                                <span class="font-black text-[11px] uppercase tracking-[0.3em] text-center leading-relaxed text-black">QC & Packaging</span>
+                            </div>
+                        </div>
+
+                        <div class="h-28 bg-coffee-950 rounded-[2rem] flex items-center justify-between px-16 relative border-y-4 border-accent-gold border-dashed mb-8 shadow-3xl">
+                            <span class="text-accent-gold font-black tracking-[0.4em] uppercase text-[10px] flex items-center gap-6">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg> 
+                                Forklift Arterial
+                            </span>
+                            <div class="absolute left-[45%] top-0 bottom-0 w-1/12 flex flex-col justify-between py-2">
+                                <div class="w-full h-2 bg-white/20 rounded-full"></div>
+                                <div class="w-full h-2 bg-white/20 rounded-full"></div>
+                                <div class="w-full h-2 bg-white/20 rounded-full"></div>
+                            </div>
+                            <span class="text-accent-gold font-black tracking-[0.4em] uppercase text-[10px] flex items-center gap-6">
+                                Outbound Flow <svg class="w-8 h-8 transform scale-x-[-1]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                            </span>
+                        </div>
+
+                        <div class="flex min-h-[350px] gap-8 items-stretch">
+                            <div class="w-1/5 bg-white p-6 rounded-[2.5rem] shadow-2xl shadow-black/5 border-2 border-black flex flex-col items-center justify-center">
+                                <div class="w-16 h-16 bg-black text-accent-gold rounded-[1.25rem] mb-6 flex items-center justify-center shadow-2xl">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <span class="font-black text-black uppercase tracking-[0.3em] text-[10px] text-center leading-relaxed">Executive Office</span>
+                            </div>
+
+                            <div class="w-1/4 bg-white p-8 rounded-[3rem] shadow-2xl shadow-black/5 border-2 border-black flex flex-col">
+                                <div class="text-center mb-6 border-b border-black/10 pb-6">
+                                    <h4 class="font-black text-coffee-950 uppercase text-xs tracking-widest">Zona B</h4>
+                                    <p class="text-[10px] text-coffee-950 font-black uppercase mt-2">Robusta Dampit</p>
+                                </div>
+                                <div id="zone-B-blocks" class="grid grid-cols-2 gap-4 flex-grow"></div>
+                            </div>
+                            
+                            <div class="w-1/12 bg-green-200/40 rounded-full border-x-4 border-white flex flex-col items-center justify-center relative"></div>
+
+                            <div class="w-1/4 bg-white p-8 rounded-[3rem] shadow-2xl shadow-black/5 border-2 border-black flex flex-col">
+                                <div class="text-center mb-6 border-b border-black/10 pb-6">
+                                    <h4 class="font-black text-coffee-950 uppercase text-xs tracking-widest">Zona D</h4>
+                                    <p class="text-[10px] text-coffee-950 font-black uppercase mt-2">Excelsa Blend</p>
+                                </div>
+                                <div id="zone-D-blocks" class="grid grid-cols-2 gap-4 flex-grow"></div>
+                            </div>
+
+                            <div class="w-1/5 bg-white/50 border-2 border-black rounded-[2.5rem] p-6 flex flex-col justify-center items-center text-black">
+                                <svg class="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                                <span class="font-black text-[10px] uppercase tracking-[0.3em] text-center leading-relaxed">Pallet Storage</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Opname Tab -->
+            <div id="tab-opname" class="wh-tab-content hidden transition-all duration-500">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                    <div class="flex items-center gap-6">
+                        <button onclick="toggleSidebar()" class="p-4 bg-white rounded-2xl shadow-xl shadow-black/5 border border-coffee-100 hover:bg-coffee-950 hover:text-white transition-all group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                        <div class="flex flex-col">
+                            <h2 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Inventory Audit</h2>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">Physical stock reconciliation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[3rem] shadow-3xl shadow-black/5 border border-coffee-50 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-coffee-950 text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">
+                                <th class="p-8">Commodity</th>
+                                <th class="p-8">System Ledger</th>
+                                <th class="p-8">Physical Count (Kg)</th>
+                                <th class="p-8">Variance Rationale</th>
+                                <th class="p-8 text-center">Verification</th>
+                            </tr>
+                        </thead>
+                        <tbody id="opname-table-body" class="text-[11px] font-bold text-coffee-950"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5. SDM Tab -->
+            <div id="tab-sdm" class="wh-tab-content hidden transition-all duration-500">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                    <div class="flex items-center gap-6">
+                        <button onclick="toggleSidebar()" class="p-4 bg-white rounded-2xl shadow-xl shadow-black/5 border border-coffee-100 hover:bg-coffee-950 hover:text-white transition-all group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                        <div class="flex flex-col">
+                            <h2 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Workforce Hub</h2>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">Logistics team management</span>
+                        </div>
+                    </div>
+                    <button onclick="openSdmModal(null)" class="w-full md:w-auto bg-coffee-950 text-white px-10 py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black transition-all shadow-3xl shadow-coffee-950/20 active:scale-95 btn-premium">+ Onboard Talent</button>
+                </div>
+                <div class="bg-white rounded-[3rem] shadow-3xl shadow-black/5 border border-coffee-50 overflow-hidden overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr class="bg-coffee-950 text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">
+                                <th class="p-8">Associate Name</th>
+                                <th class="p-8">Operational Role</th>
+                                <th class="p-8">Shift Integrity</th>
+                                <th class="p-8">Channel</th>
+                                <th class="p-8 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sdm-table-body" class="text-[11px] font-bold text-coffee-950"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 6. Reports Tab -->
+            <div id="tab-reports" class="wh-tab-content hidden transition-all duration-500">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                    <div class="flex items-center gap-6">
+                        <button onclick="toggleSidebar()" class="p-4 bg-white rounded-2xl shadow-xl shadow-black/5 border border-coffee-100 hover:bg-coffee-950 hover:text-white transition-all group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                        <div class="flex flex-col">
+                            <h2 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Operational Ledger</h2>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">End-to-end supply chain analytics</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-2 rounded-2xl border border-coffee-50 shadow-xl shadow-black/5">
+                        <label for="report-month" class="text-[9px] font-black text-coffee-300 uppercase tracking-widest pl-4 hidden sm:block">Audit Cycle</label>
+                        <input type="month" id="report-month" onchange="loadReportsData()" class="border-none rounded-xl px-5 py-3 text-[11px] font-black text-coffee-950 uppercase tracking-widest outline-none bg-accent-cream/50 hover:bg-accent-cream transition-all">
+                    </div>
+                </div>
+                
+                <div id="report-summary-container" class="mb-12"></div>
+
+                <div class="mb-20">
+                    <div class="flex items-center gap-6 mb-12">
+                        <span class="w-1.5 h-10 bg-emerald-500 rounded-full"></span>
+                        <h3 class="text-2xl font-black text-coffee-950 uppercase tracking-tighter font-display">Inbound Supply Logs</h3>
+                    </div>
+                    <div class="bg-white rounded-[3rem] shadow-3xl shadow-black/5 border border-coffee-50 overflow-hidden overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[800px]">
+                            <thead>
+                                <tr class="bg-coffee-950 text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">
+                                    <th class="p-8">Timestamp</th>
+                                    <th class="p-8">Commodity</th>
+                                    <th class="p-8">Net Volume (Kg)</th>
+                                    <th class="p-8">Logistics Lead</th>
+                                    <th class="p-8">Integrity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inbound-report-body" class="text-[11px] font-bold text-coffee-950"></tbody>
+                        </table>
+                    </div>
+                    <div id="pagination-report-inbound" class="mt-12"></div>
+                </div>
+
+                <div class="mb-20">
+                    <div class="flex items-center gap-6 mb-12">
+                        <span class="w-1.5 h-10 bg-blue-500 rounded-full"></span>
+                        <h3 class="text-2xl font-black text-coffee-950 uppercase tracking-tighter font-display">Distribution Records</h3>
+                    </div>
+                    <div class="bg-white rounded-[3rem] shadow-3xl shadow-black/5 border border-coffee-50 overflow-hidden overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[800px]">
+                            <thead>
+                                <tr class="bg-coffee-950 text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">
+                                    <th class="p-8">Fulfillment Date</th>
+                                    <th class="p-8">Request ID</th>
+                                    <th class="p-8">Partner</th>
+                                    <th class="p-8">Dispatched Volume</th>
+                                </tr>
+                            </thead>
+                            <tbody id="outbound-report-body" class="text-[11px] font-bold text-coffee-950"></tbody>
+                        </table>
+                    </div>
+                    <div id="pagination-report-outbound" class="mt-12"></div>
+                </div>
+
+
+            </div>
+
+            <!-- 7. AI Tab -->
+            <div id="tab-ai" class="wh-tab-content hidden transition-all duration-500">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8">
+                    <div class="flex items-center gap-6">
+                        <button onclick="toggleSidebar()" class="p-4 bg-white rounded-2xl shadow-xl shadow-black/5 border border-coffee-100 hover:bg-coffee-950 hover:text-white transition-all group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                        <div class="flex flex-col">
+                            <h2 class="text-3xl font-black text-coffee-950 uppercase tracking-tighter font-display leading-none">Neural Insights</h2>
+                            <span class="text-[9px] font-black text-coffee-400 uppercase tracking-[0.4em] mt-2">Predictive supply chain modeling</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-2 rounded-[1.5rem] border border-coffee-50 shadow-xl shadow-black/5 flex-wrap">
+                        <input type="month" id="ai-forecast-month" class="border-none rounded-xl px-5 py-3 text-[10px] font-black text-coffee-950 uppercase tracking-widest outline-none bg-accent-cream/50 hover:bg-accent-cream transition-all">
+                        <div class="w-px h-6 bg-coffee-100 hidden sm:block"></div>
+                        <select id="ai-forecast-multiplier" class="border-none bg-transparent px-5 py-3 text-[10px] font-black text-coffee-950 uppercase tracking-widest outline-none cursor-pointer">
+                            <option value="1.0" selected>Standard (1.0x)</option>
+                            <option value="1.2">Safe (1.2x)</option>
+                            <option value="1.5">Conservative (1.5x)</option>
+                        </select>
+                        <button onclick="loadAIForecast()" class="bg-coffee-950 text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-black transition-all shadow-2xl active:scale-95 btn-premium">Analyze</button>
+                    </div>
+                </div>
+                <div id="ai-forecast-container" class="space-y-12">
+                    <div class="text-center py-32 bg-white rounded-[4rem] shadow-3xl shadow-black/5 border border-coffee-50">
+                        <div class="w-20 h-20 bg-accent-gold/10 text-accent-gold rounded-3xl flex items-center justify-center mx-auto mb-8 animate-pulse">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-coffee-950 uppercase tracking-tighter font-display mb-4">Neural Engine Standby</h3>
+                        <p class="text-coffee-300 font-bold uppercase text-[10px] tracking-[0.3em]">Initialize cycle analysis to generate predictive modeling.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
