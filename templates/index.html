@@ -8,15 +8,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         coffee: {
-                            50: '#fdfcfb', 100: '#f7f3f0', 200: '#eee5de', 300: '#decbbd', 
-                            400: '#c1a189', 500: '#a67c52', 600: '#8b6342', 700: '#704f36', 
+                            50: '#fdfcfb', 100: '#f7f3f0', 200: '#eee5de', 300: '#decbbd',
+                            400: '#c1a189', 500: '#a67c52', 600: '#8b6342', 700: '#704f36',
                             800: '#563b29', 900: '#3d2b1f', 950: '#2a1d15'
                         },
                         accent: {
@@ -64,7 +66,9 @@
             background-color: #fdfcfb;
         }
 
-        .font-display { font-family: 'Outfit', sans-serif; }
+        .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
 
         .page-wrapper {
             display: none;
@@ -143,18 +147,23 @@
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: transparent;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: rgba(42, 29, 21, 0.1);
             border-radius: 20px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: rgba(42, 29, 21, 0.3);
         }
 
-        .wh-nav-btn.active, .admin-nav-btn.active, .cust-nav-btn.active {
+        .wh-nav-btn.active,
+        .admin-nav-btn.active,
+        .cust-nav-btn.active {
             background-color: rgba(255, 255, 255, 0.05);
             color: #fff;
             border-left: 4px solid #d4af37;
@@ -162,13 +171,17 @@
             box-shadow: inset 10px 0 30px -10px rgba(212, 175, 55, 0.2);
         }
 
-        .wh-nav-btn.active svg, .admin-nav-btn.active svg, .cust-nav-btn.active svg {
+        .wh-nav-btn.active svg,
+        .admin-nav-btn.active svg,
+        .cust-nav-btn.active svg {
             opacity: 1 !important;
             color: #d4af37 !important;
             transform: scale(1.1);
         }
 
-        .wh-nav-btn.active::after, .admin-nav-btn.active::after, .cust-nav-btn.active::after {
+        .wh-nav-btn.active::after,
+        .admin-nav-btn.active::after,
+        .cust-nav-btn.active::after {
             content: '';
             width: 8px;
             height: 8px;
@@ -180,25 +193,53 @@
         }
 
         @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
         }
 
-        .wh-tab-content, .admin-tab-content, .cust-tab-content {
+        .wh-tab-content,
+        .admin-tab-content,
+        .cust-tab-content {
             display: none;
             animation: fadeInUp 0.5s ease-out forwards;
         }
 
-        .wh-tab-content.active, .admin-tab-content.active, .cust-tab-content.active {
+        .wh-tab-content.active,
+        .admin-tab-content.active,
+        .cust-tab-content.active {
             display: block;
         }
 
         @media print {
-            body * { visibility: hidden; }
-            #print-area, #print-area * { visibility: visible; }
-            #print-area { position: absolute; left: 0; top: 0; width: 100%; padding: 20px; }
-            .no-print { display: none !important; }
+            body * {
+                visibility: hidden;
+            }
+
+            #print-area,
+            #print-area * {
+                visibility: visible;
+            }
+
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .no-print {
+                display: none !important;
+            }
         }
 
         /* Modal Interactivity */
@@ -206,7 +247,8 @@
             opacity: 1;
             pointer-events: auto;
         }
-        .modal-overlay.active > div {
+
+        .modal-overlay.active>div {
             transform: scale(1);
         }
 
@@ -233,6 +275,14 @@
     {% include 'pages/admin.html' %}
     {% include 'pages/warehouse.html' %}
     {% include 'pages/modals.html' %}
+
+    <!-- Route Guard Overlay -->
+    <div id="route-guard" class="fixed inset-0 bg-[#fdfcfb] z-[9999] flex items-center justify-center transition-opacity duration-500">
+        <div class="text-center">
+            <div class="inline-block animate-spin w-12 h-12 border-4 border-coffee-100 border-t-accent-gold rounded-full mb-6"></div>
+            <p class="font-black text-coffee-800 uppercase tracking-[0.3em] text-[10px] animate-pulse">Menghubungkan ke Pusat...</p>
+        </div>
+    </div>
 
     <script>
         const PRODUCT_LIST = ['Arabika Gayo Specialty', 'Robusta Dampit Premium', 'Liberika Jambi Eksotik', 'Excelsa House Blend'];
@@ -273,12 +323,12 @@
             const totalPages = Math.ceil(totalItems / pageSize);
             if (totalPages <= 1) { container.innerHTML = ""; return; }
             let html = `<div class="flex justify-center items-center gap-3 mt-10 pb-6">`;
-            html += `<button onclick="switchPage('${context}', ${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-coffee-950 font-black text-[10px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">&larr; Prev</button>`;
+            html += `<button onclick="switchPage('${context}', ${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-coffee-950 font-black text-[12px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">&larr; Prev</button>`;
             for (let i = 1; i <= totalPages; i++) {
-                const active = i === currentPage ? 'bg-coffee-950 text-white border-coffee-950 shadow-xl shadow-coffee-200' : 'bg-white text-coffee-400 border-coffee-100 hover:bg-coffee-50 shadow-sm';
+                const active = i === currentPage ? 'bg-coffee-950 text-white border-coffee-950 shadow-xl shadow-coffee-200' : 'bg-white text-coffee-700 border-coffee-100 hover:bg-coffee-50 shadow-sm';
                 html += `<button onclick="switchPage('${context}', ${i})" class="w-12 h-12 rounded-2xl border font-black text-xs transition active:scale-90 ${active}">${i}</button>`;
             }
-            html += `<button onclick="switchPage('${context}', ${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-coffee-950 font-black text-[10px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">Next &rarr;</button>`;
+            html += `<button onclick="switchPage('${context}', ${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-coffee-950 font-black text-[12px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">Next &rarr;</button>`;
             html += `</div>`;
             container.innerHTML = html;
         }
@@ -321,9 +371,9 @@
             document.querySelectorAll('.cust-tab-content').forEach(el => { el.classList.remove('active'); el.classList.add('hidden'); });
             document.querySelectorAll('.cust-nav-btn').forEach(el => el.classList.remove('active'));
             const activeEl = document.getElementById(tabId);
-            if(activeEl) { activeEl.classList.add('active'); activeEl.classList.remove('hidden'); }
+            if (activeEl) { activeEl.classList.add('active'); activeEl.classList.remove('hidden'); }
             const activeBtn = document.getElementById(`btn-${tabId}`);
-            if(activeBtn) activeBtn.classList.add('active');
+            if (activeBtn) activeBtn.classList.add('active');
             if (tabId === 'cust-tab-profile') fillProfileForm();
             if (window.innerWidth < 1024) {
                 const sidebar = document.getElementById('cust-sidebar');
@@ -339,10 +389,10 @@
             document.getElementById('prof-phone').value = u.phone || '';
             document.getElementById('prof-address').value = u.address || '';
             document.getElementById('prof-password').value = '';
-            
+
             document.getElementById('profile-name-header').innerText = u.name || 'User';
             document.getElementById('profile-username-header').innerText = '@' + (u.username || 'user');
-            if(u.name) document.getElementById('profile-initial-circle').innerText = u.name.charAt(0).toUpperCase();
+            if (u.name) document.getElementById('profile-initial-circle').innerText = u.name.charAt(0).toUpperCase();
         }
 
         function fillWhProfileForm() {
@@ -353,18 +403,18 @@
             document.getElementById('wh-prof-phone').value = u.phone || '';
             document.getElementById('wh-prof-address').value = u.address || '';
             document.getElementById('wh-prof-password').value = '';
-            
+
             document.getElementById('wh-profile-name-header').innerText = u.name || 'Staff';
             document.getElementById('wh-profile-role-header').innerText = currentUser.job_role || currentUser.role;
-            if(u.name) document.getElementById('wh-profile-initial').innerText = u.name.charAt(0).toUpperCase();
-            
+            if (u.name) document.getElementById('wh-profile-initial').innerText = u.name.charAt(0).toUpperCase();
+
             loadMyProfileRequests();
         }
 
         function submitProfileRequest() {
             const isCustomer = currentUser.role === 'customer';
             const prefix = isCustomer ? '' : 'wh-';
-            
+
             const payload = {
                 name: document.getElementById(`${prefix}prof-name`).value.trim(),
                 email: document.getElementById(`${prefix}prof-email`).value.trim(),
@@ -410,10 +460,10 @@
                 list.innerHTML = data.map(r => `
                     <div class="flex items-center justify-between bg-accent-cream/50 p-4 rounded-xl border border-coffee-50">
                         <div class="flex flex-col">
-                            <span class="text-[8px] font-black uppercase text-coffee-300 tracking-widest">${r.date} &bull; ${r.field}</span>
-                            <span class="text-[11px] font-black text-coffee-950">${r.new_value}</span>
+                            <span class="text-[10px] font-black uppercase text-coffee-600 tracking-widest">${r.date} &bull; ${r.field}</span>
+                            <span class="text-[13px] font-black text-coffee-950">${r.new_value}</span>
                         </div>
-                        <span class="px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest ${r.status === 'Menunggu' ? 'bg-amber-100 text-amber-700' : (r.status === 'Disetujui' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700')}">
+                        <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${r.status === 'Menunggu' ? 'bg-amber-100 text-amber-700' : (r.status === 'Disetujui' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700')}">
                             ${r.status}
                         </span>
                     </div>
@@ -425,13 +475,28 @@
             submitProfileRequest();
         }
 
-        function navigateTo(pageId) {
+        function navigateTo(pageId, updateHash = true) {
+            console.log("Navigating to:", pageId, "updateHash:", updateHash);
             const wrappers = document.querySelectorAll('.page-wrapper');
             const target = document.getElementById(pageId);
             if (!target) return;
 
+            // Mapping pageId to hash
+            const hashMap = {
+                'page-landing': 'landing',
+                'page-login': 'login',
+                'page-customer': 'customer',
+                'page-admin': 'admin',
+                'page-warehouse': 'warehouse'
+            };
+
+            if (updateHash && hashMap[pageId]) {
+                window.location.hash = hashMap[pageId];
+            }
+
             wrappers.forEach(w => {
-                if (w === target) return; 
+                if (w === target) return;
+                // Keep landing visible if login is showing (it's a modal overlay)
                 if (pageId === 'page-login' && w.id === 'page-landing') return;
 
                 w.classList.remove('active');
@@ -456,7 +521,134 @@
                 initMonthPickers();
                 loadSdmDataAndWarehouse(); // Memuat data karyawan terlebih dahulu
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (updateHash) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        let isSessionChecked = false;
+
+        function checkSession() {
+            console.log("[SebijiKopi] Checking session via /api/session ...");
+            fetch('/api/session')
+                .then(res => {
+                    console.log("[SebijiKopi] Session response status:", res.status);
+                    // Handle non-OK responses (401, 404, etc.)
+                    if (!res.ok) {
+                        console.log("[SebijiKopi] No active session (status " + res.status + ")");
+                        return { success: false };
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    console.log("[SebijiKopi] Session data:", data);
+                    isSessionChecked = true;
+                    if (data && data.success) {
+                        currentUser = data;
+                        console.log("[SebijiKopi] User restored:", data.name, "role:", data.role);
+                        if (data.role === 'customer') {
+                            const el = document.getElementById('cust-name-display');
+                            if (el) el.innerText = data.name;
+                        } else if (data.role === 'wh_supervisor' || data.role === 'wh_operator') {
+                            const locEl = document.getElementById('warehouse-loc-display');
+                            const greetEl = document.getElementById('warehouse-user-greeting');
+                            const sidebar = document.getElementById('wh-sidebar');
+                            if (locEl) locEl.innerText = data.location;
+                            if (greetEl) greetEl.innerText = `Selamat datang, ${data.name}`;
+                            if (sidebar && sidebar.classList.contains('w-0')) sidebar.classList.replace('w-0', 'w-72');
+                        }
+                    } else {
+                        console.log("[SebijiKopi] No active session.");
+                        currentUser = null;
+                    }
+                    handleRouting();
+                })
+                .catch(err => {
+                    console.error("[SebijiKopi] Session check FAILED:", err);
+                    isSessionChecked = true;
+                    currentUser = null;
+                    handleRouting();
+                });
+        }
+
+        function handleRouting() {
+            if (!isSessionChecked) {
+                console.log("[SebijiKopi] Routing deferred: session not checked yet.");
+                return;
+            }
+
+            // Hide Route Guard with fade
+            const guard = document.getElementById('route-guard');
+            if (guard) {
+                guard.style.opacity = '0';
+                setTimeout(() => { if (guard) guard.style.display = 'none'; }, 500);
+            }
+            
+            const hash = window.location.hash.substring(1);
+            console.log("[SebijiKopi] Routing for hash:", hash, "| currentUser:", currentUser ? currentUser.role : "null");
+            
+            // If user is logged in and hash is empty/landing, redirect to their dashboard
+            if (currentUser && (!hash || hash === 'landing')) {
+                console.log("[SebijiKopi] User is logged in, redirecting to dashboard.");
+                const rolePages = { 'customer': 'page-customer', 'admin': 'page-admin', 'wh_supervisor': 'page-warehouse', 'wh_operator': 'page-warehouse' };
+                if (rolePages[currentUser.role]) {
+                    navigateTo(rolePages[currentUser.role], true);
+                    return;
+                }
+            }
+
+            // Handle landing sections
+            if (!hash || hash === 'landing' || ['filosofi', 'katalog', 'kemitraan'].includes(hash)) {
+                navigateTo('page-landing', false);
+                if (hash && hash !== 'landing') {
+                    setTimeout(() => {
+                        const el = document.getElementById(hash);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }, 600);
+                }
+                return;
+            }
+
+            if (hash === 'login') {
+                navigateTo('page-login', false);
+                return;
+            }
+
+            // Authentication required for these
+            if (!currentUser) {
+                console.log("[SebijiKopi] Not authenticated for protected route, redirecting to landing.");
+                navigateTo('page-landing', false);
+                window.location.hash = 'landing';
+                return;
+            }
+
+            if (hash === 'customer' && currentUser.role === 'customer') {
+                navigateTo('page-customer', false);
+            } else if (hash === 'admin' && currentUser.role === 'admin') {
+                navigateTo('page-admin', false);
+            } else if (hash === 'warehouse' && (currentUser.role === 'wh_supervisor' || currentUser.role === 'wh_operator')) {
+                navigateTo('page-warehouse', false);
+            } else {
+                console.log("[SebijiKopi] Hash mismatch, redirecting to role default.");
+                const rolePages = { 'customer': 'page-customer', 'admin': 'page-admin', 'wh_supervisor': 'page-warehouse', 'wh_operator': 'page-warehouse' };
+                if (rolePages[currentUser.role]) {
+                    navigateTo(rolePages[currentUser.role], true);
+                } else {
+                    navigateTo('page-landing', true);
+                }
+            }
+        }
+
+        window.addEventListener('hashchange', function() {
+            if (isSessionChecked) handleRouting();
+        });
+
+        // Run session check as soon as DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkSession);
+        } else {
+            checkSession();
         }
 
         function initMonthPickers() {
@@ -546,7 +738,7 @@
                 }
             }
         }
-        
+
         function loadReportsData() {
             const monthInput = document.getElementById('report-month');
             let query = '';
@@ -558,10 +750,10 @@
                 monthInput.value = mVal;
                 query = '?month=' + mVal;
             }
-            
+
             fetch('/api/warehouse/reports' + query).then(res => res.json()).then(data => {
                 if (!data.success) return console.error("Gagal memuat laporan.");
-                
+
                 // Cache data dan reset paginasi
                 globalReportInboundCache = data.inbound;
                 globalReportOutboundCache = data.outbound;
@@ -575,14 +767,14 @@
                 const inboundTotals = {};
                 const outboundTotals = {};
                 PRODUCT_LIST.forEach(p => { inboundTotals[p] = 0; outboundTotals[p] = 0; });
-                
-                globalReportInboundCache.forEach(t => { if(inboundTotals[t.product] !== undefined) inboundTotals[t.product] += t.qty; });
-                globalReportOutboundCache.forEach(o => { o.items.forEach(i => { if(outboundTotals[i.product] !== undefined) outboundTotals[i.product] += i.qty; }); });
-                
+
+                globalReportInboundCache.forEach(t => { if (inboundTotals[t.product] !== undefined) inboundTotals[t.product] += t.qty; });
+                globalReportOutboundCache.forEach(o => { o.items.forEach(i => { if (outboundTotals[i.product] !== undefined) outboundTotals[i.product] += i.qty; }); });
+
                 const summaryContainer = document.getElementById('report-summary-container');
                 if (summaryContainer) {
                     let summaryHTML = `<h3 class="font-black text-coffee-950 text-xl mb-8 flex items-center gap-3 font-display uppercase tracking-tighter"><span class="w-2.5 h-8 bg-coffee-950 rounded-full inline-block"></span> Ringkasan Volume Produk</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-8">`;
-                    
+
                     // Inbound Card
                     summaryHTML += `
                     <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-coffee-50 flex flex-col hover:shadow-xl transition-all duration-500 group relative overflow-hidden">
@@ -592,20 +784,20 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-black text-coffee-950 uppercase tracking-[0.2em] text-[10px]">Total Inbound Stok</h4>
-                                <p class="text-[9px] font-bold text-coffee-300 uppercase tracking-widest mt-0.5">Bulan Ini</p>
+                                <h4 class="font-black text-coffee-950 uppercase tracking-[0.2em] text-[12px]">Total Inbound Stok</h4>
+                                <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mt-0.5">Bulan Ini</p>
                             </div>
                         </div>
                         <div class="space-y-3 relative z-10">`;
                     PRODUCT_LIST.forEach(p => {
                         summaryHTML += `
                         <div class="flex justify-between items-center bg-coffee-50/30 p-4 rounded-2xl border border-coffee-50/50 hover:border-emerald-200 transition">
-                            <span class="text-[11px] font-black text-coffee-600 uppercase tracking-tight">${p}</span>
-                            <span class="font-black text-coffee-950 text-base">${Math.round(inboundTotals[p])} <span class="text-[10px] text-coffee-300 font-bold uppercase">Kg</span></span>
+                            <span class="text-[13px] font-black text-coffee-600 uppercase tracking-tight">${p}</span>
+                            <span class="font-black text-coffee-950 text-base">${Math.round(inboundTotals[p])} <span class="text-[12px] text-coffee-600 font-bold uppercase">Kg</span></span>
                         </div>`;
                     });
                     summaryHTML += `</div></div>`;
-                    
+
                     // Outbound Card
                     summaryHTML += `
                     <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-coffee-50 flex flex-col hover:shadow-xl transition-all duration-500 group relative overflow-hidden">
@@ -615,20 +807,20 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-black text-coffee-950 uppercase tracking-[0.2em] text-[10px]">Total Outbound Selesai</h4>
-                                <p class="text-[9px] font-bold text-coffee-300 uppercase tracking-widest mt-0.5">Bulan Ini</p>
+                                <h4 class="font-black text-coffee-950 uppercase tracking-[0.2em] text-[12px]">Total Outbound Selesai</h4>
+                                <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mt-0.5">Bulan Ini</p>
                             </div>
                         </div>
                         <div class="space-y-3 relative z-10">`;
                     PRODUCT_LIST.forEach(p => {
                         summaryHTML += `
                         <div class="flex justify-between items-center bg-coffee-50/30 p-4 rounded-2xl border border-coffee-50/50 hover:border-blue-200 transition">
-                            <span class="text-[11px] font-black text-coffee-600 uppercase tracking-tight">${p}</span>
-                            <span class="font-black text-coffee-950 text-base">${Math.round(outboundTotals[p])} <span class="text-[10px] text-coffee-300 font-bold uppercase">Kg</span></span>
+                            <span class="text-[13px] font-black text-coffee-600 uppercase tracking-tight">${p}</span>
+                            <span class="font-black text-coffee-950 text-base">${Math.round(outboundTotals[p])} <span class="text-[12px] text-coffee-600 font-bold uppercase">Kg</span></span>
                         </div>`;
                     });
                     summaryHTML += `</div></div></div>`;
-                    
+
                     summaryContainer.innerHTML = summaryHTML;
                 }
             });
@@ -637,60 +829,60 @@
         function renderReportInbound() {
             const inBody = document.getElementById('inbound-report-body');
             if (!inBody) return;
-            
+
             const pg = globalPagination.whReportInbound;
             if (globalReportInboundCache.length === 0) {
-                inBody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-coffee-300 font-black uppercase tracking-widest text-sm">Belum ada riwayat Inbound</td></tr>`;
+                inBody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-coffee-600 font-black uppercase tracking-widest text-sm">Belum ada riwayat Inbound</td></tr>`;
                 renderPagination(0, pg.size, pg.current, 'pagination-report-inbound', 'whReportInbound');
                 return;
             }
-            
+
             const start = (pg.current - 1) * pg.size;
             const end = start + pg.size;
             const paginated = globalReportInboundCache.slice(start, end);
-            
+
             inBody.innerHTML = paginated.map(t => `
                 <tr class="border-b border-coffee-50 hover:bg-emerald-50/20 transition-colors group">
-                    <td class="p-6 text-[10px] font-black text-coffee-300 uppercase tracking-tight">${t.date}</td>
+                    <td class="p-6 text-[12px] font-black text-coffee-600 uppercase tracking-tight">${t.date}</td>
                     <td class="p-6 font-black text-coffee-950 uppercase tracking-tight">${t.product}</td>
                     <td class="p-6">
-                        <span class="text-emerald-600 font-black text-lg">+ ${Math.round(t.qty)} <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Kg</span></span>
+                        <span class="text-emerald-600 font-black text-lg">+ ${Math.round(t.qty)} <span class="text-[12px] text-emerald-400 font-bold uppercase tracking-widest">Kg</span></span>
                     </td>
                     <td class="p-6 text-xs font-black text-coffee-600 uppercase tracking-tight">${t.operator}</td>
                     <td class="p-6">
-                        ${t.status === 'Selesai Inbound' ? 
-                            '<span class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border border-emerald-100 shadow-sm">✅ Selesai</span>' : 
-                            '<span class="bg-amber-50 text-amber-700 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border border-amber-100 shadow-sm">' + t.status.toUpperCase() + '</span>'}
+                        ${t.status === 'Selesai Inbound' ?
+                    '<span class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest border border-emerald-100 shadow-sm">✅ Selesai</span>' :
+                    '<span class="bg-amber-50 text-amber-700 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest border border-amber-100 shadow-sm">' + t.status.toUpperCase() + '</span>'}
                     </td>
                 </tr>`).join('');
-                
+
             renderPagination(globalReportInboundCache.length, pg.size, pg.current, 'pagination-report-inbound', 'whReportInbound');
         }
 
         function renderReportOutbound() {
             const outBody = document.getElementById('outbound-report-body');
             if (!outBody) return;
-            
+
             const pg = globalPagination.whReportOutbound;
             if (globalReportOutboundCache.length === 0) {
-                outBody.innerHTML = `<tr><td colspan="4" class="p-12 text-center text-coffee-300 font-black uppercase tracking-widest text-sm">Belum ada transaksi keluar.</td></tr>`;
+                outBody.innerHTML = `<tr><td colspan="4" class="p-12 text-center text-coffee-600 font-black uppercase tracking-widest text-sm">Belum ada transaksi keluar.</td></tr>`;
                 renderPagination(0, pg.size, pg.current, 'pagination-report-outbound', 'whReportOutbound');
                 return;
             }
-            
+
             const start = (pg.current - 1) * pg.size;
             const end = start + pg.size;
             const paginated = globalReportOutboundCache.slice(start, end);
-            
+
             outBody.innerHTML = paginated.map(o => {
                 const itemList = o.items.map(i => `
                     <div class="mb-2 flex items-center justify-between bg-coffee-50/50 px-3 py-1.5 rounded-lg border border-coffee-100/50">
-                        <span class="text-[10px] font-bold text-coffee-600">${i.product}</span>
-                        <span class="text-[10px] font-black text-coffee-950">${Math.round(i.qty)} Kg</span>
+                        <span class="text-[12px] font-bold text-coffee-600">${i.product}</span>
+                        <span class="text-[12px] font-black text-coffee-950">${Math.round(i.qty)} Kg</span>
                     </div>`).join('');
                 return `
                     <tr class="border-b border-coffee-50 hover:bg-blue-50/20 transition-colors group">
-                        <td class="p-6 text-[10px] font-black text-coffee-300 uppercase tracking-tight">${o.date}</td>
+                        <td class="p-6 text-[12px] font-black text-coffee-600 uppercase tracking-tight">${o.date}</td>
                         <td class="p-6">
                             <span class="font-mono text-sm font-black text-coffee-950 bg-coffee-50 px-3 py-1 rounded-xl border border-coffee-100">#ORD-${o.id}</span>
                         </td>
@@ -698,7 +890,7 @@
                         <td class="p-6 w-72">${itemList}</td>
                     </tr>`;
             }).join('');
-            
+
             renderPagination(globalReportOutboundCache.length, pg.size, pg.current, 'pagination-report-outbound', 'whReportOutbound');
         }
 
@@ -741,14 +933,14 @@
 
         function safeLogout() {
             openConfirmModal(
-                "Konfirmasi Keluar", 
-                "Apakah Anda yakin ingin mengakhiri sesi ini? Anda harus masuk kembali untuk mengakses portal.", 
+                "Konfirmasi Keluar",
+                "Apakah Anda yakin ingin mengakhiri sesi ini? Anda harus masuk kembali untuk mengakses portal.",
                 () => {
                     fetch('/api/logout', { method: 'POST' }).then(() => {
-                        currentUser = null; 
-                        document.getElementById('input-username').value = ''; 
+                        currentUser = null;
+                        document.getElementById('input-username').value = '';
                         document.getElementById('input-password').value = '';
-                        navigateTo('page-landing');
+                        window.location.hash = 'landing';
                     });
                 }
             );
@@ -794,56 +986,56 @@
         function removeFromCart(idx) { customerCart.splice(idx, 1); renderCart(); }
 
         function renderCart() {
-            const container = document.getElementById('cart-items-container'); 
-            const btnCheckout = document.getElementById('btn-checkout'); 
+            const container = document.getElementById('cart-items-container');
+            const btnCheckout = document.getElementById('btn-checkout');
             const totalEl = document.getElementById('cart-total-price');
             const cartCounter = document.getElementById('cart-counter');
             if (!container) return;
-            
-            if (customerCart.length === 0) { 
+
+            if (customerCart.length === 0) {
                 container.innerHTML = `
-                <div class="flex flex-col items-center justify-center h-full text-coffee-200 py-16 opacity-50">
+                <div class="flex flex-col items-center justify-center h-full text-coffee-200 py-16 opacity-100">
                     <div class="w-20 h-20 bg-coffee-50 rounded-full flex items-center justify-center mb-4">
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     </div>
                     <p class="text-xs font-black uppercase tracking-widest">Keranjang Kosong</p>
-                </div>`; 
-                btnCheckout.disabled = true; 
-                btnCheckout.classList.add('opacity-30', 'grayscale'); 
-                if (totalEl) totalEl.innerText = '0'; 
-                if(cartCounter) cartCounter.innerText = '0 Item'; 
-                return; 
+                </div>`;
+                btnCheckout.disabled = true;
+                btnCheckout.classList.add('opacity-30', 'grayscale');
+                if (totalEl) totalEl.innerText = '0';
+                if (cartCounter) cartCounter.innerText = '0 Item';
+                return;
             }
-            
-            btnCheckout.disabled = false; 
+
+            btnCheckout.disabled = false;
             btnCheckout.classList.remove('opacity-30', 'grayscale');
             let totalCartPrice = 0;
-            
+
             container.innerHTML = customerCart.map((item, idx) => {
-                const pricePerKg = PRODUCT_PRICES[item.product]; 
+                const pricePerKg = PRODUCT_PRICES[item.product];
                 const roundedQty = Math.round(item.qty);
-                const subtotal = pricePerKg * roundedQty; 
+                const subtotal = pricePerKg * roundedQty;
                 totalCartPrice += subtotal;
-                
+
                 return `
                 <div class="group bg-white p-6 rounded-[2rem] border border-coffee-50 shadow-sm hover:shadow-xl hover:border-accent-gold/20 transition-all duration-500 relative overflow-hidden">
                     <div class="absolute -right-6 -top-6 w-16 h-16 bg-coffee-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div class="relative z-10">
-                        <div class="text-[10px] font-black text-coffee-400 uppercase tracking-widest mb-2">${item.product}</div>
+                        <div class="text-[12px] font-black text-coffee-700 uppercase tracking-widest mb-2">${item.product}</div>
                         <div class="flex justify-between items-end">
                             <div>
-                                <div class="text-2xl font-black text-coffee-950 tracking-tighter">${roundedQty} <span class="text-xs font-bold text-coffee-300 uppercase">Kg</span></div>
-                                <div class="text-[10px] font-black text-accent-gold uppercase tracking-widest mt-1">Rp ${pricePerKg}K / Kg</div>
+                                <div class="text-2xl font-black text-coffee-950 tracking-tighter">${roundedQty} <span class="text-xs font-bold text-coffee-600 uppercase">Kg</span></div>
+                                <div class="text-[12px] font-black text-accent-gold uppercase tracking-widest mt-1">Rp ${pricePerKg}K / Kg</div>
                             </div>
                             <div class="text-right">
                                 <div class="text-lg font-black text-coffee-950 tracking-tight">Rp ${subtotal.toLocaleString('id-ID')}K</div>
-                                <button onclick="removeFromCart(${idx})" class="text-[10px] font-black text-red-400 hover:text-red-600 uppercase tracking-widest mt-2 transition">Hapus Item</button>
+                                <button onclick="removeFromCart(${idx})" class="text-[12px] font-black text-red-400 hover:text-red-600 uppercase tracking-widest mt-2 transition">Hapus Item</button>
                             </div>
                         </div>
                     </div>
                 </div>`;
             }).join('');
-            
+
             if (totalEl) totalEl.innerText = totalCartPrice.toLocaleString('id-ID');
             if (cartCounter) cartCounter.innerText = customerCart.length + ' Item';
         }
@@ -859,7 +1051,7 @@
         }
         function renderCustomerDashboard(fromPagination = false) {
             if (!fromPagination) globalPagination.custOrders.current = 1;
-            
+
             const month = document.getElementById('cust-history-month')?.value || 'all';
             const year = document.getElementById('cust-history-year')?.value || 'all';
             const query = `?month=${month}&year=${year}`;
@@ -877,32 +1069,32 @@
                 // Dashboard Stats
                 stats.innerHTML = `
                     <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 flex items-center gap-5 hover:shadow-4xl hover:-translate-y-1 transition-all duration-700 group relative overflow-hidden">
-                        <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
+                        <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-100 group-hover:scale-150 transition-transform duration-1000"></div>
                         <div class="bg-coffee-950 text-accent-gold p-4 rounded-2xl shadow-xl relative z-10 group-hover:rotate-6 transition-transform">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                         </div>
                         <div class="relative z-10">
-                            <div class="text-[8px] text-coffee-300 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Total Belanja</div>
-                            <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none">${Math.round(totalKg)} <span class="text-[9px] font-black text-coffee-200 uppercase tracking-widest">Kg</span></div>
+                            <div class="text-[10px] text-coffee-600 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Total Belanja</div>
+                            <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none">${Math.round(totalKg)} <span class="text-[11px] font-black text-coffee-200 uppercase tracking-widest">Kg</span></div>
                         </div>
                     </div>
                     <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 flex items-center gap-5 hover:shadow-4xl hover:-translate-y-1 transition-all duration-700 group relative overflow-hidden">
-                        <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
+                        <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-100 group-hover:scale-150 transition-transform duration-1000"></div>
                         <div class="bg-accent-gold text-white p-4 rounded-2xl shadow-xl relative z-10 group-hover:rotate-6 transition-transform">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div class="relative z-10">
-                            <div class="text-[8px] text-coffee-300 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-coffee-950 transition-colors">Order Aktif</div>
-                            <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none">${activeCount} <span class="text-[9px] font-black text-coffee-200 uppercase tracking-widest">Batch</span></div>
+                            <div class="text-[10px] text-coffee-600 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-coffee-950 transition-colors">Order Aktif</div>
+                            <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none">${activeCount} <span class="text-[11px] font-black text-coffee-200 uppercase tracking-widest">Batch</span></div>
                         </div>
                     </div>
                     <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 flex items-center gap-5 hover:shadow-4xl hover:-translate-y-1 transition-all duration-700 group relative overflow-hidden">
-                        <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
+                        <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-100 group-hover:scale-150 transition-transform duration-1000"></div>
                         <div class="bg-coffee-950 text-white p-4 rounded-2xl shadow-xl relative z-10 group-hover:rotate-6 transition-transform">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div class="relative z-10">
-                            <div class="text-[8px] text-coffee-300 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Status Member</div>
+                            <div class="text-[10px] text-coffee-600 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Status Member</div>
                             <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none uppercase font-display">Premium</div>
                         </div>
                     </div>`;
@@ -914,26 +1106,26 @@
                             <div class="flex items-center gap-5">
                                 <div class="bg-white/10 p-4 rounded-2xl backdrop-blur-md border border-white/20"><svg class="w-6 h-6 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
                                 <div>
-                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-accent-gold opacity-80">Ringkasan Periode</p>
+                                    <p class="text-[12px] font-black uppercase tracking-[0.2em] text-accent-gold opacity-80">Ringkasan Periode</p>
                                     <h4 class="text-lg font-black tracking-tight">${month !== 'all' ? document.getElementById('cust-history-month').options[document.getElementById('cust-history-month').selectedIndex].text : 'Semua Bulan'} ${year}</h4>
                                 </div>
                             </div>
                             <div class="flex gap-8">
                                 <div class="text-center">
-                                    <p class="text-[9px] font-bold text-coffee-300 uppercase tracking-widest mb-1">Total Serapan</p>
-                                    <p class="text-2xl font-black text-white">${Math.round(totalKg)} <span class="text-xs font-bold text-white/50">Kg</span></p>
+                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Total Serapan</p>
+                                    <p class="text-2xl font-black text-white">${Math.round(totalKg)} <span class="text-xs font-bold text-white/90">Kg</span></p>
                                 </div>
                                 <div class="w-[1px] bg-white/10"></div>
                                 <div class="text-center">
-                                    <p class="text-[9px] font-bold text-coffee-300 uppercase tracking-widest mb-1">Selesai</p>
-                                    <p class="text-2xl font-black text-accent-gold">${completedCount} <span class="text-xs font-bold text-white/50">Batch</span></p>
+                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Selesai</p>
+                                    <p class="text-2xl font-black text-accent-gold">${completedCount} <span class="text-xs font-bold text-white/90">Batch</span></p>
                                 </div>
                             </div>
                         </div>`;
                 }
 
-                if (myOrders.length === 0) { tbody.innerHTML = `<div class="col-span-1 md:col-span-2 bg-white p-16 text-center rounded-[3rem] border border-coffee-100 shadow-sm flex flex-col items-center justify-center gap-3"><div class="w-20 h-20 bg-coffee-50 text-coffee-300 rounded-full flex items-center justify-center mb-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></div><p class="font-black text-coffee-400 uppercase tracking-widest text-sm">Belum ada riwayat pesanan.</p></div>`; return; }
-                
+                if (myOrders.length === 0) { tbody.innerHTML = `<div class="col-span-1 md:col-span-2 bg-white p-16 text-center rounded-[3rem] border border-coffee-100 shadow-sm flex flex-col items-center justify-center gap-3"><div class="w-20 h-20 bg-coffee-50 text-coffee-600 rounded-full flex items-center justify-center mb-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></div><p class="font-black text-coffee-700 uppercase tracking-widest text-sm">Belum ada riwayat pesanan.</p></div>`; return; }
+
                 // Pagination Slice
                 const pg = globalPagination.custOrders;
                 const start = (pg.current - 1) * pg.size;
@@ -944,38 +1136,38 @@
                     let orderTotal = 0; const itemsHtml = o.items.map(i => {
                         const price = PRODUCT_PRICES[i.product] || 0; const subtotal = price * i.qty; orderTotal += subtotal;
                         return `<div class="flex justify-between items-center bg-accent-cream/50 p-4 rounded-xl border border-coffee-100 group-hover:border-accent-gold/20 transition-colors">
-                                    <span class="font-black text-[11px] text-coffee-950 uppercase tracking-tight">${i.product}</span>
-                                    <span class="bg-coffee-950 text-accent-gold px-3 py-1 rounded-lg text-[9px] font-black">${Math.round(i.qty)} KG</span>
+                                    <span class="font-black text-[13px] text-coffee-950 uppercase tracking-tight">${i.product}</span>
+                                    <span class="bg-coffee-950 text-accent-gold px-3 py-1 rounded-lg text-[11px] font-black">${Math.round(i.qty)} KG</span>
                                 </div>`;
                     }).join('');
 
-                    let awbHtml = ''; if (o.awb_number) { 
+                    let awbHtml = ''; if (o.awb_number) {
                         awbHtml = `
                         <div class="mt-8 bg-coffee-950 p-6 rounded-[2rem] shadow-2xl border border-white/5 relative overflow-hidden group/awb">
                             <div class="absolute inset-0 bg-accent-gold/5 opacity-0 group-hover/awb:opacity-100 transition-opacity"></div>
                             <div class="flex items-center justify-between relative z-10">
                                 <div class="flex items-center gap-4">
-                                    <div class="bg-white/5 backdrop-blur-2xl p-3 rounded-xl text-accent-gold border border-white/10">
+                                    <div class="bg-white/15 backdrop-blur-2xl p-3 rounded-xl text-accent-gold border border-white/10">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     </div>
                                     <div>
-                                        <p class="text-[8px] font-black text-accent-gold uppercase tracking-[0.3em] mb-1 opacity-60">Transit Reference</p>
+                                        <p class="text-[10px] font-black text-accent-gold uppercase tracking-[0.3em] mb-1 opacity-60">Transit Reference</p>
                                         <p class="font-mono text-base font-black text-white tracking-[0.2em] uppercase">${o.awb_number}</p>
                                     </div>
                                 </div>
-                                <span class="bg-accent-gold text-coffee-950 px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest">${o.expedition}</span>
+                                <span class="bg-accent-gold text-coffee-950 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">${o.expedition}</span>
                             </div>
-                        </div>`; 
+                        </div>`;
                     }
 
                     return `
                         <div class="bg-white p-8 rounded-[2.5rem] shadow-3xl border border-coffee-50 flex flex-col hover:shadow-4xl hover:-translate-y-1 transition-all duration-700 group relative overflow-hidden">
-                            <div class="absolute -right-20 -top-20 w-48 h-48 bg-accent-cream rounded-full opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
+                            <div class="absolute -right-20 -top-20 w-48 h-48 bg-accent-cream rounded-full opacity-100 group-hover:scale-150 transition-transform duration-1000"></div>
                             
                             <div class="flex justify-between items-start mb-8 relative z-10">
                                 <div>
-                                    <span class="font-mono text-[9px] font-black bg-coffee-950 px-3 py-1.5 rounded-xl border border-white/5 text-white uppercase tracking-tighter shadow-xl">#ORD-${o.id}</span>
-                                    <p class="text-[8px] font-black text-coffee-300 mt-3 uppercase tracking-[0.3em]">${o.date}</p>
+                                    <span class="font-mono text-[11px] font-black bg-coffee-950 px-3 py-1.5 rounded-xl border border-white/5 text-white uppercase tracking-tighter shadow-xl">#ORD-${o.id}</span>
+                                    <p class="text-[10px] font-black text-coffee-600 mt-3 uppercase tracking-[0.3em]">${o.date}</p>
                                 </div>
                                 <div class="bg-accent-cream p-2.5 rounded-xl text-coffee-950 border border-coffee-100 shadow-inner">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
@@ -983,12 +1175,12 @@
                             </div>
 
                             <div class="space-y-2 mb-8 flex-grow relative z-10">
-                                <p class="text-[8px] font-black text-coffee-300 uppercase tracking-[0.3em] mb-3">Curated Selections</p>
+                                <p class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-3">Curated Selections</p>
                                 ${itemsHtml}
                             </div>
 
                             <div class="bg-coffee-950/5 border border-coffee-100 rounded-[1.5rem] p-6 mb-6 relative z-10 shadow-inner">
-                                <span class="text-[8px] font-black text-coffee-400 uppercase tracking-[0.3em] block mb-1">Investment Portfolio</span>
+                                <span class="text-[10px] font-black text-coffee-700 uppercase tracking-[0.3em] block mb-1">Investment Portfolio</span>
                                 <div class="text-2xl font-black text-coffee-950 tracking-tighter uppercase font-display">Rp ${Math.round(orderTotal).toLocaleString('id-ID')}.000</div>
                             </div>
 
@@ -998,12 +1190,12 @@
                                 <div class="w-full text-center">${getStatusBadge(o.status, o.warehouse)}</div>
                                 <div class="flex gap-3 w-full">
                                     ${o.status === 'Serahkan ke Jasa Kirim' ? `
-                                        <button onclick="confirmOrderReceived(${o.id})" class="flex-grow bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-xl font-black text-[9px] uppercase tracking-[0.3em] shadow-xl shadow-emerald-100 transition-all active:scale-95 flex items-center justify-center gap-3">
+                                        <button onclick="confirmOrderReceived(${o.id})" class="flex-grow bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.3em] shadow-xl shadow-emerald-100 transition-all active:scale-95 flex items-center justify-center gap-3">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                             Confirm Receipt
                                         </button>
                                     ` : ''}
-                                    <button onclick="openInvoice(${o.id})" class="flex-grow bg-white hover:bg-coffee-950 hover:text-white text-coffee-950 border-2 border-coffee-100 py-4 rounded-xl font-black text-[9px] uppercase tracking-[0.3em] shadow-xl shadow-black/5 transition-all active:scale-95 flex items-center justify-center gap-3">
+                                    <button onclick="openInvoice(${o.id})" class="flex-grow bg-white hover:bg-coffee-950 hover:text-white text-coffee-950 border-2 border-coffee-100 py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.3em] shadow-xl shadow-black/5 transition-all active:scale-95 flex items-center justify-center gap-3">
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         Digital Invoice
                                     </button>
@@ -1015,7 +1207,7 @@
                 renderPagination(myOrders.length, pg.size, pg.current, 'pagination-cust-orders', 'custOrders');
             }).catch(e => {
                 const tbody = document.getElementById('customer-orders-body-new');
-                if (tbody) tbody.innerHTML = `<div class="col-span-full bg-red-50 p-12 text-center rounded-[3rem] border border-red-100 text-red-600 font-black uppercase tracking-widest text-[10px]">Synchronization Error</div>`;
+                if (tbody) tbody.innerHTML = `<div class="col-span-full bg-red-50 p-12 text-center rounded-[3rem] border border-red-100 text-red-600 font-black uppercase tracking-widest text-[12px]">Synchronization Error</div>`;
             });
         }
 
@@ -1039,8 +1231,8 @@
 
 
         function toggleAdminSidebar() { const sidebar = document.getElementById('admin-sidebar'); if (sidebar.classList.contains('w-64')) { sidebar.classList.replace('w-64', 'w-0'); } else { sidebar.classList.replace('w-0', 'w-64'); } }
-        function switchAdminTab(tabId) { document.querySelectorAll('.admin-tab-content').forEach(el => { el.classList.remove('active'); el.classList.add('hidden'); }); document.querySelectorAll('.admin-nav-btn').forEach(el => el.classList.remove('active')); const activeEl = document.getElementById(tabId); if(activeEl) { activeEl.classList.add('active'); activeEl.classList.remove('hidden'); } const activeBtn = document.getElementById(`btn-${tabId}`); if(activeBtn) activeBtn.classList.add('active'); if (window.innerWidth < 768) { const sidebar = document.getElementById('admin-sidebar'); if (sidebar && sidebar.classList.contains('w-64')) toggleAdminSidebar(); } if(tabId === 'admin-tab-warehouse') renderAdminWarehouseLayout(); if(tabId === 'admin-tab-ai') loadAIForecast('admin'); }
-        
+        function switchAdminTab(tabId) { document.querySelectorAll('.admin-tab-content').forEach(el => { el.classList.remove('active'); el.classList.add('hidden'); }); document.querySelectorAll('.admin-nav-btn').forEach(el => el.classList.remove('active')); const activeEl = document.getElementById(tabId); if (activeEl) { activeEl.classList.add('active'); activeEl.classList.remove('hidden'); } const activeBtn = document.getElementById(`btn-${tabId}`); if (activeBtn) activeBtn.classList.add('active'); if (window.innerWidth < 768) { const sidebar = document.getElementById('admin-sidebar'); if (sidebar && sidebar.classList.contains('w-64')) toggleAdminSidebar(); } if (tabId === 'admin-tab-warehouse') renderAdminWarehouseLayout(); if (tabId === 'admin-tab-ai') loadAIForecast('admin'); }
+
         // Confirmation Modal Logic
         function openConfirmModal(title, msg, onConfirm) {
             document.getElementById('confirm-modal-title').innerText = title;
@@ -1055,18 +1247,18 @@
             if (!globalStocksCache) return;
             const tempUser = currentUser;
             currentUser = { location: selectedHub, role: 'admin' };
-            if(!document.getElementById('admin-zone-A-blocks')) {
+            if (!document.getElementById('admin-zone-A-blocks')) {
                 document.getElementById('admin-map-injection-target').innerHTML = `                    <div class="flex min-h-[300px] mb-4 gap-4 items-stretch">
                         <div class="w-1/5 bg-blue-50/80 border-2 border-black border-dashed rounded-xl p-3 flex flex-col justify-center items-center text-blue-800 relative">
                             <span class="font-black text-sm uppercase tracking-widest text-center leading-tight">Loading Dock</span>
                         </div>
                         <div class="w-1/4 bg-cyan-50 border-2 border-black rounded-xl p-3 shadow-md flex flex-col">
-                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-cyan-900 uppercase text-sm tracking-widest">Zona A</h4><p class="text-[10px] text-cyan-700 font-bold">Arabika Gayo Specialty</p></div>
+                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-cyan-900 uppercase text-sm tracking-widest">Zona A</h4><p class="text-[12px] text-cyan-700 font-bold">Arabika Gayo Specialty</p></div>
                             <div id="admin-zone-A-blocks" class="grid grid-cols-2 gap-2 flex-grow"></div>
                         </div>
                         <div class="w-1/12 bg-green-200/60 border-x-2 border-black flex flex-col items-center justify-center relative"><span class="text-green-700 text-xs -rotate-90 font-black tracking-widest uppercase whitespace-nowrap z-10">Personnel Path</span></div>
                         <div class="w-1/4 bg-purple-50 border-2 border-black rounded-xl p-3 shadow-md flex flex-col">
-                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-purple-900 uppercase text-sm tracking-widest">Zona C</h4><p class="text-[10px] text-purple-700 font-bold">Liberika Jambi Eksotik</p></div>
+                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-purple-900 uppercase text-sm tracking-widest">Zona C</h4><p class="text-[12px] text-purple-700 font-bold">Liberika Jambi Eksotik</p></div>
                             <div id="admin-zone-C-blocks" class="grid grid-cols-2 gap-2 flex-grow"></div>
                         </div>
                         <div class="w-1/5 bg-emerald-50 border-2 border-black rounded-xl p-3 flex flex-col justify-center items-center text-emerald-800">
@@ -1087,12 +1279,12 @@
                             <span class="font-black text-black uppercase tracking-widest text-xs text-center">Executive Office</span>
                         </div>
                         <div class="w-1/4 bg-orange-50 border-2 border-black rounded-xl p-3 shadow-md flex flex-col">
-                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-orange-900 uppercase text-sm tracking-widest">Zona B</h4><p class="text-[10px] text-orange-700 font-bold">Robusta Dampit Premium</p></div>
+                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-orange-900 uppercase text-sm tracking-widest">Zona B</h4><p class="text-[12px] text-orange-700 font-bold">Robusta Dampit Premium</p></div>
                             <div id="admin-zone-B-blocks" class="grid grid-cols-2 gap-2 flex-grow"></div>
                         </div>
                         <div class="w-1/12 bg-green-200/60 border-x-4 border-white flex flex-col items-center justify-center relative"></div>
                         <div class="w-1/4 bg-rose-50 border-2 border-black rounded-xl p-3 shadow-md flex flex-col">
-                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-rose-900 uppercase text-sm tracking-widest">Zona D</h4><p class="text-[10px] text-rose-700 font-bold">Excelsa House Blend</p></div>
+                            <div class="text-center mb-3 border-b border-black/10 pb-2"><h4 class="font-black text-rose-900 uppercase text-sm tracking-widest">Zona D</h4><p class="text-[12px] text-rose-700 font-bold">Excelsa House Blend</p></div>
                             <div id="admin-zone-D-blocks" class="grid grid-cols-2 gap-2 flex-grow"></div>
                         </div>
                         <div class="w-1/5 bg-amber-100/50 border-2 border-black rounded-xl p-3 flex flex-col justify-center items-center text-amber-800">
@@ -1116,47 +1308,47 @@
             const mOrders = document.getElementById('admin-orders-month');
             const mCust = document.getElementById('admin-customers-month');
             const mAn = document.getElementById('admin-analytics-month');
-            
+
             let mVal = '';
             if (target === 'orders' && mOrders) mVal = mOrders.value;
             else if (target === 'customers' && mCust) mVal = mCust.value;
             else if (target === 'analytics' && mAn) mVal = mAn.value;
             else if (target === 'all') mVal = (mOrders && mOrders.value) ? mOrders.value : '';
-            
+
             const query = mVal ? '?month=' + mVal : '';
-            
+
             fetch('/api/admin/data' + query).then(res => res.json()).then(data => {
                 if (data.error) return;
-                
+
                 // 1. DATA MASTER & TAB ORDER
                 if (target === 'all' || target === 'orders') {
                     globalOrdersCache = data.orders; globalStocksCache = data.stocks;
-                    
-                    const alertsContainer = document.getElementById('admin-alerts-container'); 
+
+                    const alertsContainer = document.getElementById('admin-alerts-container');
                     let alertsHTML = '';
-                    
-                    Object.keys(data.stocks).forEach(loc => { 
-                        Object.keys(data.stocks[loc]).forEach(prod => { 
+
+                    Object.keys(data.stocks).forEach(loc => {
+                        Object.keys(data.stocks[loc]).forEach(prod => {
                             const stockVal = Math.round(data.stocks[loc][prod].stock);
                             const demandVal = Math.round(data.stocks[loc][prod].last_month_demand || data.stocks[loc][prod].demand || 0);
-                            
+
                             // Trigger alert if stock is less than 60% of demand (Benchmark April)
-                            if (stockVal < (demandVal * 0.6)) { 
+                            if (stockVal < (demandVal * 0.6)) {
                                 alertsHTML += `
                                 <div class="bg-red-50/50 border border-red-200 p-6 rounded-[2rem] mb-4 group relative overflow-hidden">
-                                    <div class="absolute -right-4 -top-4 w-12 h-12 bg-red-100 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+                                    <div class="absolute -right-4 -top-4 w-12 h-12 bg-red-100 rounded-full opacity-100 group-hover:scale-150 transition-transform duration-700"></div>
                                     <div class="flex items-center gap-5 relative z-10">
                                         <div class="bg-red-500 text-white p-3 rounded-xl shadow-lg shadow-red-100 animate-pulse">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                         </div>
                                         <div>
-                                            <p class="font-black text-[11px] uppercase tracking-tighter text-red-900">🚨 Stok Kritis: ${prod}</p>
-                                            <p class="text-[9px] font-bold text-red-600 opacity-80 uppercase tracking-widest mt-1">GUDANG ${loc} &bull; STOK SAAT INI: ${stockVal}KG &bull; KEBUTUHAN AMAN: ${demandVal}KG</p>
+                                            <p class="font-black text-[13px] uppercase tracking-tighter text-red-900">🚨 Stok Kritis: ${prod}</p>
+                                            <p class="text-[11px] font-bold text-red-600 opacity-80 uppercase tracking-widest mt-1">GUDANG ${loc} &bull; STOK SAAT INI: ${stockVal}KG &bull; KEBUTUHAN AMAN: ${demandVal}KG</p>
                                         </div>
                                     </div>
                                 </div>`;
                             }
-                        }); 
+                        });
                     });
                     if (alertsContainer) alertsContainer.innerHTML = alertsHTML;
 
@@ -1165,23 +1357,23 @@
 
                     const approvalList = document.getElementById('admin-approval-list');
                     if (approvalList) {
-                        if (approvalOrders.length === 0) approvalList.innerHTML = `<div class="p-10 text-center text-coffee-300 font-black uppercase tracking-widest text-xs">Tidak ada permintaan persetujuan.</div>`;
+                        if (approvalOrders.length === 0) approvalList.innerHTML = `<div class="p-10 text-center text-coffee-600 font-black uppercase tracking-widest text-xs">Tidak ada permintaan persetujuan.</div>`;
                         else approvalList.innerHTML = approvalOrders.map(o => {
-                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-950 text-xs uppercase tracking-tight flex justify-between items-center bg-white/50 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-accent-gold bg-coffee-950 px-2 py-0.5 rounded text-[9px]">${Math.round(i.qty)} KG</span></div>`).join('');
+                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-950 text-xs uppercase tracking-tight flex justify-between items-center bg-white/150 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-accent-gold bg-coffee-950 px-2 py-0.5 rounded text-[11px]">${Math.round(i.qty)} KG</span></div>`).join('');
                             return `
                             <div class="bg-accent-cream/30 p-8 rounded-[2.5rem] border border-coffee-100 flex flex-col md:flex-row justify-between md:items-center gap-8 hover:shadow-2xl hover:bg-white transition-all duration-500 group">
                                 <div class="flex-grow">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <span class="font-mono text-[10px] font-black bg-coffee-950 px-3 py-1.5 rounded-xl text-white uppercase tracking-tighter">#ORD-${o.id}</span>
-                                        <span class="text-[9px] font-black text-coffee-300 uppercase tracking-widest">LOGISTICS HUB: ${o.warehouse}</span>
+                                        <span class="font-mono text-[12px] font-black bg-coffee-950 px-3 py-1.5 rounded-xl text-white uppercase tracking-tighter">#ORD-${o.id}</span>
+                                        <span class="text-[11px] font-black text-coffee-600 uppercase tracking-widest">LOGISTICS HUB: ${o.warehouse}</span>
                                     </div>
                                     <div class="space-y-2">${itemsList}</div>
                                 </div>
                                 <div class="flex flex-col gap-3 w-full md:w-auto">
-                                    <button onclick="approveOrderAdmin(${o.id})" class="bg-emerald-600 text-white px-10 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-emerald-700 shadow-xl shadow-emerald-100 transition transform active:scale-95">
+                                    <button onclick="approveOrderAdmin(${o.id})" class="bg-emerald-600 text-white px-10 py-4 rounded-2xl text-[12px] font-black uppercase tracking-[0.2em] hover:bg-emerald-700 shadow-xl shadow-emerald-100 transition transform active:scale-95">
                                         Quick Approve
                                     </button>
-                                    <button onclick="openAwbModal([${o.id}], false)" class="bg-coffee-950 text-white px-10 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-black shadow-xl shadow-coffee-200 transition transform active:scale-95">
+                                    <button onclick="openAwbModal([${o.id}], false)" class="bg-coffee-950 text-white px-10 py-4 rounded-2xl text-[12px] font-black uppercase tracking-[0.2em] hover:bg-black shadow-xl shadow-coffee-200 transition transform active:scale-95">
                                         Ship with AWB
                                     </button>
                                 </div>
@@ -1191,34 +1383,34 @@
 
                     const unassignedList = document.getElementById('admin-unassigned-list');
                     if (unassignedList) {
-                        if (unassignedOrders.length === 0) unassignedList.innerHTML = `<div class="p-10 text-center text-coffee-300 font-black uppercase tracking-widest text-xs">Semua pesanan baru sudah dialokasikan.</div>`;
+                        if (unassignedOrders.length === 0) unassignedList.innerHTML = `<div class="p-10 text-center text-coffee-600 font-black uppercase tracking-widest text-xs">Semua pesanan baru sudah dialokasikan.</div>`;
                         else unassignedList.innerHTML = unassignedOrders.map(o => {
                             const isBekasiOk = o.items.every(i => data.stocks['Bekasi'][i.product].stock >= i.qty); const isJakutOk = o.items.every(i => data.stocks['Jakarta Utara'][i.product].stock >= i.qty); const isCikarangOk = o.items.every(i => data.stocks['Cikarang'][i.product].stock >= i.qty);
                             const isAnyAvailable = isBekasiOk || isJakutOk || isCikarangOk;
-                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-900 text-xs uppercase tracking-tight flex justify-between items-center bg-coffee-50/50 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-coffee-400 text-[9px] font-black">${Math.round(i.qty)} KG</span></div>`).join('');
+                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-900 text-xs uppercase tracking-tight flex justify-between items-center bg-coffee-50/50 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-coffee-700 text-[11px] font-black">${Math.round(i.qty)} KG</span></div>`).join('');
                             return `
                             <div class="bg-white p-8 rounded-[3rem] border border-coffee-100 flex flex-col lg:flex-row justify-between lg:items-center gap-8 hover:shadow-2xl transition-all duration-500">
                                 <div class="flex-grow">
                                     <div class="flex items-center gap-4 mb-6">
-                                        <span class="font-mono text-[10px] font-black bg-accent-cream border border-coffee-100 text-coffee-600 px-3 py-1.5 rounded-xl shadow-inner">#ORD-${o.id}</span>
+                                        <span class="font-mono text-[12px] font-black bg-accent-cream border border-coffee-100 text-coffee-600 px-3 py-1.5 rounded-xl shadow-inner">#ORD-${o.id}</span>
                                         <span class="text-sm font-black text-coffee-950 uppercase tracking-tighter">${o.customer_name}</span>
                                     </div>
-                                    <div class="text-[9px] text-coffee-300 font-black mb-4 uppercase tracking-[0.2em] flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> ${o.customer_address || 'NO ADDRESS RECORDED'}</div>
+                                    <div class="text-[11px] text-coffee-600 font-black mb-4 uppercase tracking-[0.2em] flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> ${o.customer_address || 'NO ADDRESS RECORDED'}</div>
                                     <div class="space-y-2">${itemsList}</div>
                                 </div>
                                 <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-4 items-center">
                                     ${isAnyAvailable ? `
-                                        <select id="assign-wh-${o.id}" class="w-full sm:w-72 bg-accent-cream border-2 border-transparent p-5 rounded-2xl font-black text-[11px] uppercase tracking-widest focus:bg-white focus:border-accent-gold transition-all duration-500 outline-none shadow-inner">
+                                        <select id="assign-wh-${o.id}" class="w-full sm:w-72 bg-accent-cream border-2 border-transparent p-5 rounded-2xl font-black text-[13px] uppercase tracking-widest focus:bg-white focus:border-accent-gold transition-all duration-500 outline-none shadow-inner">
                                             <option value="" disabled selected>-- Select Fulfillment Hub --</option>
                                             <option value="Bekasi" ${!isBekasiOk ? 'disabled' : ''}>Bekasi Hub ${!isBekasiOk ? '✕' : '✓'}</option>
                                             <option value="Jakarta Utara" ${!isJakutOk ? 'disabled' : ''}>Jakarta Hub ${!isJakutOk ? '✕' : '✓'}</option>
                                             <option value="Cikarang" ${!isCikarangOk ? 'disabled' : ''}>Cikarang Hub ${!isCikarangOk ? '✕' : '✓'}</option>
                                         </select>
-                                        <button onclick="assignWarehouse(${o.id})" class="w-full sm:w-auto bg-accent-gold text-coffee-950 px-10 py-5 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl shadow-accent-gold/10 hover:bg-coffee-950 hover:text-white transition-all transform active:scale-95">
+                                        <button onclick="assignWarehouse(${o.id})" class="w-full sm:w-auto bg-accent-gold text-coffee-950 px-10 py-5 rounded-2xl text-[12px] font-black uppercase tracking-[0.2em] shadow-xl shadow-accent-gold/10 hover:bg-coffee-950 hover:text-white transition-all transform active:scale-95">
                                             Allocate
                                         </button>
                                     ` : `
-                                        <div class="w-full px-8 py-5 bg-red-50 text-red-600 font-black text-[10px] uppercase tracking-[0.2em] rounded-2xl border border-red-100 text-center">
+                                        <div class="w-full px-8 py-5 bg-red-50 text-red-600 font-black text-[12px] uppercase tracking-[0.2em] rounded-2xl border border-red-100 text-center">
                                             Critical Inventory Deficit
                                         </div>
                                     `}
@@ -1242,21 +1434,21 @@
                             <h4 class="font-black text-coffee-950 text-xs mb-8 line-clamp-1 border-b border-coffee-50 pb-4 uppercase tracking-widest group-hover:text-accent-gold transition-colors">${prod}</h4>
                             <div class="space-y-6">
                                 <div>
-                                    <div class="flex justify-between text-[9px] font-black uppercase tracking-[0.3em] mb-1">
+                                    <div class="flex justify-between text-[11px] font-black uppercase tracking-[0.3em] mb-1">
                                         <span class="text-coffee-950 border border-black px-2 py-0.5 rounded-md font-bold">Hub Bekasi</span>
                                         <span class="${bVal < 100 ? 'text-red-600' : 'text-coffee-950'}">${bVal} KG</span>
                                     </div>
                                     ${drawBar(bVal)}
                                 </div>
                                 <div>
-                                    <div class="flex justify-between text-[9px] font-black uppercase tracking-[0.3em] mb-1">
+                                    <div class="flex justify-between text-[11px] font-black uppercase tracking-[0.3em] mb-1">
                                         <span class="text-coffee-950 border border-black px-2 py-0.5 rounded-md font-bold">Hub Jakarta</span>
                                         <span class="${jVal < 100 ? 'text-red-600' : 'text-coffee-950'}">${jVal} KG</span>
                                     </div>
                                     ${drawBar(jVal)}
                                 </div>
                                 <div>
-                                    <div class="flex justify-between text-[9px] font-black uppercase tracking-[0.3em] mb-1">
+                                    <div class="flex justify-between text-[11px] font-black uppercase tracking-[0.3em] mb-1">
                                         <span class="text-coffee-950 border border-black px-2 py-0.5 rounded-md font-bold">Hub Cikarang</span>
                                         <span class="${cVal < 100 ? 'text-red-600' : 'text-coffee-950'}">${cVal} KG</span>
                                     </div>
@@ -1274,29 +1466,29 @@
                         const paginatedOrders = data.orders.slice(start, end);
 
                         allOrdersGrid.innerHTML = paginatedOrders.map(o => {
-                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-950 text-[10px] uppercase tracking-tight flex justify-between items-center py-1.5 border-b border-coffee-50 last:border-0"><span>${i.product}</span> <span class="text-coffee-400 font-black">${Math.round(i.qty)} KG</span></div>`).join('');
+                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-950 text-[12px] uppercase tracking-tight flex justify-between items-center py-1.5 border-b border-coffee-50 last:border-0"><span>${i.product}</span> <span class="text-coffee-700 font-black">${Math.round(i.qty)} KG</span></div>`).join('');
                             return `
                             <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 hover:shadow-3xl transition-all duration-500 flex flex-col relative overflow-hidden group">
                                 <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 <div class="flex justify-between items-center mb-5 relative z-10">
-                                    <span class="font-mono text-[10px] font-black bg-coffee-950 px-4 py-2 rounded-xl text-white shadow-xl">#ORD-${o.id}</span>
-                                    <span class="text-[9px] font-black text-coffee-300 uppercase tracking-[0.3em]">${o.date}</span>
+                                    <span class="font-mono text-[12px] font-black bg-coffee-950 px-4 py-2 rounded-xl text-white shadow-xl">#ORD-${o.id}</span>
+                                    <span class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em]">${o.date}</span>
                                 </div>
                                 <div class="mb-4 relative z-10">
-                                    <p class="text-[8px] font-black text-coffee-300 uppercase tracking-[0.3em] mb-1.5">Partner Identity</p>
+                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-1.5">Partner Identity</p>
                                     <p class="font-black text-coffee-950 text-base tracking-tighter uppercase leading-none">${o.customer_name}</p>
                                 </div>
                                 <div class="space-y-1 mb-5 flex-grow relative z-10 border-t border-coffee-50 pt-4">
-                                    <p class="text-[8px] font-black text-coffee-300 uppercase tracking-[0.3em] mb-3">Batch Composition</p>
+                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-3">Batch Composition</p>
                                     ${itemsList}
                                 </div>
                                 <div class="mt-auto relative z-10 pt-4 border-t border-coffee-50">
                                     <div class="flex justify-between items-center mb-4">
-                                        <span class="text-[8px] font-black text-coffee-300 uppercase tracking-[0.3em]">Logistics Hub</span>
-                                        <span class="bg-coffee-950 text-accent-gold px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest shadow-lg">${o.warehouse || 'UNASSIGNED'}</span>
+                                        <span class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em]">Logistics Hub</span>
+                                        <span class="bg-coffee-950 text-accent-gold px-3 py-1 rounded-lg text-[11px] font-black uppercase tracking-widest shadow-lg">${o.warehouse || 'UNASSIGNED'}</span>
                                     </div>
                                     <div class="w-full text-center mb-3">${getStatusBadge(o.status, o.warehouse)}</div>
-                                    <button onclick="deleteOrder(${o.id})" class="w-full py-3 bg-red-50 text-red-500 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition active:scale-95 border border-red-100 no-print">
+                                    <button onclick="deleteOrder(${o.id})" class="w-full py-3 bg-red-50 text-red-500 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition active:scale-95 border border-red-100 no-print">
                                         Delete Order
                                     </button>
                                 </div>
@@ -1325,15 +1517,15 @@
                                         ${c.name}
                                     </td>
                                     <td class="p-8">
-                                        <p class="text-[11px] font-black text-coffee-900 uppercase tracking-widest">${c.username}</p>
-                                        <p class="text-[10px] text-coffee-400 font-bold uppercase mt-1 tracking-wider">${c.phone || '-'}</p>
+                                        <p class="text-[13px] font-black text-coffee-900 uppercase tracking-widest">${c.username}</p>
+                                        <p class="text-[12px] text-coffee-700 font-bold uppercase mt-1 tracking-wider">${c.phone || '-'}</p>
                                     </td>
-                                    <td class="p-8 text-[10px] text-coffee-400 font-bold uppercase tracking-widest leading-relaxed max-w-[200px] truncate">${c.address || '-'}</td>
+                                    <td class="p-8 text-[12px] text-coffee-700 font-bold uppercase tracking-widest leading-relaxed max-w-[200px] truncate">${c.address || '-'}</td>
                                     <td class="p-8 font-black text-accent-gold text-right bg-accent-cream/10">
-                                        <span class="bg-coffee-950 px-4 py-2 rounded-xl shadow-lg border border-white/5 uppercase tracking-tighter text-[10px]">${ordersCount} Orders</span>
+                                        <span class="bg-coffee-950 px-4 py-2 rounded-xl shadow-lg border border-white/5 uppercase tracking-tighter text-[12px]">${ordersCount} Orders</span>
                                     </td>
                                 </tr>`;
-                            }).join('') || `<tr><td colspan="4" class="p-12 text-center text-coffee-300 font-black uppercase tracking-[0.3em] text-[10px]">No partners recorded for this period.</td></tr>`;
+                            }).join('') || `<tr><td colspan="4" class="p-12 text-center text-coffee-600 font-black uppercase tracking-[0.3em] text-[12px]">No partners recorded for this period.</td></tr>`;
 
                             renderPagination(data.customers.length, pg.size, pg.current, 'pagination-admin-customers', 'adminCustomers');
                         }
@@ -1343,21 +1535,21 @@
                 // 3. TAB ANALYTICS & GLOBAL SDM
                 if (target === 'all' || target === 'analytics') {
                     if (data.employees) sdmDataArray = data.employees;
-                    
+
                     let totalIncome = 0; let itemsSold = {};
                     PRODUCT_LIST.forEach(p => itemsSold[p] = 0);
-                    data.orders.forEach(o => { o.items.forEach(i => { let price = PRODUCT_PRICES[i.product] || 0; totalIncome += price * i.qty; if(itemsSold[i.product] !== undefined) itemsSold[i.product] += i.qty; }); });
+                    data.orders.forEach(o => { o.items.forEach(i => { let price = PRODUCT_PRICES[i.product] || 0; totalIncome += price * i.qty; if (itemsSold[i.product] !== undefined) itemsSold[i.product] += i.qty; }); });
 
                     const totalCustCount = data.customers ? data.customers.length : 0;
                     const anSummary = document.getElementById('admin-analytics-summary');
                     if (anSummary) anSummary.innerHTML = `
                         <div class="bg-coffee-950 p-10 rounded-[3rem] flex items-center gap-8 shadow-3xl border border-white/5 relative overflow-hidden group">
                             <div class="absolute inset-0 bg-accent-gold/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <div class="bg-white/5 backdrop-blur-2xl text-accent-gold p-6 rounded-[1.5rem] border border-white/10 shadow-2xl transition-transform group-hover:scale-110">
+                            <div class="bg-white/15 backdrop-blur-2xl text-accent-gold p-6 rounded-[1.5rem] border border-white/10 shadow-2xl transition-transform group-hover:scale-110">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[9px] text-accent-gold font-black uppercase tracking-[0.4em] mb-3 opacity-60">Revenue Portfolio</p>
+                                <p class="text-[11px] text-accent-gold font-black uppercase tracking-[0.2em] mb-3 opacity-60">Revenue Portfolio</p>
                                 <p class="text-2xl font-black text-white font-display tracking-tighter uppercase leading-none">Rp ${Math.round(totalIncome * 1000).toLocaleString('id-ID')}</p>
                             </div>
                         </div>
@@ -1366,7 +1558,7 @@
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[9px] text-coffee-400 font-black uppercase tracking-[0.4em] mb-3">Order Velocity</p>
+                                <p class="text-[11px] text-coffee-700 font-black uppercase tracking-[0.2em] mb-3">Order Velocity</p>
                                 <p class="text-3xl font-black text-coffee-950 font-display tracking-tighter uppercase leading-none">${data.orders.length} Batches</p>
                             </div>
                         </div>
@@ -1375,7 +1567,7 @@
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[9px] text-coffee-400 font-black uppercase tracking-[0.4em] mb-3">Network Reach</p>
+                                <p class="text-[11px] text-coffee-700 font-black uppercase tracking-[0.2em] mb-3">Network Reach</p>
                                 <p class="text-3xl font-black text-coffee-950 font-display tracking-tighter uppercase leading-none">${totalCustCount} Partners</p>
                             </div>
                         </div>`;
@@ -1387,24 +1579,24 @@
                         if (adminCompositionChart) adminCompositionChart.destroy();
                         const compData = PRODUCT_LIST.map(p => itemsSold[p]);
                         const compColors = ['#1a1412', '#d4af37', '#e2d1c3', '#a48b78'];
-                        adminCompositionChart = new Chart(ctxComp, { type: 'doughnut', data: { labels: PRODUCT_LIST, datasets: [{ data: compData, backgroundColor: compColors, borderWidth: 0, hoverOffset: 20 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1412', titleFont: { family: 'Inter', size: 10, weight: 'bold' }, bodyFont: { family: 'Inter', size: 12, weight: 'black' }, padding: 15, cornerRadius: 12, displayColors: false, callbacks: { label: (c) => Math.round(c.parsed).toLocaleString('id-ID') + ' KG' } } }, cutout: '85%' } });
-                        
+                        adminCompositionChart = new Chart(ctxComp, { type: 'doughnut', data: { labels: PRODUCT_LIST, datasets: [{ data: compData, backgroundColor: compColors, borderWidth: 0, hoverOffset: 20 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1412', titleFont: { family: 'Inter', size: 12, weight: 'bold' }, bodyFont: { family: 'Inter', size: 12, weight: 'black' }, padding: 15, cornerRadius: 12, displayColors: false, callbacks: { label: (c) => Math.round(c.parsed).toLocaleString('id-ID') + ' KG' } } }, cutout: '85%' } });
+
                         const legendTarget = document.getElementById('admin-composition-legend');
                         if (legendTarget) {
                             legendTarget.innerHTML = PRODUCT_LIST.map((p, i) => `
                                 <div class="flex items-center gap-3">
                                     <div class="w-3 h-3 rounded-full shadow-sm" style="background-color: ${compColors[i]}"></div>
-                                    <span class="text-[9px] font-black text-coffee-950 uppercase tracking-tight truncate">${p}</span>
+                                    <span class="text-[13px] font-black text-coffee-950 uppercase tracking-tight truncate">${p}</span>
                                 </div>
                             `).join('');
                         }
 
                         const weeks = ['WK 1', 'WK 2', 'WK 3', 'WK 4']; let weeklyTrendData = [0, 0, 0, 0];
                         data.orders.forEach(o => { const d = new Date(o.date); if (!isNaN(d)) { const day = d.getDate(); const orderQty = o.items.reduce((sum, item) => sum + item.qty, 0); if (day <= 7) weeklyTrendData[0] += orderQty; else if (day <= 14) weeklyTrendData[1] += orderQty; else if (day <= 21) weeklyTrendData[2] += orderQty; else weeklyTrendData[3] += orderQty; } });
-                        adminTrendChart = new Chart(ctxTrend, { type: 'line', data: { labels: weeks, datasets: [{ label: 'Volume', data: weeklyTrendData.map(v => Math.round(v)), borderColor: '#d4af37', backgroundColor: 'rgba(212, 175, 55, 0.05)', borderWidth: 4, pointBackgroundColor: '#1a1412', pointBorderColor: '#d4af37', pointBorderWidth: 3, pointRadius: 6, pointHoverRadius: 8, fill: true, tension: 0.5 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1412', titleFont: { family: 'Inter', size: 10, weight: 'bold' }, bodyFont: { family: 'Inter', size: 12, weight: 'black' }, padding: 15, cornerRadius: 12, displayColors: false, callbacks: { label: (c) => Math.round(c.parsed.y).toLocaleString('id-ID') + ' KG DISPATCHED' } } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(26, 20, 18, 0.05)', drawBorder: false }, ticks: { font: { family: 'Inter', weight: 'bold', size: 9 }, color: '#a48b78' } }, x: { grid: { display: false }, ticks: { font: { family: 'Inter', weight: 'bold', size: 9 }, color: '#a48b78' } } } } });
+                        adminTrendChart = new Chart(ctxTrend, { type: 'line', data: { labels: weeks, datasets: [{ label: 'Volume', data: weeklyTrendData.map(v => Math.round(v)), borderColor: '#d4af37', backgroundColor: 'rgba(212, 175, 55, 0.15)', borderWidth: 4, pointBackgroundColor: '#1a1412', pointBorderColor: '#d4af37', pointBorderWidth: 3, pointRadius: 6, pointHoverRadius: 8, fill: true, tension: 0.5 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1412', titleFont: { family: 'Inter', size: 12, weight: 'bold' }, bodyFont: { family: 'Inter', size: 12, weight: 'black' }, padding: 15, cornerRadius: 12, displayColors: false, callbacks: { label: (c) => Math.round(c.parsed.y).toLocaleString('id-ID') + ' KG DISPATCHED' } } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(26, 20, 18, 0.05)', drawBorder: false }, ticks: { font: { family: 'Inter', weight: 'bold', size: 11 }, color: '#563b29' } }, x: { grid: { display: false }, ticks: { font: { family: 'Inter', weight: 'bold', size: 11 }, color: '#563b29' } } } } });
                     }
                 }
-                
+
                 // DATA SDM GLOBAL (SLIP IN HERE)
                 if (target === 'all') {
                     const pg = globalPagination.adminSdm;
@@ -1413,16 +1605,20 @@
                     const paginatedSdm = data.employees.slice(start, end);
 
                     const empHtml = paginatedSdm.map(e => {
-                        const statusH = e.status === 'Aktif' ? '<span class="text-emerald-500 font-black text-[9px] uppercase tracking-widest flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Active Duty</span>' : '<span class="text-coffee-300 font-black text-[9px] uppercase tracking-widest">Off-Shift</span>';
+                        const statusH = e.status === 'Aktif' ? '<span class="text-emerald-500 font-black text-[13px] uppercase tracking-widest flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Active Duty</span>' : '<span class="text-coffee-600 font-black text-[13px] uppercase tracking-widest">Off-Shift</span>';
                         return `<tr class="border-b border-coffee-50 hover:bg-accent-cream/30 transition-colors">
                             <td class="p-8 font-black text-coffee-950 flex items-center gap-4">
                                 <div class="w-10 h-10 rounded-xl bg-coffee-950 text-accent-gold flex justify-center items-center font-black text-xs shadow-lg">${e.name.charAt(0).toUpperCase()}</div>
                                 ${e.name}
                             </td>
-                            <td class="p-8 text-[11px] font-black text-coffee-900 uppercase tracking-widest">${e.warehouse_location}</td>
-                            <td class="p-8 text-[10px] font-black text-accent-gold uppercase tracking-tighter"><span class="bg-coffee-950 px-3 py-1 rounded-lg">${e.role.toLowerCase().includes('supervisor') ? 'Kepala Gudang (Supervisor)' : e.role}</span></td>
+                            <td class="p-8 text-[13px] font-black text-coffee-900 uppercase tracking-widest">${e.warehouse_location}</td>
+                            <td class="p-8">
+                                <div class="text-[12px] font-black text-coffee-950 uppercase tracking-widest">
+                                    ${e.role.toLowerCase().includes('supervisor') ? '<span class="text-accent-gold">★</span> Kepala Gudang (Supervisor)' : e.role}
+                                </div>
+                            </td>
                             <td class="p-8">${statusH}</td>
-                            <td class="p-8 text-[10px] font-black text-coffee-400 uppercase tracking-widest">${e.phone || '-'}</td>
+                            <td class="p-8 text-[14px] font-black text-coffee-700 uppercase tracking-widest">${e.phone || '-'}</td>
                             <td class="p-8 text-center">
                                 <button onclick="openSdmModal(${e.id})" class="bg-coffee-950 text-white p-3 rounded-xl shadow-lg hover:bg-black transition group">
                                     <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-5M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
@@ -1446,7 +1642,7 @@
                 if (!container) return;
 
                 if (data.length === 0) {
-                    container.innerHTML = `<div class="text-center py-12 text-coffee-300 font-black uppercase tracking-widest text-[10px]">No pending identity requests.</div>`;
+                    container.innerHTML = `<div class="text-center py-12 text-coffee-600 font-black uppercase tracking-widest text-[14px]">No pending identity requests.</div>`;
                     return;
                 }
 
@@ -1456,15 +1652,15 @@
                             <div class="w-16 h-16 bg-coffee-950 text-accent-gold rounded-2xl flex items-center justify-center font-black text-xl shadow-xl">${r.name.charAt(0).toUpperCase()}</div>
                             <div>
                                 <h4 class="text-lg font-black text-coffee-950 uppercase tracking-tighter">${r.name}</h4>
-                                <p class="text-[9px] font-black text-coffee-300 uppercase tracking-widest mt-1">${r.role} &bull; ${r.date}</p>
+                                <p class="text-[12px] font-bold text-coffee-600 uppercase tracking-wide mt-1">${r.role} &bull; ${r.date}</p>
                             </div>
                         </div>
                         
                         <div class="flex-1 bg-white p-6 rounded-2xl border border-coffee-50 shadow-inner">
                             <div class="flex items-center gap-4">
-                                <div class="px-3 py-1 bg-coffee-50 text-coffee-400 rounded-lg text-[9px] font-black uppercase tracking-widest">${r.field}</div>
+                                <div class="px-3 py-1 bg-coffee-50 text-coffee-700 rounded-lg text-[11px] font-bold uppercase tracking-wide">${r.field}</div>
                                 <div class="flex items-center gap-3">
-                                    <span class="text-xs font-bold text-coffee-400 line-through">${r.old_value || 'Empty'}</span>
+                                    <span class="text-xs font-bold text-coffee-700 line-through">${r.old_value || 'Empty'}</span>
                                     <svg class="w-4 h-4 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span class="text-sm font-black text-coffee-950">${r.new_value}</span>
                                 </div>
@@ -1472,8 +1668,8 @@
                         </div>
 
                         <div class="flex gap-4">
-                            <button onclick="approveProfileRequest(${r.id})" class="bg-emerald-600 text-white px-8 py-4 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-emerald-700 shadow-xl shadow-emerald-100 transition-all active:scale-95">Approve</button>
-                            <button onclick="rejectProfileRequest(${r.id})" class="bg-white text-red-500 border border-red-100 px-8 py-4 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-red-50 transition-all active:scale-95">Reject</button>
+                            <button onclick="approveProfileRequest(${r.id})" class="bg-emerald-600 text-white px-8 py-4 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-emerald-700 shadow-xl shadow-emerald-100 transition-all active:scale-95">Approve</button>
+                            <button onclick="rejectProfileRequest(${r.id})" class="bg-white text-red-500 border border-red-100 px-8 py-4 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-red-50 transition-all active:scale-95">Reject</button>
                         </div>
                     </div>
                 `).join('');
@@ -1530,7 +1726,7 @@
         function loadWarehouseData(target = 'all', fromPagination = false) {
             const mInbound = document.getElementById('wh-inbound-month');
             const mPicking = document.getElementById('wh-picking-month');
-            
+
             // Inisialisasi mVal berdasarkan target yang ingin diupdate
             let mVal = '';
             if (target === 'picking' && mPicking) {
@@ -1542,25 +1738,25 @@
             } else if (target === 'all') {
                 mVal = (mPicking && mPicking.value) ? mPicking.value : '';
             }
-            
+
             const query = mVal ? '?month=' + mVal : '';
-            
+
             fetch('/api/admin/data' + query).then(res => res.json()).then(data => {
                 if (data.error) return;
-                
+
                 // Update Cache dan UI secara selektif jika ada target
                 if (target === 'all' || target === 'stocks') {
                     globalStocksCache = data.stocks;
-                    renderWarehouseLayout(data.stocks); 
+                    renderWarehouseLayout(data.stocks);
                     renderWarehouseStock(data.stocks);
                     if (currentUser.role === 'wh_supervisor') renderStockOpname(data.stocks);
                 }
-                
+
                 if (target === 'all' || target === 'picking') {
                     globalOrdersCache = data.orders;
                     renderWarehousePickingList(data.orders);
                 }
-                
+
                 if (target === 'all' || target === 'inbound') {
                     if (data.inbound_tasks) {
                         globalInboundTasksCache = data.inbound_tasks;
@@ -1616,7 +1812,7 @@
             if (!grid || !empty) return;
 
             let myOrders = allOrdersData.filter(o => o.warehouse === currentUser.location && o.status !== 'Menunggu Alokasi');
-            
+
             // Urutkan: Yang belum selesai di atas, yang Selesai di bawah
             myOrders.sort((a, b) => {
                 if (a.status === 'Selesai' && b.status !== 'Selesai') return 1;
@@ -1639,15 +1835,15 @@
             const paginatedOrders = myOrders.slice(start, end);
 
             grid.innerHTML = paginatedOrders.map(o => {
-                const isError = o.status === 'Perbaiki Kemasan'; 
-                const isDone = o.status === 'Serahkan ke Jasa Kirim' || o.status === 'Selesai'; 
-                const isWait = o.status === 'Minta Persetujuan/Approval Pengiriman'; 
+                const isError = o.status === 'Perbaiki Kemasan';
+                const isDone = o.status === 'Serahkan ke Jasa Kirim' || o.status === 'Selesai';
+                const isWait = o.status === 'Minta Persetujuan/Approval Pengiriman';
                 const isAppr = o.status === 'Disetujui Admin (Siap Kirim)';
 
                 const itemsList = o.items.map(i => {
                     const stockData = globalStocksCache ? globalStocksCache[currentUser.location][i.product] : null;
                     const prefix = stockData ? stockData.rack : '-';
-                    
+
                     // FIFO Instruction: Show oldest batch date
                     let fifoInfo = '';
                     if (stockData && stockData.batches && stockData.batches.length > 0) {
@@ -1655,35 +1851,35 @@
                         fifoInfo = `
                         <div class="mt-1.5 bg-amber-50 border border-amber-200 p-1 rounded-xl flex items-center gap-2 animate-pulse">
                             <div class="bg-amber-500 text-white p-0.5 rounded-lg"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
-                            <span class="text-[8px] font-black text-amber-700 uppercase tracking-widest">FIFO: Batch ${oldestBatch.date}</span>
+                            <span class="text-[10px] font-black text-amber-700 uppercase tracking-widest">FIFO: Batch ${oldestBatch.date}</span>
                         </div>`;
                     }
 
                     const requiredBlocks = Math.ceil(i.qty / WMS_CONFIG.CAPACITY_PER_BLOCK);
                     let blockNames = []; for (let b = 1; b <= requiredBlocks; b++) blockNames.push(`${prefix}-${b}`);
-                    
+
                     return `
                     <div class="bg-coffee-50/50 border border-coffee-100/50 p-2.5 rounded-2xl mb-1.5 last:mb-0">
                         <div class="flex justify-between items-center mb-1">
                             <div>
-                                <p class="text-[8px] font-black text-coffee-400 uppercase tracking-widest mb-1">Produk</p>
-                                <p class="font-black text-coffee-950 text-[11px] leading-tight">${i.product}</p>
+                                <p class="text-[10px] font-black text-coffee-700 uppercase tracking-widest mb-1">Produk</p>
+                                <p class="font-black text-coffee-950 text-[13px] leading-tight">${i.product}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[8px] font-black text-coffee-400 uppercase tracking-widest mb-1">Kuantitas</p>
-                                <p class="font-black text-base text-coffee-950">${Math.round(i.qty)} <span class="text-[9px] text-coffee-300">KG</span></p>
+                                <p class="text-[10px] font-black text-coffee-700 uppercase tracking-widest mb-1">Kuantitas</p>
+                                <p class="font-black text-base text-coffee-950">${Math.round(i.qty)} <span class="text-[11px] text-coffee-600">KG</span></p>
                             </div>
                         </div>
                         <div class="bg-white border border-coffee-100 rounded-xl px-3 py-1 flex items-center justify-between">
-                            <span class="text-[8px] font-black text-coffee-400 uppercase tracking-widest">Peta Rak:</span>
-                            <span class="font-mono text-[10px] font-black text-coffee-900 bg-coffee-100/50 px-2 py-0.5 rounded-lg">Blok ${blockNames.join(', ')}</span>
+                            <span class="text-[10px] font-black text-coffee-700 uppercase tracking-widest">Peta Rak:</span>
+                            <span class="font-mono text-[12px] font-black text-coffee-900 bg-coffee-100/50 px-2 py-0.5 rounded-lg">Blok ${blockNames.join(', ')}</span>
                         </div>
                         ${fifoInfo}
                     </div>`;
                 }).join('');
 
                 let cardStyle = "bg-white border-coffee-100 shadow-sm hover:shadow-2xl hover:border-accent-gold/20";
-                if (isError) cardStyle = "bg-red-50 border-red-200 shadow-lg animate-bounce-subtle"; 
+                if (isError) cardStyle = "bg-red-50 border-red-200 shadow-lg animate-bounce-subtle";
                 else if (isDone) cardStyle = "bg-coffee-50/30 border-coffee-100 opacity-60";
 
                 let assignHTML = ''; let act = '';
@@ -1699,38 +1895,38 @@
                     if (isDone) {
                         assignHTML = `
                         <div class="mb-2 bg-coffee-100/50 px-3 py-2 rounded-xl border border-coffee-200">
-                            <span class="text-[7px] font-black text-coffee-400 uppercase tracking-widest block mb-0.5">Ditangani Oleh</span>
+                            <span class="text-[7px] font-black text-coffee-700 uppercase tracking-widest block mb-0.5">Ditangani Oleh</span>
                             <span class="font-black text-xs text-coffee-950 uppercase tracking-tight">${o.assigned_operator || 'Internal System'}</span>
                         </div>`;
                     } else {
                         assignHTML = `
                         <div class="mb-2 bg-blue-50/50 border border-blue-100 px-3 py-2 rounded-xl shadow-sm">
                             <label class="text-[7px] font-black text-blue-400 uppercase tracking-widest block mb-1">Penugasan Operator</label>
-                            <select onchange="assignTaskWh(${o.id}, this)" class="w-full border border-blue-200 text-blue-800 bg-white p-1.5 rounded-lg text-[10px] font-black outline-none focus:border-blue-500 shadow-sm">${opOptions}</select>
+                            <select onchange="assignTaskWh(${o.id}, this)" class="w-full border border-blue-200 text-blue-800 bg-white p-1.5 rounded-lg text-[12px] font-black outline-none focus:border-blue-500 shadow-sm">${opOptions}</select>
                         </div>`;
                     }
 
                     let statusText = o.status;
                     if (isError) statusText = "⚠️ Gagal QC"; else if (isWait) statusText = "⏳ Menunggu Admin"; else if (isAppr) statusText = "✅ Siap Kirim"; else if (isDone) statusText = "🎉 Selesai";
-                    act = `<div class="text-[10px] font-black text-coffee-400 uppercase tracking-widest mb-1.5 px-1">Status Operasional</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-xl text-xs font-black text-coffee-700 text-center cursor-not-allowed opacity-80 uppercase tracking-widest">${statusText}</div>`;
+                    act = `<div class="text-[12px] font-black text-coffee-700 uppercase tracking-widest mb-1.5 px-1">Status Operasional</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-xl text-xs font-black text-coffee-700 text-center cursor-not-allowed opacity-80 uppercase tracking-widest">${statusText}</div>`;
 
                 } else if (currentUser.role === 'wh_operator') {
                     let opName = o.assigned_operator || "Belum ada tugas";
                     assignHTML = `
                     <div class="mb-2 bg-coffee-50 px-3 py-2 rounded-xl border border-coffee-100">
-                        <span class="text-[7px] font-black text-coffee-300 uppercase tracking-widest block mb-0.5">Ditugaskan Kepada</span>
+                        <span class="text-[7px] font-black text-coffee-600 uppercase tracking-widest block mb-0.5">Ditugaskan Kepada</span>
                         <span class="font-black text-xs text-coffee-950 uppercase tracking-tight">${opName}</span>
                     </div>`;
 
                     if (o.assigned_operator === currentUser.name) {
-                        if (isWait) act = `<div class="bg-amber-50 text-amber-700 p-4 rounded-2xl text-[10px] font-black text-center animate-pulse border border-amber-100 uppercase tracking-widest">⏳ Tunggu Konfirmasi Admin</div>`;
+                        if (isWait) act = `<div class="bg-amber-50 text-amber-700 p-4 rounded-2xl text-[12px] font-black text-center animate-pulse border border-amber-100 uppercase tracking-widest">⏳ Tunggu Konfirmasi Admin</div>`;
                         else if (isAppr) act = `
-                            <div class="text-[10px] font-black text-emerald-600 uppercase tracking-widest mb-2 px-1">Update Status</div>
-                            <button onclick="updateOrderStatusWh(${o.id}, {value: 'Serahkan ke Jasa Kirim'})" class="w-full bg-emerald-600 text-white p-4 rounded-2xl text-[10px] font-black hover:bg-emerald-700 transition shadow-lg shadow-emerald-100 uppercase tracking-[0.2em]">🚀 Serahkan Kurir</button>`;
-                        else if (isDone) act = `<div class="bg-emerald-50 text-emerald-700 p-4 rounded-2xl text-[10px] font-black text-center border border-emerald-100 uppercase tracking-widest">📦 Selesai & Terkirim</div>`;
+                            <div class="text-[12px] font-black text-emerald-600 uppercase tracking-widest mb-2 px-1">Update Status</div>
+                            <button onclick="updateOrderStatusWh(${o.id}, {value: 'Serahkan ke Jasa Kirim'})" class="w-full bg-emerald-600 text-white p-4 rounded-2xl text-[12px] font-black hover:bg-emerald-700 transition shadow-lg shadow-emerald-100 uppercase tracking-[0.2em]">🚀 Serahkan Kurir</button>`;
+                        else if (isDone) act = `<div class="bg-emerald-50 text-emerald-700 p-4 rounded-2xl text-[12px] font-black text-center border border-emerald-100 uppercase tracking-widest">📦 Selesai & Terkirim</div>`;
                         else act = `
-                            <div class="text-[10px] font-black text-coffee-400 uppercase tracking-widest mb-2 px-1">Update Progres</div>
-                            <select onchange="updateOrderStatusWh(${o.id}, this)" class="w-full border-2 ${isError ? 'border-red-400 text-red-700 bg-red-50' : 'border-coffee-200 text-coffee-950 bg-white'} p-3 rounded-2xl text-[10px] font-black outline-none shadow-sm uppercase tracking-wider">
+                            <div class="text-[12px] font-black text-coffee-700 uppercase tracking-widest mb-2 px-1">Update Progres</div>
+                            <select onchange="updateOrderStatusWh(${o.id}, this)" class="w-full border-2 ${isError ? 'border-red-400 text-red-700 bg-red-50' : 'border-coffee-200 text-coffee-950 bg-white'} p-3 rounded-2xl text-[12px] font-black outline-none shadow-sm uppercase tracking-wider">
                                 <option value="Menunggu Diproses" ${o.status === 'Menunggu Diproses' ? 'selected' : ''}>📋 Antre Picking</option>
                                 <option value="Ambil Barang" ${o.status === 'Ambil Barang' ? 'selected' : ''}>🏃‍♂️ Ambil Barang</option>
                                 <option value="Packing" ${o.status === 'Packing' ? 'selected' : ''}>📦 Packing</option>
@@ -1739,33 +1935,33 @@
                                 <option value="Minta Persetujuan/Approval Pengiriman">✅ Minta Approval</option>
                             </select>`;
                     } else {
-                        act = `<div class="bg-red-50 text-red-600 text-[10px] p-4 rounded-2xl text-center font-black border border-red-100 uppercase tracking-widest">❌ Bukan Tugas Anda</div>`;
+                        act = `<div class="bg-red-50 text-red-600 text-[12px] p-4 rounded-2xl text-center font-black border border-red-100 uppercase tracking-widest">❌ Bukan Tugas Anda</div>`;
                     }
                 }
 
                 let checkboxHTML = (isDone) ? '' : `<input type="checkbox" class="order-batch-cb w-6 h-6 rounded-lg cursor-pointer border-coffee-200 text-coffee-900 focus:ring-coffee-900" value="${o.id}">`;
                 let printBtn = '';
                 if (o.status === 'Packing' || o.status === 'QC' || isAppr || isDone) {
-                    printBtn = `<button onclick="openShippingLabel(${o.id})" class="text-[10px] font-black bg-coffee-950 text-white px-4 py-2 rounded-xl hover:bg-black transition flex items-center gap-2 shadow-lg shadow-coffee-200 uppercase tracking-widest"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg> Label</button>`;
+                    printBtn = `<button onclick="openShippingLabel(${o.id})" class="text-[12px] font-black bg-coffee-950 text-white px-4 py-2 rounded-xl hover:bg-black transition flex items-center gap-2 shadow-lg shadow-coffee-200 uppercase tracking-widest"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg> Label</button>`;
                 }
 
                 return `
                 <div class="rounded-[2rem] border-2 transition-all duration-700 overflow-hidden flex flex-col hover:shadow-4xl hover:-translate-y-1 ${cardStyle}">
                     <div class="p-4 flex-grow flex flex-col relative group overflow-hidden">
-                        <div class="absolute -right-20 -top-20 w-48 h-48 bg-coffee-50 rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-1000"></div>
+                        <div class="absolute -right-20 -top-20 w-48 h-48 bg-coffee-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                         <div class="flex justify-between items-start mb-3 relative z-10">
                             <div class="flex items-center gap-4">
                                 ${checkboxHTML}
                                 <div>
-                                    <span class="font-mono text-[9px] font-black text-coffee-950 bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#SHIP-${o.id}</span>
-                                    <p class="text-[8px] font-black text-coffee-300 mt-2 uppercase tracking-[0.3em]">${o.date}</p>
+                                    <span class="font-mono text-[11px] font-black text-coffee-950 bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#SHIP-${o.id}</span>
+                                    <p class="text-[10px] font-black text-coffee-600 mt-2 uppercase tracking-[0.3em]">${o.date}</p>
                                 </div>
                             </div>
                             ${printBtn}
                         </div>
                         ${assignHTML}
                         <div class="space-y-1 mb-2 flex-grow relative z-10 border-t border-coffee-50 pt-1.5">
-                            <div class="text-[8px] font-black text-coffee-300 uppercase tracking-[0.4em] mb-1">Fulfillment Protocol</div>
+                            <div class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.2em] mb-1">Fulfillment Protocol</div>
                             ${itemsList}
                         </div>
                         <div class="mb-4 relative z-10">${getProgressTrackerHTML(o.status)}</div>
@@ -1798,29 +1994,29 @@
             const tbody = document.getElementById('opname-table-body');
             if (!tbody || !currentUser || currentUser.role !== 'wh_supervisor') return;
             tbody.innerHTML = PRODUCT_LIST.map(prod => {
-                const stockVal = Math.round(dbStocks[currentUser.location][prod].stock); 
-                const rackPrefix = dbStocks[currentUser.location][prod].rack; 
+                const stockVal = Math.round(dbStocks[currentUser.location][prod].stock);
+                const rackPrefix = dbStocks[currentUser.location][prod].rack;
                 const safeId = prod.replace(/\s+/g, '-');
                 return `
                 <tr class="border-b border-coffee-50 hover:bg-accent-cream/30 transition-all duration-300 group">
                     <td class="p-8">
                         <div class="font-black text-coffee-950 uppercase tracking-tighter text-sm">${prod}</div>
-                        <div class="text-[9px] text-accent-gold font-black mt-3 bg-coffee-950 inline-block px-4 py-1.5 rounded-xl uppercase tracking-widest shadow-xl">TERMINAL ${rackPrefix}</div>
+                        <div class="text-[11px] text-accent-gold font-black mt-3 bg-coffee-950 inline-block px-4 py-1.5 rounded-xl uppercase tracking-widest shadow-xl">TERMINAL ${rackPrefix}</div>
                     </td>
                     <td class="p-8">
-                        <div class="text-[9px] font-black text-coffee-300 uppercase tracking-[0.3em] mb-2">Digital Inventory</div>
-                        <div class="font-black text-2xl text-coffee-950 tracking-tighter">${stockVal} <span class="text-[10px] text-coffee-300">KG</span></div>
+                        <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-2">Digital Inventory</div>
+                        <div class="font-black text-2xl text-coffee-950 tracking-tighter">${stockVal} <span class="text-[12px] text-coffee-600">KG</span></div>
                     </td>
                     <td class="p-8">
-                        <div class="text-[9px] font-black text-coffee-300 uppercase tracking-[0.3em] mb-2">Physical Audit</div>
+                        <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-2">Physical Audit</div>
                         <input type="number" id="opname-actual-${safeId}" class="w-32 bg-accent-cream border-2 border-transparent p-4 rounded-2xl focus:bg-white focus:border-accent-gold font-black text-coffee-950 outline-none transition-all duration-500 shadow-inner" placeholder="${stockVal}">
                     </td>
                     <td class="p-8">
-                        <div class="text-[9px] font-black text-coffee-300 uppercase tracking-[0.3em] mb-2">Discrepancy Notes</div>
+                        <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-2">Discrepancy Notes</div>
                         <input type="text" id="opname-reason-${safeId}" class="w-full bg-accent-cream border-2 border-transparent p-4 rounded-2xl focus:bg-white focus:border-accent-gold text-xs font-black text-coffee-950 outline-none transition-all duration-500 shadow-inner" placeholder="Log variance rationale...">
                     </td>
                     <td class="p-8 text-center">
-                        <button onclick="submitOpname('${prod}')" class="bg-coffee-950 text-white px-8 py-4 rounded-2xl text-[10px] font-black hover:bg-black shadow-2xl shadow-coffee-200 transition-all active:scale-95 uppercase tracking-[0.2em]">Update Ledger</button>
+                        <button onclick="submitOpname('${prod}')" class="bg-coffee-950 text-white px-8 py-4 rounded-2xl text-[12px] font-black hover:bg-black shadow-2xl shadow-coffee-200 transition-all active:scale-95 uppercase tracking-[0.2em]">Update Ledger</button>
                     </td>
                 </tr>`;
             }).join('');
@@ -1842,10 +2038,10 @@
 
         // FITUR BARU: MENGGAMBAR PETA 2D SECARA EKSPLISIT (ANTI-BLANK)
         function renderWarehouseLayout(dbStocks, prefix = '') {
-            if (!currentUser) return; 
+            if (!currentUser) return;
 
             const colorMap = {
-                'A': { empty: 'border-black text-coffee-300 bg-coffee-50/20', fill: 'border-black text-coffee-950 bg-white', full: 'bg-coffee-900 border-black text-white shadow-2xl', bar: 'bg-coffee-100 opacity-30' },
+                'A': { empty: 'border-black text-coffee-600 bg-coffee-50/20', fill: 'border-black text-coffee-950 bg-white', full: 'bg-coffee-900 border-black text-white shadow-2xl', bar: 'bg-coffee-100 opacity-30' },
                 'B': { empty: 'border-black text-amber-300 bg-amber-50/20', fill: 'border-black text-amber-950 bg-white', full: 'bg-amber-800 border-black text-white shadow-2xl', bar: 'bg-amber-100 opacity-30' },
                 'C': { empty: 'border-black text-stone-300 bg-stone-50/20', fill: 'border-black text-stone-950 bg-white', full: 'bg-stone-800 border-black text-white shadow-2xl', bar: 'bg-stone-100 opacity-30' },
                 'D': { empty: 'border-black text-orange-300 bg-orange-50/20', fill: 'border-black text-orange-950 bg-white', full: 'bg-orange-800 border-black text-white shadow-2xl', bar: 'bg-orange-100 opacity-30' }
@@ -1888,7 +2084,7 @@
                     let stacksObj = '';
                     for (let s = 1; s <= 8; s++) {
                         let op = s <= currentStacks ? 'opacity-100 bg-accent-gold shadow-[0_0_10px_rgba(212,163,115,0.3)]' : 'opacity-10 bg-coffee-200';
-                        stacksObj += `<div class="w-full h-1 ${op} rounded-full mt-1 flex-shrink-0 transition-all duration-500 delay-${s*100} border border-black"></div>`;
+                        stacksObj += `<div class="w-full h-1 ${op} rounded-full mt-1 flex-shrink-0 transition-all duration-500 delay-${s * 100} border border-black"></div>`;
                     }
 
                     blocksHTML += `
@@ -1896,8 +2092,8 @@
                         ${barHTML}
                         <div class="z-10 w-full flex flex-col justify-between h-full text-center">
                             <div>
-                                <span class="text-[10px] font-black uppercase tracking-widest opacity-80">${blockName}</span>
-                                <div class="text-[9px] font-bold mt-1 opacity-60">${Math.round(stockInThisBlock)} Kg</div>
+                                <span class="text-[12px] font-black uppercase tracking-widest opacity-80">${blockName}</span>
+                                <div class="text-[11px] font-bold mt-1 opacity-60">${Math.round(stockInThisBlock)} Kg</div>
                             </div>
                             <div class="w-2/3 mx-auto mt-3 flex flex-col-reverse justify-end pb-1 h-14">
                                 ${stacksObj}
@@ -1912,51 +2108,51 @@
         function renderWarehouseStock(dbStocks) {
             const container = document.getElementById('warehouse-stock-management-grid');
             if (!container || !currentUser || !currentUser.role.includes('wh_')) return;
-            
+
             let accentColor = "text-accent-gold";
             let btnClass = "bg-coffee-950 hover:bg-black text-white";
-            
+
             const canInbound = (currentUser.job_role && currentUser.job_role.includes('Inbound'));
 
             container.innerHTML = PRODUCT_LIST.map(prod => {
-                const stockData = dbStocks[currentUser.location][prod]; 
-                const stockVal = Math.round(stockData ? stockData.stock : 0); 
+                const stockData = dbStocks[currentUser.location][prod];
+                const stockVal = Math.round(stockData ? stockData.stock : 0);
                 const safeId = prod.replace(/\s+/g, '-');
-                
+
                 // Render FIFO Batches List
                 let batchHtml = '';
                 if (stockData && stockData.batches && stockData.batches.length > 0) {
                     batchHtml = `
                     <div class="mt-6 border-t border-coffee-50 pt-5">
-                        <span class="text-[9px] font-black text-coffee-300 uppercase tracking-[0.2em] block mb-3">Antrean FIFO (Per Batch)</span>
+                        <span class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.2em] block mb-3">Antrean FIFO (Per Batch)</span>
                         <div class="space-y-2">
                             ${stockData.batches.map(b => `
                                 <div class="flex justify-between items-center bg-coffee-50/50 px-4 py-2.5 rounded-xl border border-coffee-100/50">
-                                    <span class="text-[10px] font-black text-coffee-600 uppercase tracking-tight">📅 ${b.date}</span>
-                                    <span class="text-[10px] font-black text-coffee-950">${Math.round(b.qty)} KG</span>
+                                    <span class="text-[12px] font-black text-coffee-600 uppercase tracking-tight">📅 ${b.date}</span>
+                                    <span class="text-[12px] font-black text-coffee-950">${Math.round(b.qty)} KG</span>
                                 </div>
                             `).join('')}
                         </div>
                     </div>`;
                 }
 
-                const inputArea = canInbound ? 
+                const inputArea = canInbound ?
                     `<div class="flex gap-3 mt-6">
                         <input type="number" id="add-stock-${safeId}" placeholder="+ Qty" class="w-full bg-white border-2 border-coffee-100 px-4 py-3 rounded-2xl text-sm font-black focus:outline-none focus:ring-4 focus:ring-coffee-50 focus:border-coffee-300 text-coffee-950 text-center transition">
-                        <button onclick="addStockWh('${prod}')" class="${btnClass} px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition shadow-lg shadow-coffee-100 active:scale-95">Inbound</button>
-                    </div>` : 
+                        <button onclick="addStockWh('${prod}')" class="${btnClass} px-6 py-3 rounded-2xl text-[12px] font-black uppercase tracking-widest transition shadow-lg shadow-coffee-100 active:scale-95">Inbound</button>
+                    </div>` :
                     `<div class="bg-coffee-50/50 p-4 rounded-2xl border border-dashed border-coffee-200 text-center mt-6">
-                        <span class="text-[9px] font-black text-coffee-300 uppercase tracking-widest">Wewenang Operator Inbound</span>
+                        <span class="text-[11px] font-black text-coffee-600 uppercase tracking-widest">Wewenang Operator Inbound</span>
                     </div>`;
 
                 return `
                 <div class="bg-white rounded-[2.5rem] shadow-sm border border-coffee-50 p-6 flex flex-col justify-between hover:shadow-4xl hover:-translate-y-2 transition-all duration-700 group relative overflow-hidden">
-                    <div class="absolute -right-20 -top-20 w-48 h-48 bg-accent-cream rounded-full opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div class="absolute -right-20 -top-20 w-48 h-48 bg-accent-cream rounded-full opacity-100 group-hover:scale-150 transition-transform duration-1000"></div>
                     <div class="relative z-10">
-                        <h4 class="text-[8px] font-black text-coffee-300 uppercase tracking-[0.4em] mb-3 group-hover:text-accent-gold transition-colors">${prod}</h4>
+                        <h4 class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.2em] mb-3 group-hover:text-accent-gold transition-colors">${prod}</h4>
                         <div class="flex items-baseline gap-2 mb-4">
                             <span class="text-4xl font-black ${stockVal < 100 ? 'text-red-600' : 'text-coffee-950'} tracking-tighter leading-none">${stockVal}</span>
-                            <span class="text-[9px] font-black text-coffee-200 uppercase tracking-[0.2em]">/ 1600 KG</span>
+                            <span class="text-[11px] font-black text-coffee-200 uppercase tracking-[0.2em]">/ 1600 KG</span>
                         </div>
                         ${batchHtml}
                     </div>
@@ -1992,9 +2188,9 @@
 
             let myTasks = globalInboundTasksCache.filter(t => t.warehouse_location === currentUser.location);
             if (myTasks.length === 0) { grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
-            
+
             empty.classList.add('hidden');
-            
+
             const pg = globalPagination.whInbound;
             const start = (pg.current - 1) * pg.size;
             const end = start + pg.size;
@@ -2004,37 +2200,37 @@
                 const isDone = t.status === 'Selesai Inbound';
                 let cardStyle = isDone ? "bg-coffee-50/50 border-coffee-100 opacity-60" : "bg-white border-coffee-100 shadow-sm";
                 const canProcess = currentUser.job_role && currentUser.job_role.includes('Inbound');
-                
+
                 if (canProcess && !isDone) {
-                    act = `<div class="text-[9px] font-black text-coffee-300 uppercase tracking-widest mb-2 px-1">Update Proses</div><select onchange="updateInboundTaskStatus(${t.id}, this)" class="w-full border-2 border-coffee-100 text-coffee-950 p-3 rounded-2xl text-sm font-black outline-none focus:ring-4 focus:ring-coffee-50 transition bg-white"><option value="Menunggu Bongkar Muat" ${t.status === 'Menunggu Bongkar Muat' ? 'selected' : ''}>🚚 Antrean</option><option value="QC Inbound" ${t.status === 'QC Inbound' ? 'selected' : ''}>🔍 QC Inbound</option><option value="Penempatan ke Rak" ${t.status === 'Penempatan ke Rak' ? 'selected' : ''}>📦 Penempatan</option><option value="Selesai Inbound">✅ Selesai</option></select>`;
+                    act = `<div class="text-[11px] font-black text-coffee-600 uppercase tracking-widest mb-2 px-1">Update Proses</div><select onchange="updateInboundTaskStatus(${t.id}, this)" class="w-full border-2 border-coffee-100 text-coffee-950 p-3 rounded-2xl text-sm font-black outline-none focus:ring-4 focus:ring-coffee-50 transition bg-white"><option value="Menunggu Bongkar Muat" ${t.status === 'Menunggu Bongkar Muat' ? 'selected' : ''}>🚚 Antrean</option><option value="QC Inbound" ${t.status === 'QC Inbound' ? 'selected' : ''}>🔍 QC Inbound</option><option value="Penempatan ke Rak" ${t.status === 'Penempatan ke Rak' ? 'selected' : ''}>📦 Penempatan</option><option value="Selesai Inbound">✅ Selesai</option></select>`;
                 } else if (isDone) {
-                    act = `<div class="bg-emerald-50 text-emerald-700 p-4 rounded-2xl text-[10px] font-black text-center uppercase tracking-widest border border-emerald-100">✅ Selesai Inbound</div>`;
+                    act = `<div class="bg-emerald-50 text-emerald-700 p-4 rounded-2xl text-[12px] font-black text-center uppercase tracking-widest border border-emerald-100">✅ Selesai Inbound</div>`;
                 } else {
-                    act = `<div class="text-[9px] font-black text-coffee-300 uppercase tracking-widest mb-2 px-1">Status Saat Ini</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-2xl text-sm font-black text-coffee-900 text-center uppercase tracking-tight">${t.status}</div>`;
+                    act = `<div class="text-[11px] font-black text-coffee-600 uppercase tracking-widest mb-2 px-1">Status Saat Ini</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-2xl text-sm font-black text-coffee-900 text-center uppercase tracking-tight">${t.status}</div>`;
                 }
-                
+
                 return `
                 <div class="rounded-[3.5rem] border-2 transition-all duration-700 overflow-hidden flex flex-col hover:shadow-4xl hover:-translate-y-2 ${cardStyle}">
                     <div class="p-10 flex-grow flex flex-col relative overflow-hidden group">
-                        <div class="absolute -right-20 -top-20 w-48 h-48 bg-coffee-50 rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-1000"></div>
+                        <div class="absolute -right-20 -top-20 w-48 h-48 bg-coffee-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                         <div class="flex justify-between items-start mb-8 relative z-10">
                             <div>
-                                <span class="font-mono text-[10px] font-black text-coffee-950 bg-coffee-50 px-4 py-2 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#INTAKE-${t.id}</span>
-                                <p class="text-[9px] font-black text-coffee-300 mt-4 uppercase tracking-[0.3em]">${t.created_at}</p>
+                                <span class="font-mono text-[12px] font-black text-coffee-950 bg-coffee-50 px-4 py-2 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#INTAKE-${t.id}</span>
+                                <p class="text-[11px] font-black text-coffee-600 mt-4 uppercase tracking-[0.3em]">${t.created_at}</p>
                             </div>
                             <div class="bg-coffee-950 text-accent-gold p-4 rounded-2xl shadow-xl">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
                             </div>
                         </div>
                         <div class="mb-8 bg-coffee-50/50 p-6 rounded-2xl border border-coffee-100/50 relative z-10">
-                            <span class="text-[8px] font-black text-coffee-300 uppercase tracking-[0.4em] block mb-2">Lead Personnel:</span>
+                            <span class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.2em] block mb-2">Lead Personnel:</span>
                             <span class="font-black text-sm text-coffee-950 uppercase tracking-tight">${t.operator_name}</span>
                         </div>
                         <div class="space-y-6 mb-10 flex-grow relative z-10 border-t border-coffee-50 pt-6">
-                             <div class="text-[9px] font-black text-coffee-300 uppercase tracking-[0.3em] mb-4">Stock Manifest</div>
+                             <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-4">Stock Manifest</div>
                              <div class="flex justify-between items-end">
                                  <span class="font-black text-coffee-950 text-lg uppercase tracking-tighter leading-none">${t.product_name}</span>
-                                 <span class="font-black text-3xl text-coffee-950 tracking-tighter leading-none">${Math.round(t.qty_kg)} <span class="text-[10px] text-coffee-300">KG</span></span>
+                                 <span class="font-black text-3xl text-coffee-950 tracking-tighter leading-none">${Math.round(t.qty_kg)} <span class="text-[12px] text-coffee-600">KG</span></span>
                              </div>
                         </div>
                         <div class="mt-auto relative z-10">${act}</div>
@@ -2055,18 +2251,17 @@
         function renderSdmTable() {
             const tbody = document.getElementById('sdm-table-body');
             if (!tbody) return;
-            if (sdmDataArray.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-coffee-300 font-black uppercase tracking-widest text-sm">Belum ada data karyawan terdaftar.</td></tr>`; return; }
+            if (sdmDataArray.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-coffee-600 font-black uppercase tracking-widest text-sm">Belum ada data karyawan terdaftar.</td></tr>`; return; }
             tbody.innerHTML = sdmDataArray.map(sdm => {
-                const initial = sdm.name.charAt(0).toUpperCase(); 
-                let roleClass = "bg-coffee-50 text-coffee-600 border-coffee-100";
-                const isSup = sdm.role.toLowerCase().includes('supervisor');
-                if (isSup) roleClass = "bg-coffee-950 text-accent-gold border-coffee-900"; 
-                else roleClass = "bg-coffee-50 text-coffee-700 border-coffee-100"; 
-                
-                let statusHtml = sdm.status === 'Aktif' ? 
-                    `<span class="text-emerald-600 font-black text-[10px] flex items-center gap-2 uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Aktif Bekerja</span>` : 
-                    `<span class="text-coffee-300 font-black text-[10px] uppercase tracking-widest bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100">Off-Shift</span>`;
-                
+                const initial = sdm.name.charAt(0).toUpperCase();
+                let roleStyle = sdm.role.toLowerCase().includes('supervisor') ?
+                    "text-coffee-950 font-black tracking-widest" :
+                    "text-coffee-600 font-bold tracking-wide";
+
+                let statusHtml = sdm.status === 'Aktif' ?
+                    `<span class="text-emerald-600 font-black text-[12px] flex items-center gap-2 uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Aktif Bekerja</span>` :
+                    `<span class="text-coffee-600 font-black text-[12px] uppercase tracking-widest bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100">Off-Shift</span>`;
+
                 return `
                 <tr class="border-b border-coffee-50 hover:bg-accent-cream/30 transition-all duration-300 group">
                     <td class="p-8">
@@ -2076,10 +2271,12 @@
                         </div>
                     </td>
                     <td class="p-8">
-                        <span class="${roleClass} px-4 py-2 rounded-xl text-[10px] font-black border uppercase tracking-widest shadow-xl">${isSup ? 'Kepala Gudang (Supervisor)' : sdm.role}</span>
+                        <div class="${roleStyle} text-[12px] uppercase">
+                            ${sdm.role.toLowerCase().includes('supervisor') ? '<span class="text-accent-gold">★</span> Kepala Gudang (Supervisor)' : sdm.role}
+                        </div>
                     </td>
                     <td class="p-8">${statusHtml}</td>
-                    <td class="p-8 font-black text-coffee-400 text-[10px] tracking-[0.2em] uppercase">${sdm.phone}</td>
+                    <td class="p-8 font-black text-coffee-700 text-[12px] tracking-[0.2em] uppercase">${sdm.phone}</td>
                     <td class="p-8 text-center">
                         <div class="flex justify-center gap-3">
                             <button onclick="openSdmModal(${sdm.id})" class="p-4 bg-coffee-950 text-white rounded-xl hover:bg-black transition shadow-xl active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
@@ -2093,12 +2290,12 @@
         function openSdmModal(id = null) {
             const modal = document.getElementById('sdm-modal');
             const locContainer = document.getElementById('sdm-loc-container');
-            if (currentUser && currentUser.role === 'admin') { 
-                if (locContainer) locContainer.style.display = 'block'; 
-            } else { 
-                if (locContainer) locContainer.style.display = 'none'; 
+            if (currentUser && currentUser.role === 'admin') {
+                if (locContainer) locContainer.style.display = 'block';
+            } else {
+                if (locContainer) locContainer.style.display = 'none';
             }
-            
+
             const title = document.getElementById('sdm-modal-title');
             const idInput = document.getElementById('sdm-id');
             const nameInput = document.getElementById('sdm-name');
@@ -2159,13 +2356,13 @@
         }
 
         function deleteSdm(id) {
-            if (confirm("Hapus karyawan ini?")) { 
-                fetch(`/api/warehouse/sdm/${id}`, { method: 'DELETE' }).then(res => res.json()).then(d => { 
+            if (confirm("Hapus karyawan ini?")) {
+                fetch(`/api/warehouse/sdm/${id}`, { method: 'DELETE' }).then(res => res.json()).then(d => {
                     if (d.success) {
                         if (currentUser && currentUser.role === 'admin') renderAdminDashboard();
-                        else loadSdmDataAndWarehouse(); 
+                        else loadSdmDataAndWarehouse();
                     }
-                }); 
+                });
             }
         }
 
@@ -2201,18 +2398,18 @@
 
         function getProgressTrackerHTML(currentStatus) {
             const mainSteps = ['Menunggu Diproses', 'Ambil Barang', 'Packing', 'QC', 'Minta Persetujuan/Approval Pengiriman', 'Serahkan ke Jasa Kirim', 'Selesai'];
-            let currentIndex = mainSteps.indexOf(currentStatus); 
-            let isError = currentStatus === 'Perbaiki Kemasan'; 
+            let currentIndex = mainSteps.indexOf(currentStatus);
+            let isError = currentStatus === 'Perbaiki Kemasan';
             let isAdminApproved = currentStatus === 'Disetujui Admin (Siap Kirim)';
-            
-            if (isError) currentIndex = 3; 
+
+            if (isError) currentIndex = 3;
             if (isAdminApproved) currentIndex = 4;
- 
+
             let fillWidth = currentIndex > -1 ? (currentIndex / (mainSteps.length - 1)) * 100 : 0;
-            let fillColor = "bg-coffee-950"; 
-            if (isError) fillColor = 'bg-red-500'; 
+            let fillColor = "bg-coffee-950";
+            if (isError) fillColor = 'bg-red-500';
             if (isAdminApproved || currentStatus === 'Serahkan ke Jasa Kirim' || currentStatus === 'Selesai') fillColor = 'bg-accent-gold';
- 
+
             let html = `
             <div class="relative mb-4 px-2">
                 <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-coffee-100 rounded-full"></div>
@@ -2220,22 +2417,22 @@
                 <div class="flex justify-between items-center relative z-10">`;
 
             mainSteps.forEach((step, i) => {
-                let dotClass = "bg-coffee-100 w-2.5 h-2.5"; 
-                if (i < currentIndex) dotClass = "bg-coffee-950 w-2.5 h-2.5 shadow-lg"; 
+                let dotClass = "bg-coffee-100 w-2.5 h-2.5";
+                if (i < currentIndex) dotClass = "bg-coffee-950 w-2.5 h-2.5 shadow-lg";
                 if ((isAdminApproved || currentStatus === 'Selesai') && i <= currentIndex) dotClass = "bg-accent-gold w-2.5 h-2.5 shadow-lg";
-                
-                if (i === currentIndex) { 
-                    if (isError) dotClass = "bg-red-500 w-4 h-4 ring-4 ring-red-100 shadow-xl"; 
-                    else if (isAdminApproved || currentStatus === 'Selesai') dotClass = "bg-accent-gold w-5 h-5 ring-4 ring-accent-gold/20 shadow-2xl"; 
-                    else dotClass = "bg-coffee-950 w-5 h-5 ring-4 ring-coffee-100 shadow-2xl animate-pulse"; 
+
+                if (i === currentIndex) {
+                    if (isError) dotClass = "bg-red-500 w-4 h-4 ring-4 ring-red-100 shadow-xl";
+                    else if (isAdminApproved || currentStatus === 'Selesai') dotClass = "bg-accent-gold w-5 h-5 ring-4 ring-accent-gold/20 shadow-2xl";
+                    else dotClass = "bg-coffee-950 w-5 h-5 ring-4 ring-coffee-100 shadow-2xl animate-pulse";
                 }
                 html += `<div class="rounded-full ${dotClass} border-2 border-white transition-all duration-500"></div>`;
             });
 
             html += `</div></div>`;
-            
-            let statusText = currentStatus; 
-            let textClass = "text-coffee-300";
+
+            let statusText = currentStatus;
+            let textClass = "text-coffee-600";
             if (isError) { statusText = "Gagal QC (Perbaiki)"; textClass = "text-red-600 font-black"; }
             else if (currentStatus === 'Minta Persetujuan/Approval Pengiriman') { statusText = "Validasi Admin..."; textClass = "text-accent-gold font-black animate-pulse"; }
             else if (isAdminApproved) { statusText = "Disetujui Admin!"; textClass = "text-emerald-600 font-black"; }
@@ -2243,7 +2440,7 @@
             else if (currentStatus === 'Selesai') { statusText = "Pesanan Selesai 🎉"; textClass = "text-accent-gold font-black"; }
             else if (currentIndex > -1) { textClass = "text-coffee-950 font-black"; }
 
-            html += `<div class="text-[9px] text-center ${textClass} font-black uppercase tracking-[0.3em] mt-2">${statusText}</div>`; 
+            html += `<div class="text-[11px] text-center ${textClass} font-black uppercase tracking-[0.3em] mt-2">${statusText}</div>`;
             return html;
         }
 
@@ -2274,10 +2471,10 @@
         }
 
         function getStatusBadge(status, wh) {
-            let color = "bg-coffee-50 text-coffee-400 border-coffee-100";
+            let color = "bg-coffee-50 text-coffee-700 border-coffee-100";
             let icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
-            
-            if (status === 'Menunggu Alokasi') { color = "bg-accent-cream text-coffee-400 border-coffee-100"; }
+
+            if (status === 'Menunggu Alokasi') { color = "bg-accent-cream text-coffee-700 border-coffee-100"; }
             else if (status === 'Menunggu Picking/Inbound') { color = "bg-coffee-950 text-accent-gold border-white/5 shadow-xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>`; }
             else if (status === 'Proses Picking' || status === 'Dalam Proses Inbound') { color = "bg-coffee-950 text-white border-white/5 animate-pulse shadow-2xl"; icon = `<svg class="w-3 h-3 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`; }
             else if (status === 'Selesai Picking' || status === 'Inbound Selesai') { color = "bg-emerald-600 text-white border-transparent shadow-xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`; }
@@ -2285,9 +2482,9 @@
             else if (status === 'Serahkan ke Jasa Kirim') { color = "bg-coffee-950 text-accent-gold border-white/5 shadow-2xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>`; }
             else if (status === 'Selesai') { color = "bg-white text-coffee-950 border-coffee-100 shadow-xl opacity-60"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`; }
 
-            return `<span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] border shadow-sm transition-all duration-500 ${color}">${icon} ${status}</span>`;
+            return `<span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] border shadow-sm transition-all duration-500 ${color}">${icon} ${status}</span>`;
         }
-        
+
         function openInvoice(orderId) {
             const order = globalOrdersCache.find(o => o.id === orderId); if (!order) return;
             let finalTotal = 0; const itemsTableRows = order.items.map(i => {
@@ -2296,48 +2493,48 @@
                 <div class="flex justify-between items-center border-b border-coffee-50 py-4 last:border-0">
                     <div>
                         <p class="font-black text-sm text-coffee-950 uppercase tracking-tight">${i.product}</p>
-                        <p class="text-[10px] text-coffee-400 font-bold uppercase tracking-widest mt-1">${Math.round(i.qty)} Kg x Rp ${price}K</p>
+                        <p class="text-[12px] text-coffee-700 font-bold uppercase tracking-widest mt-1">${Math.round(i.qty)} Kg x Rp ${price}K</p>
                     </div>
-                    <p class="font-black text-lg text-coffee-900">${Math.round(subtotal).toLocaleString('id-ID')} <span class="text-[10px] text-coffee-300 font-bold">K</span></p>
+                    <p class="font-black text-lg text-coffee-900">${Math.round(subtotal).toLocaleString('id-ID')} <span class="text-[12px] text-coffee-600 font-bold">K</span></p>
                 </div>`;
             }).join('');
 
             let resiHTML = ''; if (order.awb_number) {
-                resiHTML = `<div class="bg-emerald-50/50 border-2 border-emerald-100 p-6 rounded-[2rem] mb-8 text-center relative overflow-hidden group"><div class="absolute -right-4 -top-4 w-12 h-12 bg-emerald-100 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div><p class="text-[9px] uppercase font-black text-emerald-600 mb-2 tracking-[0.2em] relative z-10">Nomor Resi Pengiriman (${order.expedition})</p><p class="font-mono font-black text-2xl tracking-[0.3em] text-coffee-950 relative z-10">${order.awb_number}</p></div>`;
+                resiHTML = `<div class="bg-emerald-50/50 border-2 border-emerald-100 p-6 rounded-[2rem] mb-8 text-center relative overflow-hidden group"><div class="absolute -right-4 -top-4 w-12 h-12 bg-emerald-100 rounded-full opacity-100 group-hover:scale-150 transition-transform duration-700"></div><p class="text-[11px] uppercase font-black text-emerald-600 mb-2 tracking-[0.2em] relative z-10">Nomor Resi Pengiriman (${order.expedition})</p><p class="font-mono font-black text-2xl tracking-[0.3em] text-coffee-950 relative z-10">${order.awb_number}</p></div>`;
             }
 
             let stampHTML = '<div class="inline-block border-2 border-amber-500 text-amber-600 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-widest text-xs scale-110 shadow-lg">Processing</div>';
             if (order.status === 'Selesai') {
-                stampHTML = '<div class="inline-block border-4 border-emerald-600 text-emerald-600 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-[0.3em] text-sm scale-110 shadow-2xl bg-white/50 backdrop-blur-sm">Delivered ✅</div>';
+                stampHTML = '<div class="inline-block border-4 border-emerald-600 text-emerald-600 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-[0.3em] text-sm scale-110 shadow-2xl bg-white/150 backdrop-blur-sm">Delivered ✅</div>';
             } else if (order.status === 'Serahkan ke Jasa Kirim' || order.status === 'Disetujui Admin (Siap Kirim)') {
-                stampHTML = '<div class="inline-block border-4 border-coffee-900 text-coffee-900 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-[0.3em] text-sm scale-110 shadow-2xl bg-white/50 backdrop-blur-sm">Paid & Shipped</div>';
+                stampHTML = '<div class="inline-block border-4 border-coffee-900 text-coffee-900 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-[0.3em] text-sm scale-110 shadow-2xl bg-white/150 backdrop-blur-sm">Paid & Shipped</div>';
             }
 
             document.getElementById('invoice-content').innerHTML = `
                 <div class="text-center mb-10">
-                    <div class="inline-block bg-coffee-950 text-white px-4 py-1.5 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] mb-4">Official Invoice</div>
+                    <div class="inline-block bg-coffee-950 text-white px-4 py-1.5 rounded-xl font-black text-[12px] uppercase tracking-[0.3em] mb-4">Official Invoice</div>
                     <h2 class="text-4xl font-black text-coffee-950 tracking-tighter font-display uppercase">Sebiji Kopi</h2>
-                    <p class="text-[9px] text-coffee-300 uppercase tracking-[0.2em] font-black mt-2">Premium Warehouse Management System</p>
+                    <p class="text-[11px] text-coffee-600 uppercase tracking-[0.2em] font-black mt-2">Premium Warehouse Management System</p>
                 </div>
                 ${resiHTML}
                 <div class="grid grid-cols-2 gap-8 border-t border-b border-coffee-100 py-8 mb-8">
                     <div>
-                        <p class="text-[9px] text-coffee-300 font-black uppercase tracking-widest mb-2">Order Reference</p>
+                        <p class="text-[11px] text-coffee-600 font-black uppercase tracking-widest mb-2">Order Reference</p>
                         <p class="font-mono font-black text-sm text-coffee-950">#ORD-${order.id}</p>
-                        <p class="text-[10px] font-black text-coffee-400 mt-1 uppercase tracking-tight">${order.date}</p>
+                        <p class="text-[12px] font-black text-coffee-700 mt-1 uppercase tracking-tight">${order.date}</p>
                     </div>
                     <div class="text-right">
-                        <p class="text-[9px] text-coffee-300 font-black uppercase tracking-widest mb-2">Customer Destination</p>
+                        <p class="text-[11px] text-coffee-600 font-black uppercase tracking-widest mb-2">Customer Destination</p>
                         <p class="font-black text-sm text-coffee-950 uppercase tracking-tight">${order.customer_name}</p>
-                        <p class="text-[10px] text-coffee-400 font-bold leading-relaxed mt-1 uppercase">${order.customer_address || '-'}</p>
-                        <p class="text-[9px] font-black text-coffee-300 mt-2 uppercase tracking-widest">Telp: ${order.customer_phone || '-'}</p>
+                        <p class="text-[12px] text-coffee-700 font-bold leading-relaxed mt-1 uppercase">${order.customer_address || '-'}</p>
+                        <p class="text-[11px] font-black text-coffee-600 mt-2 uppercase tracking-widest">Telp: ${order.customer_phone || '-'}</p>
                     </div>
                 </div>
                 <div class="bg-coffee-50/30 p-8 rounded-[2.5rem] border border-coffee-50 mb-8 relative">
-                    <p class="text-[9px] text-coffee-300 font-black uppercase tracking-widest mb-4">Item Details</p>
+                    <p class="text-[11px] text-coffee-600 font-black uppercase tracking-widest mb-4">Item Details</p>
                     ${itemsTableRows}
                     <div class="flex justify-between items-center pt-6 mt-6 border-t border-coffee-100">
-                        <span class="text-[10px] font-black text-coffee-400 uppercase tracking-widest">Grand Total Payment</span>
+                        <span class="text-[12px] font-black text-coffee-700 uppercase tracking-widest">Grand Total Payment</span>
                         <span class="font-black text-2xl text-coffee-950 tracking-tighter">Rp ${Math.round(finalTotal).toLocaleString('id-ID')}.000</span>
                     </div>
                 </div>
@@ -2383,7 +2580,7 @@
             container.innerHTML = `
                 <div class="text-center py-16">
                     <div class="inline-block animate-spin w-12 h-12 border-4 border-coffee-200 border-t-accent-gold rounded-full mb-4"></div>
-                    <p class="font-black text-coffee-400 uppercase tracking-widest text-xs">Menganalisa data penjualan...</p>
+                    <p class="font-black text-coffee-700 uppercase tracking-widest text-xs">Menganalisa data penjualan...</p>
                 </div>`;
 
             let url = `/api/ai/forecast?location=${encodeURIComponent(location)}&multiplier=${multiplier}`;
@@ -2417,17 +2614,17 @@
                     <div class="relative z-10">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                             <div>
-                                <span class="inline-block bg-accent-gold text-coffee-950 px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] mb-4 shadow-lg">AI Engine</span>
+                                <span class="inline-block bg-accent-gold text-coffee-950 px-4 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.2em] mb-4 shadow-lg">AI Engine</span>
                                 <h3 class="text-2xl font-black font-display tracking-tight">Prediksi ${data.target_period}</h3>
                                 <p class="text-coffee-200 text-sm font-bold mt-2 opacity-80">Benchmark: Penjualan ${data.reference_period}</p>
                             </div>
                             <div class="flex gap-6">
                                 <div class="text-center">
-                                    <p class="text-[9px] font-bold text-coffee-300 uppercase tracking-widest mb-1">Total Produk</p>
+                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Total Produk</p>
                                     <p class="text-3xl font-black text-white">${data.suggestions.length}</p>
                                 </div>
                                 <div class="text-center">
-                                    <p class="text-[9px] font-bold text-coffee-300 uppercase tracking-widest mb-1">Perlu Restock</p>
+                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Perlu Restock</p>
                                     <p class="text-3xl font-black text-accent-gold">${data.suggestions.filter(s => s.urgency === 'CRITICAL' || s.urgency === 'HIGH').length}</p>
                                 </div>
                             </div>
@@ -2438,36 +2635,36 @@
             let cardsHTML = data.suggestions.map((s, idx) => {
                 const colors = urgencyColors[s.urgency] || urgencyColors['LOW'];
                 const isBestSeller = s.is_best_seller;
-                
+
                 return `
                 <div class="${colors.bg} border border-coffee-100 rounded-[3.5rem] p-10 transition-all duration-700 hover:shadow-4xl hover:-translate-y-2 group relative overflow-hidden">
-                    <div class="absolute -right-20 -top-20 w-48 h-48 bg-white rounded-full opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div class="absolute -right-20 -top-20 w-48 h-48 bg-white rounded-full opacity-100 group-hover:scale-150 transition-transform duration-1000"></div>
                     <div class="relative z-10">
                         <div class="flex flex-col xl:flex-row justify-between items-start gap-10">
                             <div class="flex-grow">
                                 <div class="flex items-center gap-4 mb-6 flex-wrap">
-                                    <span class="${colors.badge} px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-xl border border-white/10">${colors.icon} ${s.urgency}</span>
-                                    <span class="bg-coffee-950 text-white px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-xl border border-white/10">${s.type}</span>
-                                    ${isBestSeller ? '<span class="bg-accent-gold text-coffee-950 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-2xl shadow-accent-gold/30 border border-white/20">⭐ Top Seller</span>' : ''}
+                                    <span class="${colors.badge} px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-xl border border-white/10">${colors.icon} ${s.urgency}</span>
+                                    <span class="bg-coffee-950 text-white px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-xl border border-white/10">${s.type}</span>
+                                    ${isBestSeller ? '<span class="bg-accent-gold text-coffee-950 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-2xl shadow-accent-gold/30 border border-white/20">⭐ Top Seller</span>' : ''}
                                 </div>
                                 <h4 class="font-black text-2xl text-coffee-950 uppercase tracking-tighter mb-4 font-display">${s.product}</h4>
                                 <p class="text-sm font-black ${colors.text} leading-relaxed opacity-80 uppercase tracking-tight">${s.message}</p>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 xl:gap-6 flex-shrink-0 w-full xl:w-auto">
-                                <div class="text-center bg-white/50 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[8px] font-black text-coffee-300 uppercase tracking-widest mb-3">Target</p>
+                                <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
+                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Target</p>
                                     <p class="text-2xl font-black text-coffee-950 tracking-tighter">${Math.round(parseFloat(s.metrics.demand))}kg</p>
                                 </div>
-                                <div class="text-center bg-white/50 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[8px] font-black text-coffee-300 uppercase tracking-widest mb-3">Stok</p>
+                                <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
+                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Stok</p>
                                     <p class="text-2xl font-black text-coffee-950 tracking-tighter">${Math.round(parseFloat(s.metrics.stock))}kg</p>
                                 </div>
-                                <div class="text-center bg-white/50 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[8px] font-black text-coffee-300 uppercase tracking-widest mb-3">Gap</p>
+                                <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
+                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Gap</p>
                                     <p class="text-2xl font-black ${s.metrics.gap !== '0kg' ? 'text-red-600' : 'text-emerald-600'} tracking-tighter">${Math.round(parseFloat(s.metrics.gap))}kg</p>
                                 </div>
-                                <div class="text-center bg-white/50 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[8px] font-black text-coffee-300 uppercase tracking-widest mb-3">Share</p>
+                                <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
+                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Share</p>
                                     <p class="text-2xl font-black text-accent-gold tracking-tighter">${Math.round(parseFloat(s.market_share))}%</p>
                                 </div>
                             </div>
@@ -2480,4 +2677,5 @@
         }
     </script>
 </body>
+
 </html>

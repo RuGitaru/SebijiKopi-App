@@ -14,6 +14,8 @@ app = Flask(__name__)
 app.secret_key = "sebiji_kopi_super_secure_key"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sebiji_kopi_v2.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SESSION_COOKIE_NAME'] = 'sebiji_kopi_session'
+app.config['PERMANENT_SESSION_LIFETIME'] = 604800 # 7 days
 
 db.init_app(app)
 
@@ -29,6 +31,25 @@ app.register_blueprint(profile_bp)
 @app.route('/')
 def index(): 
     return render_template('index.html')
+
+@app.route('/api/session_check')
+def session_check():
+    from flask import session, jsonify
+    from models import User, db
+    print(f"DEBUG: session_check hit. session={session}")
+    if 'user_id' in session:
+        user = db.session.get(User, session['user_id'])
+        if user:
+            print(f"DEBUG: Found user {user.username}")
+            return jsonify({
+                "success": True,
+                "role": user.role,
+                "name": user.name,
+                "location": user.location,
+                "username": user.username
+            })
+    print("DEBUG: session_check failed.")
+    return jsonify({"success": False}), 401
 
 if __name__ == '__main__':
     app.run(debug=True)

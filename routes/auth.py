@@ -10,6 +10,7 @@ def api_login():
     user = User.query.filter_by(username=data['username'], password=data['password']).first()
     if user:
         from models import Employee
+        session.permanent = True
         session['user_id'] = user.id
         session['role'] = user.role
         session['location'] = user.location
@@ -57,6 +58,28 @@ def api_register():
     db.session.commit()
     
     return jsonify({"success": True})
+
+@auth_bp.route('/api/session', methods=['GET'])
+def api_session():
+    print(f"DEBUG: Checking session. session={session}")
+    if 'user_id' in session:
+        from models import User, db
+        user = db.session.get(User, session['user_id'])
+        if user:
+            print(f"DEBUG: Session found for user: {user.username}")
+            return jsonify({
+                "success": True,
+                "role": user.role,
+                "job_role": session.get('job_role', ''),
+                "name": user.name,
+                "location": user.location,
+                "username": user.username,
+                "email": user.email,
+                "phone": user.phone,
+                "address": user.address
+            })
+    print("DEBUG: No active session found.")
+    return jsonify({"success": False}), 401
 
 @auth_bp.route('/api/logout', methods=['POST'])
 def api_logout():
