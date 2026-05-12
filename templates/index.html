@@ -17,14 +17,14 @@
                 extend: {
                     colors: {
                         coffee: {
-                            50: '#fdfcfb', 100: '#f7f3f0', 200: '#eee5de', 300: '#decbbd',
+                            50: '#f9f9f9', 100: '#f7f3f0', 200: '#eee5de', 300: '#decbbd',
                             400: '#c1a189', 500: '#a67c52', 600: '#8b6342', 700: '#704f36',
                             800: '#563b29', 900: '#3d2b1f', 950: '#2a1d15'
                         },
                         accent: {
                             gold: '#d4af37', // More vibrant gold
                             bronze: '#a67c52',
-                            cream: '#fcfaf7'
+                            cream: '#f7f7f7'
                         }
                     },
                     fontFamily: {
@@ -63,7 +63,7 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #2a1d15;
-            background-color: #fdfcfb;
+            background-color: #f7f7f7;
         }
 
         .font-display {
@@ -280,7 +280,7 @@
     <div id="route-guard" class="fixed inset-0 bg-[#fdfcfb] z-[9999] flex items-center justify-center transition-opacity duration-500">
         <div class="text-center">
             <div class="inline-block animate-spin w-12 h-12 border-4 border-coffee-100 border-t-accent-gold rounded-full mb-6"></div>
-            <p class="font-black text-coffee-800 uppercase tracking-[0.3em] text-[10px] animate-pulse">Menghubungkan ke Pusat...</p>
+            <p class="font-black text-black uppercase tracking-[0.3em] text-[10px] animate-pulse">Menghubungkan ke Pusat...</p>
         </div>
     </div>
 
@@ -323,12 +323,12 @@
             const totalPages = Math.ceil(totalItems / pageSize);
             if (totalPages <= 1) { container.innerHTML = ""; return; }
             let html = `<div class="flex justify-center items-center gap-3 mt-10 pb-6">`;
-            html += `<button onclick="switchPage('${context}', ${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-coffee-950 font-black text-[12px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">&larr; Prev</button>`;
+            html += `<button onclick="switchPage('${context}', ${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-black font-black text-[12px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">&larr; Prev</button>`;
             for (let i = 1; i <= totalPages; i++) {
-                const active = i === currentPage ? 'bg-coffee-950 text-white border-coffee-950 shadow-xl shadow-coffee-200' : 'bg-white text-coffee-700 border-coffee-100 hover:bg-coffee-50 shadow-sm';
+                const active = i === currentPage ? 'bg-coffee-950 text-white border-coffee-950 shadow-xl shadow-coffee-200' : 'bg-white text-black border-coffee-100 hover:bg-coffee-50 shadow-sm';
                 html += `<button onclick="switchPage('${context}', ${i})" class="w-12 h-12 rounded-2xl border font-black text-xs transition active:scale-90 ${active}">${i}</button>`;
             }
-            html += `<button onclick="switchPage('${context}', ${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-coffee-950 font-black text-[12px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">Next &rarr;</button>`;
+            html += `<button onclick="switchPage('${context}', ${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-white border border-coffee-100 text-black font-black text-[12px] hover:bg-coffee-50 transition disabled:opacity-30 disabled:cursor-not-allowed shadow-sm uppercase tracking-widest">Next &rarr;</button>`;
             html += `</div>`;
             container.innerHTML = html;
         }
@@ -346,7 +346,7 @@
             document.getElementById(`btn-${tabId}`).classList.add('active');
             if (window.innerWidth < 768) {
                 const sidebar = document.getElementById('wh-sidebar');
-                if (sidebar && sidebar.classList.contains('w-64')) toggleSidebar();
+                if (sidebar && sidebar.classList.contains('w-72')) toggleSidebar();
             }
             if (tabId === 'tab-reports') loadReportsData();
             if (tabId === 'tab-ai') loadAIForecast();
@@ -460,8 +460,8 @@
                 list.innerHTML = data.map(r => `
                     <div class="flex items-center justify-between bg-accent-cream/50 p-4 rounded-xl border border-coffee-50">
                         <div class="flex flex-col">
-                            <span class="text-[10px] font-black uppercase text-coffee-600 tracking-widest">${r.date} &bull; ${r.field}</span>
-                            <span class="text-[13px] font-black text-coffee-950">${r.new_value}</span>
+                            <span class="text-[10px] font-black uppercase text-black tracking-widest">${r.date} &bull; ${r.field}</span>
+                            <span class="text-[13px] font-black text-black">${r.new_value}</span>
                         </div>
                         <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${r.status === 'Menunggu' ? 'bg-amber-100 text-amber-700' : (r.status === 'Disetujui' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700')}">
                             ${r.status}
@@ -725,8 +725,8 @@
                     const btn = batchControls.querySelector('button');
                     if (select && btn) {
                         let operators = sdmDataArray.filter(s => s.role === 'Operator Picking & Packing');
-                        let opOptions = `<option value="" disabled selected class="text-coffee-950">Pilih Operator...</option>`;
-                        operators.forEach(op => opOptions += `<option value="${op.name}" class="text-coffee-950">${op.name}</option>`);
+                        let opOptions = `<option value="" disabled selected class="text-black">Pilih Operator...</option>`;
+                        operators.forEach(op => opOptions += `<option value="${op.name}" class="text-black">${op.name}</option>`);
                         select.innerHTML = opOptions;
                         btn.innerText = 'Assign Personnel';
                     }
@@ -773,7 +773,7 @@
 
                 const summaryContainer = document.getElementById('report-summary-container');
                 if (summaryContainer) {
-                    let summaryHTML = `<h3 class="font-black text-coffee-950 text-xl mb-8 flex items-center gap-3 font-display uppercase tracking-tighter"><span class="w-2.5 h-8 bg-coffee-950 rounded-full inline-block"></span> Ringkasan Volume Produk</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-8">`;
+                    let summaryHTML = `<h3 class="font-black text-black text-xl mb-8 flex items-center gap-3 font-display uppercase tracking-tighter"><span class="w-2.5 h-8 bg-coffee-950 rounded-full inline-block"></span> Ringkasan Volume Produk</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-8">`;
 
                     // Inbound Card
                     summaryHTML += `
@@ -784,16 +784,16 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-black text-coffee-950 uppercase tracking-[0.2em] text-[12px]">Total Inbound Stok</h4>
-                                <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mt-0.5">Bulan Ini</p>
+                                <h4 class="font-black text-black uppercase tracking-[0.2em] text-[12px]">Total Inbound Stok</h4>
+                                <p class="text-[11px] font-bold text-black uppercase tracking-widest mt-0.5">Bulan Ini</p>
                             </div>
                         </div>
                         <div class="space-y-3 relative z-10">`;
                     PRODUCT_LIST.forEach(p => {
                         summaryHTML += `
                         <div class="flex justify-between items-center bg-coffee-50/30 p-4 rounded-2xl border border-coffee-50/50 hover:border-emerald-200 transition">
-                            <span class="text-[13px] font-black text-coffee-600 uppercase tracking-tight">${p}</span>
-                            <span class="font-black text-coffee-950 text-base">${Math.round(inboundTotals[p])} <span class="text-[12px] text-coffee-600 font-bold uppercase">Kg</span></span>
+                            <span class="text-[13px] font-black text-black uppercase tracking-tight">${p}</span>
+                            <span class="font-black text-black text-base">${Math.round(inboundTotals[p])} <span class="text-[12px] text-black font-bold uppercase">Kg</span></span>
                         </div>`;
                     });
                     summaryHTML += `</div></div>`;
@@ -807,16 +807,16 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-black text-coffee-950 uppercase tracking-[0.2em] text-[12px]">Total Outbound Selesai</h4>
-                                <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mt-0.5">Bulan Ini</p>
+                                <h4 class="font-black text-black uppercase tracking-[0.2em] text-[12px]">Total Outbound Selesai</h4>
+                                <p class="text-[11px] font-bold text-black uppercase tracking-widest mt-0.5">Bulan Ini</p>
                             </div>
                         </div>
                         <div class="space-y-3 relative z-10">`;
                     PRODUCT_LIST.forEach(p => {
                         summaryHTML += `
                         <div class="flex justify-between items-center bg-coffee-50/30 p-4 rounded-2xl border border-coffee-50/50 hover:border-blue-200 transition">
-                            <span class="text-[13px] font-black text-coffee-600 uppercase tracking-tight">${p}</span>
-                            <span class="font-black text-coffee-950 text-base">${Math.round(outboundTotals[p])} <span class="text-[12px] text-coffee-600 font-bold uppercase">Kg</span></span>
+                            <span class="text-[13px] font-black text-black uppercase tracking-tight">${p}</span>
+                            <span class="font-black text-black text-base">${Math.round(outboundTotals[p])} <span class="text-[12px] text-black font-bold uppercase">Kg</span></span>
                         </div>`;
                     });
                     summaryHTML += `</div></div></div>`;
@@ -832,7 +832,7 @@
 
             const pg = globalPagination.whReportInbound;
             if (globalReportInboundCache.length === 0) {
-                inBody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-coffee-600 font-black uppercase tracking-widest text-sm">Belum ada riwayat Inbound</td></tr>`;
+                inBody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-black font-black uppercase tracking-widest text-sm">Belum ada riwayat Inbound</td></tr>`;
                 renderPagination(0, pg.size, pg.current, 'pagination-report-inbound', 'whReportInbound');
                 return;
             }
@@ -843,12 +843,12 @@
 
             inBody.innerHTML = paginated.map(t => `
                 <tr class="border-b border-coffee-50 hover:bg-emerald-50/20 transition-colors group">
-                    <td class="p-6 text-[12px] font-black text-coffee-600 uppercase tracking-tight">${t.date}</td>
-                    <td class="p-6 font-black text-coffee-950 uppercase tracking-tight">${t.product}</td>
+                    <td class="p-6 text-[12px] font-black text-black uppercase tracking-tight">${t.date}</td>
+                    <td class="p-6 font-black text-black uppercase tracking-tight">${t.product}</td>
                     <td class="p-6">
                         <span class="text-emerald-600 font-black text-lg">+ ${Math.round(t.qty)} <span class="text-[12px] text-emerald-400 font-bold uppercase tracking-widest">Kg</span></span>
                     </td>
-                    <td class="p-6 text-xs font-black text-coffee-600 uppercase tracking-tight">${t.operator}</td>
+                    <td class="p-6 text-xs font-black text-black uppercase tracking-tight">${t.operator}</td>
                     <td class="p-6">
                         ${t.status === 'Selesai Inbound' ?
                     '<span class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest border border-emerald-100 shadow-sm">✅ Selesai</span>' :
@@ -865,7 +865,7 @@
 
             const pg = globalPagination.whReportOutbound;
             if (globalReportOutboundCache.length === 0) {
-                outBody.innerHTML = `<tr><td colspan="4" class="p-12 text-center text-coffee-600 font-black uppercase tracking-widest text-sm">Belum ada transaksi keluar.</td></tr>`;
+                outBody.innerHTML = `<tr><td colspan="4" class="p-12 text-center text-black font-black uppercase tracking-widest text-sm">Belum ada transaksi keluar.</td></tr>`;
                 renderPagination(0, pg.size, pg.current, 'pagination-report-outbound', 'whReportOutbound');
                 return;
             }
@@ -877,16 +877,16 @@
             outBody.innerHTML = paginated.map(o => {
                 const itemList = o.items.map(i => `
                     <div class="mb-2 flex items-center justify-between bg-coffee-50/50 px-3 py-1.5 rounded-lg border border-coffee-100/50">
-                        <span class="text-[12px] font-bold text-coffee-600">${i.product}</span>
-                        <span class="text-[12px] font-black text-coffee-950">${Math.round(i.qty)} Kg</span>
+                        <span class="text-[12px] font-bold text-black">${i.product}</span>
+                        <span class="text-[12px] font-black text-black">${Math.round(i.qty)} Kg</span>
                     </div>`).join('');
                 return `
                     <tr class="border-b border-coffee-50 hover:bg-blue-50/20 transition-colors group">
-                        <td class="p-6 text-[12px] font-black text-coffee-600 uppercase tracking-tight">${o.date}</td>
+                        <td class="p-6 text-[12px] font-black text-black uppercase tracking-tight">${o.date}</td>
                         <td class="p-6">
-                            <span class="font-mono text-sm font-black text-coffee-950 bg-coffee-50 px-3 py-1 rounded-xl border border-coffee-100">#ORD-${o.id}</span>
+                            <span class="font-mono text-sm font-black text-black bg-coffee-50 px-3 py-1 rounded-xl border border-coffee-100">#ORD-${o.id}</span>
                         </td>
-                        <td class="p-6 font-black text-coffee-950 uppercase tracking-tight">${o.customer}</td>
+                        <td class="p-6 font-black text-black uppercase tracking-tight">${o.customer}</td>
                         <td class="p-6 w-72">${itemList}</td>
                     </tr>`;
             }).join('');
@@ -967,11 +967,11 @@
             if (!currentUser) return;
             const header = document.getElementById('wh-sidebar-header');
             if (header) {
-                header.classList.remove('bg-emerald-700', 'bg-blue-700', 'bg-orange-600', 'bg-slate-900');
-                if (currentUser.location === 'Bekasi') header.classList.add('bg-emerald-700');
-                else if (currentUser.location === 'Jakarta Utara') header.classList.add('bg-blue-700');
-                else if (currentUser.location === 'Cikarang') header.classList.add('bg-orange-600');
-                else header.classList.add('bg-slate-900');
+                header.classList.remove('bg-emerald-700', 'bg-blue-700', 'bg-orange-600', 'bg-slate-900', 'bg-coffee-800', 'bg-coffee-900', 'bg-coffee-700', 'bg-coffee-950', 'bg-black');
+                if (currentUser.location === 'Bekasi') header.classList.add('bg-coffee-800');
+                else if (currentUser.location === 'Jakarta Utara') header.classList.add('bg-coffee-950');
+                else if (currentUser.location === 'Cikarang') header.classList.add('bg-coffee-700');
+                else header.classList.add('bg-coffee-900');
             }
         }
 
@@ -994,7 +994,7 @@
 
             if (customerCart.length === 0) {
                 container.innerHTML = `
-                <div class="flex flex-col items-center justify-center h-full text-coffee-200 py-16 opacity-100">
+                <div class="flex flex-col items-center justify-center h-full text-black py-16 opacity-100">
                     <div class="w-20 h-20 bg-coffee-50 rounded-full flex items-center justify-center mb-4">
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     </div>
@@ -1021,14 +1021,14 @@
                 <div class="group bg-white p-6 rounded-[2rem] border border-coffee-50 shadow-sm hover:shadow-xl hover:border-accent-gold/20 transition-all duration-500 relative overflow-hidden">
                     <div class="absolute -right-6 -top-6 w-16 h-16 bg-coffee-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div class="relative z-10">
-                        <div class="text-[12px] font-black text-coffee-700 uppercase tracking-widest mb-2">${item.product}</div>
+                        <div class="text-[12px] font-black text-black uppercase tracking-widest mb-2">${item.product}</div>
                         <div class="flex justify-between items-end">
                             <div>
-                                <div class="text-2xl font-black text-coffee-950 tracking-tighter">${roundedQty} <span class="text-xs font-bold text-coffee-600 uppercase">Kg</span></div>
+                                <div class="text-2xl font-black text-black tracking-tighter">${roundedQty} <span class="text-xs font-bold text-black uppercase">Kg</span></div>
                                 <div class="text-[12px] font-black text-accent-gold uppercase tracking-widest mt-1">Rp ${pricePerKg}K / Kg</div>
                             </div>
                             <div class="text-right">
-                                <div class="text-lg font-black text-coffee-950 tracking-tight">Rp ${subtotal.toLocaleString('id-ID')}K</div>
+                                <div class="text-lg font-black text-black tracking-tight">Rp ${subtotal.toLocaleString('id-ID')}K</div>
                                 <button onclick="removeFromCart(${idx})" class="text-[12px] font-black text-red-400 hover:text-red-600 uppercase tracking-widest mt-2 transition">Hapus Item</button>
                             </div>
                         </div>
@@ -1074,8 +1074,8 @@
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                         </div>
                         <div class="relative z-10">
-                            <div class="text-[10px] text-coffee-600 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Total Belanja</div>
-                            <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none">${Math.round(totalKg)} <span class="text-[11px] font-black text-coffee-200 uppercase tracking-widest">Kg</span></div>
+                            <div class="text-[10px] text-black font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Total Belanja</div>
+                            <div class="text-2xl font-black text-black tracking-tighter leading-none">${Math.round(totalKg)} <span class="text-[11px] font-black text-black uppercase tracking-widest">Kg</span></div>
                         </div>
                     </div>
                     <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 flex items-center gap-5 hover:shadow-4xl hover:-translate-y-1 transition-all duration-700 group relative overflow-hidden">
@@ -1084,8 +1084,8 @@
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div class="relative z-10">
-                            <div class="text-[10px] text-coffee-600 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-coffee-950 transition-colors">Order Aktif</div>
-                            <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none">${activeCount} <span class="text-[11px] font-black text-coffee-200 uppercase tracking-widest">Batch</span></div>
+                            <div class="text-[10px] text-black font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-black transition-colors">Order Aktif</div>
+                            <div class="text-2xl font-black text-black tracking-tighter leading-none">${activeCount} <span class="text-[11px] font-black text-black uppercase tracking-widest">Batch</span></div>
                         </div>
                     </div>
                     <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 flex items-center gap-5 hover:shadow-4xl hover:-translate-y-1 transition-all duration-700 group relative overflow-hidden">
@@ -1094,8 +1094,8 @@
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div class="relative z-10">
-                            <div class="text-[10px] text-coffee-600 font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Status Member</div>
-                            <div class="text-2xl font-black text-coffee-950 tracking-tighter leading-none uppercase font-display">Premium</div>
+                            <div class="text-[10px] text-black font-black uppercase tracking-[0.3em] mb-1.5 group-hover:text-accent-gold transition-colors">Status Member</div>
+                            <div class="text-2xl font-black text-black tracking-tighter leading-none uppercase font-display">Premium</div>
                         </div>
                     </div>`;
 
@@ -1112,19 +1112,19 @@
                             </div>
                             <div class="flex gap-8">
                                 <div class="text-center">
-                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Total Serapan</p>
+                                    <p class="text-[11px] font-bold text-black uppercase tracking-widest mb-1">Total Serapan</p>
                                     <p class="text-2xl font-black text-white">${Math.round(totalKg)} <span class="text-xs font-bold text-white/90">Kg</span></p>
                                 </div>
                                 <div class="w-[1px] bg-white/10"></div>
                                 <div class="text-center">
-                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Selesai</p>
+                                    <p class="text-[11px] font-bold text-black uppercase tracking-widest mb-1">Selesai</p>
                                     <p class="text-2xl font-black text-accent-gold">${completedCount} <span class="text-xs font-bold text-white/90">Batch</span></p>
                                 </div>
                             </div>
                         </div>`;
                 }
 
-                if (myOrders.length === 0) { tbody.innerHTML = `<div class="col-span-1 md:col-span-2 bg-white p-16 text-center rounded-[3rem] border border-coffee-100 shadow-sm flex flex-col items-center justify-center gap-3"><div class="w-20 h-20 bg-coffee-50 text-coffee-600 rounded-full flex items-center justify-center mb-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></div><p class="font-black text-coffee-700 uppercase tracking-widest text-sm">Belum ada riwayat pesanan.</p></div>`; return; }
+                if (myOrders.length === 0) { tbody.innerHTML = `<div class="col-span-1 md:col-span-2 bg-white p-16 text-center rounded-[3rem] border border-coffee-100 shadow-sm flex flex-col items-center justify-center gap-3"><div class="w-20 h-20 bg-coffee-50 text-black rounded-full flex items-center justify-center mb-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></div><p class="font-black text-black uppercase tracking-widest text-sm">Belum ada riwayat pesanan.</p></div>`; return; }
 
                 // Pagination Slice
                 const pg = globalPagination.custOrders;
@@ -1136,7 +1136,7 @@
                     let orderTotal = 0; const itemsHtml = o.items.map(i => {
                         const price = PRODUCT_PRICES[i.product] || 0; const subtotal = price * i.qty; orderTotal += subtotal;
                         return `<div class="flex justify-between items-center bg-accent-cream/50 p-4 rounded-xl border border-coffee-100 group-hover:border-accent-gold/20 transition-colors">
-                                    <span class="font-black text-[13px] text-coffee-950 uppercase tracking-tight">${i.product}</span>
+                                    <span class="font-black text-[13px] text-black uppercase tracking-tight">${i.product}</span>
                                     <span class="bg-coffee-950 text-accent-gold px-3 py-1 rounded-lg text-[11px] font-black">${Math.round(i.qty)} KG</span>
                                 </div>`;
                     }).join('');
@@ -1155,7 +1155,7 @@
                                         <p class="font-mono text-base font-black text-white tracking-[0.2em] uppercase">${o.awb_number}</p>
                                     </div>
                                 </div>
-                                <span class="bg-accent-gold text-coffee-950 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">${o.expedition}</span>
+                                <span class="bg-accent-gold text-black px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">${o.expedition}</span>
                             </div>
                         </div>`;
                     }
@@ -1167,21 +1167,21 @@
                             <div class="flex justify-between items-start mb-8 relative z-10">
                                 <div>
                                     <span class="font-mono text-[11px] font-black bg-coffee-950 px-3 py-1.5 rounded-xl border border-white/5 text-white uppercase tracking-tighter shadow-xl">#ORD-${o.id}</span>
-                                    <p class="text-[10px] font-black text-coffee-600 mt-3 uppercase tracking-[0.3em]">${o.date}</p>
+                                    <p class="text-[10px] font-black text-black mt-3 uppercase tracking-[0.3em]">${o.date}</p>
                                 </div>
-                                <div class="bg-accent-cream p-2.5 rounded-xl text-coffee-950 border border-coffee-100 shadow-inner">
+                                <div class="bg-accent-cream p-2.5 rounded-xl text-black border border-coffee-100 shadow-inner">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                                 </div>
                             </div>
 
                             <div class="space-y-2 mb-8 flex-grow relative z-10">
-                                <p class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-3">Curated Selections</p>
+                                <p class="text-[10px] font-black text-black uppercase tracking-[0.3em] mb-3">Curated Selections</p>
                                 ${itemsHtml}
                             </div>
 
                             <div class="bg-coffee-950/5 border border-coffee-100 rounded-[1.5rem] p-6 mb-6 relative z-10 shadow-inner">
-                                <span class="text-[10px] font-black text-coffee-700 uppercase tracking-[0.3em] block mb-1">Investment Portfolio</span>
-                                <div class="text-2xl font-black text-coffee-950 tracking-tighter uppercase font-display">Rp ${Math.round(orderTotal).toLocaleString('id-ID')}.000</div>
+                                <span class="text-[10px] font-black text-black uppercase tracking-[0.3em] block mb-1">Investment Portfolio</span>
+                                <div class="text-2xl font-black text-black tracking-tighter uppercase font-display">Rp ${Math.round(orderTotal).toLocaleString('id-ID')}.000</div>
                             </div>
 
                             <div class="relative z-10">${awbHtml}</div>
@@ -1195,7 +1195,7 @@
                                             Confirm Receipt
                                         </button>
                                     ` : ''}
-                                    <button onclick="openInvoice(${o.id})" class="flex-grow bg-white hover:bg-coffee-950 hover:text-white text-coffee-950 border-2 border-coffee-100 py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.3em] shadow-xl shadow-black/5 transition-all active:scale-95 flex items-center justify-center gap-3">
+                                    <button onclick="openInvoice(${o.id})" class="flex-grow bg-white hover:bg-coffee-950 hover:text-white text-black border-2 border-coffee-100 py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.3em] shadow-xl shadow-black/5 transition-all active:scale-95 flex items-center justify-center gap-3">
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         Digital Invoice
                                     </button>
@@ -1230,8 +1230,8 @@
         }
 
 
-        function toggleAdminSidebar() { const sidebar = document.getElementById('admin-sidebar'); if (sidebar.classList.contains('w-64')) { sidebar.classList.replace('w-64', 'w-0'); } else { sidebar.classList.replace('w-0', 'w-64'); } }
-        function switchAdminTab(tabId) { document.querySelectorAll('.admin-tab-content').forEach(el => { el.classList.remove('active'); el.classList.add('hidden'); }); document.querySelectorAll('.admin-nav-btn').forEach(el => el.classList.remove('active')); const activeEl = document.getElementById(tabId); if (activeEl) { activeEl.classList.add('active'); activeEl.classList.remove('hidden'); } const activeBtn = document.getElementById(`btn-${tabId}`); if (activeBtn) activeBtn.classList.add('active'); if (window.innerWidth < 768) { const sidebar = document.getElementById('admin-sidebar'); if (sidebar && sidebar.classList.contains('w-64')) toggleAdminSidebar(); } if (tabId === 'admin-tab-warehouse') renderAdminWarehouseLayout(); if (tabId === 'admin-tab-ai') loadAIForecast('admin'); }
+        function toggleAdminSidebar() { const sidebar = document.getElementById('admin-sidebar'); if (sidebar.classList.contains('w-72')) { sidebar.classList.replace('w-72', 'w-0'); } else { sidebar.classList.replace('w-0', 'w-72'); } }
+        function switchAdminTab(tabId) { document.querySelectorAll('.admin-tab-content').forEach(el => { el.classList.remove('active'); el.classList.add('hidden'); }); document.querySelectorAll('.admin-nav-btn').forEach(el => el.classList.remove('active')); const activeEl = document.getElementById(tabId); if (activeEl) { activeEl.classList.add('active'); activeEl.classList.remove('hidden'); } const activeBtn = document.getElementById(`btn-${tabId}`); if (activeBtn) activeBtn.classList.add('active'); if (window.innerWidth < 768) { const sidebar = document.getElementById('admin-sidebar'); if (sidebar && sidebar.classList.contains('w-72')) toggleAdminSidebar(); } if (tabId === 'admin-tab-warehouse') renderAdminWarehouseLayout(); if (tabId === 'admin-tab-ai') loadAIForecast('admin'); }
 
         // Confirmation Modal Logic
         function openConfirmModal(title, msg, onConfirm) {
@@ -1357,15 +1357,15 @@
 
                     const approvalList = document.getElementById('admin-approval-list');
                     if (approvalList) {
-                        if (approvalOrders.length === 0) approvalList.innerHTML = `<div class="p-10 text-center text-coffee-600 font-black uppercase tracking-widest text-xs">Tidak ada permintaan persetujuan.</div>`;
+                        if (approvalOrders.length === 0) approvalList.innerHTML = `<div class="p-10 text-center text-black font-black uppercase tracking-widest text-xs">Tidak ada permintaan persetujuan.</div>`;
                         else approvalList.innerHTML = approvalOrders.map(o => {
-                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-950 text-xs uppercase tracking-tight flex justify-between items-center bg-white/150 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-accent-gold bg-coffee-950 px-2 py-0.5 rounded text-[11px]">${Math.round(i.qty)} KG</span></div>`).join('');
+                            const itemsList = o.items.map(i => `<div class="font-black text-black text-xs uppercase tracking-tight flex justify-between items-center bg-white/150 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-accent-gold bg-coffee-950 px-2 py-0.5 rounded text-[11px]">${Math.round(i.qty)} KG</span></div>`).join('');
                             return `
                             <div class="bg-accent-cream/30 p-8 rounded-[2.5rem] border border-coffee-100 flex flex-col md:flex-row justify-between md:items-center gap-8 hover:shadow-2xl hover:bg-white transition-all duration-500 group">
                                 <div class="flex-grow">
                                     <div class="flex items-center gap-4 mb-4">
                                         <span class="font-mono text-[12px] font-black bg-coffee-950 px-3 py-1.5 rounded-xl text-white uppercase tracking-tighter">#ORD-${o.id}</span>
-                                        <span class="text-[11px] font-black text-coffee-600 uppercase tracking-widest">LOGISTICS HUB: ${o.warehouse}</span>
+                                        <span class="text-[11px] font-black text-black uppercase tracking-widest">LOGISTICS HUB: ${o.warehouse}</span>
                                     </div>
                                     <div class="space-y-2">${itemsList}</div>
                                 </div>
@@ -1383,19 +1383,19 @@
 
                     const unassignedList = document.getElementById('admin-unassigned-list');
                     if (unassignedList) {
-                        if (unassignedOrders.length === 0) unassignedList.innerHTML = `<div class="p-10 text-center text-coffee-600 font-black uppercase tracking-widest text-xs">Semua pesanan baru sudah dialokasikan.</div>`;
+                        if (unassignedOrders.length === 0) unassignedList.innerHTML = `<div class="p-10 text-center text-black font-black uppercase tracking-widest text-xs">Semua pesanan baru sudah dialokasikan.</div>`;
                         else unassignedList.innerHTML = unassignedOrders.map(o => {
                             const isBekasiOk = o.items.every(i => data.stocks['Bekasi'][i.product].stock >= i.qty); const isJakutOk = o.items.every(i => data.stocks['Jakarta Utara'][i.product].stock >= i.qty); const isCikarangOk = o.items.every(i => data.stocks['Cikarang'][i.product].stock >= i.qty);
                             const isAnyAvailable = isBekasiOk || isJakutOk || isCikarangOk;
-                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-900 text-xs uppercase tracking-tight flex justify-between items-center bg-coffee-50/50 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-coffee-700 text-[11px] font-black">${Math.round(i.qty)} KG</span></div>`).join('');
+                            const itemsList = o.items.map(i => `<div class="font-black text-black text-xs uppercase tracking-tight flex justify-between items-center bg-coffee-50/50 px-4 py-2 rounded-lg"><span>${i.product}</span> <span class="text-black text-[11px] font-black">${Math.round(i.qty)} KG</span></div>`).join('');
                             return `
                             <div class="bg-white p-8 rounded-[3rem] border border-coffee-100 flex flex-col lg:flex-row justify-between lg:items-center gap-8 hover:shadow-2xl transition-all duration-500">
                                 <div class="flex-grow">
                                     <div class="flex items-center gap-4 mb-6">
-                                        <span class="font-mono text-[12px] font-black bg-accent-cream border border-coffee-100 text-coffee-600 px-3 py-1.5 rounded-xl shadow-inner">#ORD-${o.id}</span>
-                                        <span class="text-sm font-black text-coffee-950 uppercase tracking-tighter">${o.customer_name}</span>
+                                        <span class="font-mono text-[12px] font-black bg-accent-cream border border-coffee-100 text-black px-3 py-1.5 rounded-xl shadow-inner">#ORD-${o.id}</span>
+                                        <span class="text-sm font-black text-black uppercase tracking-tighter">${o.customer_name}</span>
                                     </div>
-                                    <div class="text-[11px] text-coffee-600 font-black mb-4 uppercase tracking-[0.2em] flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> ${o.customer_address || 'NO ADDRESS RECORDED'}</div>
+                                    <div class="text-[11px] text-black font-black mb-4 uppercase tracking-[0.2em] flex items-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> ${o.customer_address || 'NO ADDRESS RECORDED'}</div>
                                     <div class="space-y-2">${itemsList}</div>
                                 </div>
                                 <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-4 items-center">
@@ -1406,7 +1406,7 @@
                                             <option value="Jakarta Utara" ${!isJakutOk ? 'disabled' : ''}>Jakarta Hub ${!isJakutOk ? '✕' : '✓'}</option>
                                             <option value="Cikarang" ${!isCikarangOk ? 'disabled' : ''}>Cikarang Hub ${!isCikarangOk ? '✕' : '✓'}</option>
                                         </select>
-                                        <button onclick="assignWarehouse(${o.id})" class="w-full sm:w-auto bg-accent-gold text-coffee-950 px-10 py-5 rounded-2xl text-[12px] font-black uppercase tracking-[0.2em] shadow-xl shadow-accent-gold/10 hover:bg-coffee-950 hover:text-white transition-all transform active:scale-95">
+                                        <button onclick="assignWarehouse(${o.id})" class="w-full sm:w-auto bg-accent-gold text-black px-10 py-5 rounded-2xl text-[12px] font-black uppercase tracking-[0.2em] shadow-xl shadow-accent-gold/10 hover:bg-coffee-950 hover:text-white transition-all transform active:scale-95">
                                             Allocate
                                         </button>
                                     ` : `
@@ -1430,27 +1430,27 @@
                             </div>`;
                         };
                         return `
-                        <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-coffee-50 hover:shadow-2xl transition-all duration-500 group">
-                            <h4 class="font-black text-coffee-950 text-xs mb-8 line-clamp-1 border-b border-coffee-50 pb-4 uppercase tracking-widest group-hover:text-accent-gold transition-colors">${prod}</h4>
+                        <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 hover:shadow-2xl transition-all duration-500 group">
+                            <h4 class="font-black text-black text-[10px] mb-6 line-clamp-1 border-b border-coffee-50 pb-3 uppercase tracking-widest group-hover:text-accent-gold transition-colors">${prod}</h4>
                             <div class="space-y-6">
                                 <div>
-                                    <div class="flex justify-between text-[11px] font-black uppercase tracking-[0.3em] mb-1">
-                                        <span class="text-coffee-950 border border-black px-2 py-0.5 rounded-md font-bold">Hub Bekasi</span>
-                                        <span class="${bVal < 100 ? 'text-red-600' : 'text-coffee-950'}">${bVal} KG</span>
+                                    <div class="flex justify-between text-[9px] font-black uppercase tracking-[0.2em] mb-1">
+                                        <span class="text-black border border-black px-1.5 py-0 rounded-md font-bold">Hub Bekasi</span>
+                                        <span class="${bVal < 100 ? 'text-red-600' : 'text-black'}">${bVal} KG</span>
                                     </div>
                                     ${drawBar(bVal)}
                                 </div>
                                 <div>
-                                    <div class="flex justify-between text-[11px] font-black uppercase tracking-[0.3em] mb-1">
-                                        <span class="text-coffee-950 border border-black px-2 py-0.5 rounded-md font-bold">Hub Jakarta</span>
-                                        <span class="${jVal < 100 ? 'text-red-600' : 'text-coffee-950'}">${jVal} KG</span>
+                                    <div class="flex justify-between text-[9px] font-black uppercase tracking-[0.2em] mb-1">
+                                        <span class="text-black border border-black px-1.5 py-0 rounded-md font-bold">Hub Jakarta</span>
+                                        <span class="${jVal < 100 ? 'text-red-600' : 'text-black'}">${jVal} KG</span>
                                     </div>
                                     ${drawBar(jVal)}
                                 </div>
                                 <div>
-                                    <div class="flex justify-between text-[11px] font-black uppercase tracking-[0.3em] mb-1">
-                                        <span class="text-coffee-950 border border-black px-2 py-0.5 rounded-md font-bold">Hub Cikarang</span>
-                                        <span class="${cVal < 100 ? 'text-red-600' : 'text-coffee-950'}">${cVal} KG</span>
+                                    <div class="flex justify-between text-[9px] font-black uppercase tracking-[0.2em] mb-1">
+                                        <span class="text-black border border-black px-1.5 py-0 rounded-md font-bold">Hub Cikarang</span>
+                                        <span class="${cVal < 100 ? 'text-red-600' : 'text-black'}">${cVal} KG</span>
                                     </div>
                                     ${drawBar(cVal)}
                                 </div>
@@ -1466,25 +1466,25 @@
                         const paginatedOrders = data.orders.slice(start, end);
 
                         allOrdersGrid.innerHTML = paginatedOrders.map(o => {
-                            const itemsList = o.items.map(i => `<div class="font-black text-coffee-950 text-[12px] uppercase tracking-tight flex justify-between items-center py-1.5 border-b border-coffee-50 last:border-0"><span>${i.product}</span> <span class="text-coffee-700 font-black">${Math.round(i.qty)} KG</span></div>`).join('');
+                            const itemsList = o.items.map(i => `<div class="font-black text-black text-[12px] uppercase tracking-tight flex justify-between items-center py-1.5 border-b border-coffee-50 last:border-0"><span>${i.product}</span> <span class="text-black font-black">${Math.round(i.qty)} KG</span></div>`).join('');
                             return `
                             <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-coffee-50 hover:shadow-3xl transition-all duration-500 flex flex-col relative overflow-hidden group">
                                 <div class="absolute -right-12 -top-12 w-24 h-24 bg-accent-cream rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 <div class="flex justify-between items-center mb-5 relative z-10">
                                     <span class="font-mono text-[12px] font-black bg-coffee-950 px-4 py-2 rounded-xl text-white shadow-xl">#ORD-${o.id}</span>
-                                    <span class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em]">${o.date}</span>
+                                    <span class="text-[11px] font-black text-black uppercase tracking-[0.3em]">${o.date}</span>
                                 </div>
                                 <div class="mb-4 relative z-10">
-                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-1.5">Partner Identity</p>
-                                    <p class="font-black text-coffee-950 text-base tracking-tighter uppercase leading-none">${o.customer_name}</p>
+                                    <p class="text-[10px] font-black text-black uppercase tracking-[0.3em] mb-1.5">Partner Identity</p>
+                                    <p class="font-black text-black text-base tracking-tighter uppercase leading-none">${o.customer_name}</p>
                                 </div>
                                 <div class="space-y-1 mb-5 flex-grow relative z-10 border-t border-coffee-50 pt-4">
-                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-3">Batch Composition</p>
+                                    <p class="text-[10px] font-black text-black uppercase tracking-[0.3em] mb-3">Batch Composition</p>
                                     ${itemsList}
                                 </div>
                                 <div class="mt-auto relative z-10 pt-4 border-t border-coffee-50">
                                     <div class="flex justify-between items-center mb-4">
-                                        <span class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.3em]">Logistics Hub</span>
+                                        <span class="text-[10px] font-black text-black uppercase tracking-[0.3em]">Logistics Hub</span>
                                         <span class="bg-coffee-950 text-accent-gold px-3 py-1 rounded-lg text-[11px] font-black uppercase tracking-widest shadow-lg">${o.warehouse || 'UNASSIGNED'}</span>
                                     </div>
                                     <div class="w-full text-center mb-3">${getStatusBadge(o.status, o.warehouse)}</div>
@@ -1512,20 +1512,20 @@
                             custBody.innerHTML = paginatedCust.map(c => {
                                 const ordersCount = data.orders.filter(o => o.customer_name === c.name || o.customer_name === c.username).length;
                                 return `<tr class="border-b border-coffee-50 hover:bg-accent-cream/30 transition-colors">
-                                    <td class="p-8 font-black text-coffee-950 flex items-center gap-4">
+                                    <td class="p-8 font-black text-black flex items-center gap-4">
                                         <div class="w-10 h-10 rounded-xl bg-coffee-950 text-accent-gold flex justify-center items-center font-black text-xs shadow-lg">${c.name.charAt(0).toUpperCase()}</div>
                                         ${c.name}
                                     </td>
                                     <td class="p-8">
-                                        <p class="text-[13px] font-black text-coffee-900 uppercase tracking-widest">${c.username}</p>
-                                        <p class="text-[12px] text-coffee-700 font-bold uppercase mt-1 tracking-wider">${c.phone || '-'}</p>
+                                        <p class="text-[13px] font-black text-black uppercase tracking-widest">${c.username}</p>
+                                        <p class="text-[12px] text-black font-bold uppercase mt-1 tracking-wider">${c.phone || '-'}</p>
                                     </td>
-                                    <td class="p-8 text-[12px] text-coffee-700 font-bold uppercase tracking-widest leading-relaxed max-w-[200px] truncate">${c.address || '-'}</td>
+                                    <td class="p-8 text-[12px] text-black font-bold uppercase tracking-widest leading-relaxed max-w-[200px] truncate">${c.address || '-'}</td>
                                     <td class="p-8 font-black text-accent-gold text-right bg-accent-cream/10">
                                         <span class="bg-coffee-950 px-4 py-2 rounded-xl shadow-lg border border-white/5 uppercase tracking-tighter text-[12px]">${ordersCount} Orders</span>
                                     </td>
                                 </tr>`;
-                            }).join('') || `<tr><td colspan="4" class="p-12 text-center text-coffee-600 font-black uppercase tracking-[0.3em] text-[12px]">No partners recorded for this period.</td></tr>`;
+                            }).join('') || `<tr><td colspan="4" class="p-12 text-center text-black font-black uppercase tracking-[0.3em] text-[12px]">No partners recorded for this period.</td></tr>`;
 
                             renderPagination(data.customers.length, pg.size, pg.current, 'pagination-admin-customers', 'adminCustomers');
                         }
@@ -1554,21 +1554,21 @@
                             </div>
                         </div>
                         <div class="bg-white p-10 rounded-[3rem] flex items-center gap-8 shadow-3xl border border-coffee-50 relative overflow-hidden group">
-                            <div class="bg-accent-cream text-coffee-950 p-6 rounded-[1.5rem] border border-coffee-100 shadow-xl transition-transform group-hover:scale-110">
+                            <div class="bg-accent-cream text-black p-6 rounded-[1.5rem] border border-coffee-100 shadow-xl transition-transform group-hover:scale-110">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[11px] text-coffee-700 font-black uppercase tracking-[0.2em] mb-3">Order Velocity</p>
-                                <p class="text-3xl font-black text-coffee-950 font-display tracking-tighter uppercase leading-none">${data.orders.length} Batches</p>
+                                <p class="text-[11px] text-black font-black uppercase tracking-[0.2em] mb-3">Order Velocity</p>
+                                <p class="text-3xl font-black text-black font-display tracking-tighter uppercase leading-none">${data.orders.length} Batches</p>
                             </div>
                         </div>
                         <div class="bg-white p-10 rounded-[3rem] flex items-center gap-8 shadow-3xl border border-coffee-50 relative overflow-hidden group">
-                            <div class="bg-accent-cream text-coffee-950 p-6 rounded-[1.5rem] border border-coffee-100 shadow-xl transition-transform group-hover:scale-110">
+                            <div class="bg-accent-cream text-black p-6 rounded-[1.5rem] border border-coffee-100 shadow-xl transition-transform group-hover:scale-110">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[11px] text-coffee-700 font-black uppercase tracking-[0.2em] mb-3">Network Reach</p>
-                                <p class="text-3xl font-black text-coffee-950 font-display tracking-tighter uppercase leading-none">${totalCustCount} Partners</p>
+                                <p class="text-[11px] text-black font-black uppercase tracking-[0.2em] mb-3">Network Reach</p>
+                                <p class="text-3xl font-black text-black font-display tracking-tighter uppercase leading-none">${totalCustCount} Partners</p>
                             </div>
                         </div>`;
 
@@ -1586,7 +1586,7 @@
                             legendTarget.innerHTML = PRODUCT_LIST.map((p, i) => `
                                 <div class="flex items-center gap-3">
                                     <div class="w-3 h-3 rounded-full shadow-sm" style="background-color: ${compColors[i]}"></div>
-                                    <span class="text-[13px] font-black text-coffee-950 uppercase tracking-tight truncate">${p}</span>
+                                    <span class="text-[13px] font-black text-black uppercase tracking-tight truncate">${p}</span>
                                 </div>
                             `).join('');
                         }
@@ -1605,20 +1605,20 @@
                     const paginatedSdm = data.employees.slice(start, end);
 
                     const empHtml = paginatedSdm.map(e => {
-                        const statusH = e.status === 'Aktif' ? '<span class="text-emerald-500 font-black text-[13px] uppercase tracking-widest flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Active Duty</span>' : '<span class="text-coffee-600 font-black text-[13px] uppercase tracking-widest">Off-Shift</span>';
+                        const statusH = e.status === 'Aktif' ? '<span class="text-emerald-500 font-black text-[13px] uppercase tracking-widest flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Active Duty</span>' : '<span class="text-black font-black text-[13px] uppercase tracking-widest">Off-Shift</span>';
                         return `<tr class="border-b border-coffee-50 hover:bg-accent-cream/30 transition-colors">
-                            <td class="p-8 font-black text-coffee-950 flex items-center gap-4">
+                            <td class="p-8 font-black text-black flex items-center gap-4">
                                 <div class="w-10 h-10 rounded-xl bg-coffee-950 text-accent-gold flex justify-center items-center font-black text-xs shadow-lg">${e.name.charAt(0).toUpperCase()}</div>
                                 ${e.name}
                             </td>
-                            <td class="p-8 text-[13px] font-black text-coffee-900 uppercase tracking-widest">${e.warehouse_location}</td>
+                            <td class="p-8 text-[13px] font-black text-black uppercase tracking-widest">${e.warehouse_location}</td>
                             <td class="p-8">
-                                <div class="text-[12px] font-black text-coffee-950 uppercase tracking-widest">
+                                <div class="text-[12px] font-black text-black uppercase tracking-widest">
                                     ${e.role.toLowerCase().includes('supervisor') ? '<span class="text-accent-gold">★</span> Kepala Gudang (Supervisor)' : e.role}
                                 </div>
                             </td>
                             <td class="p-8">${statusH}</td>
-                            <td class="p-8 text-[14px] font-black text-coffee-700 uppercase tracking-widest">${e.phone || '-'}</td>
+                            <td class="p-8 text-[14px] font-black text-black uppercase tracking-widest">${e.phone || '-'}</td>
                             <td class="p-8 text-center">
                                 <button onclick="openSdmModal(${e.id})" class="bg-coffee-950 text-white p-3 rounded-xl shadow-lg hover:bg-black transition group">
                                     <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-5M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
@@ -1642,7 +1642,7 @@
                 if (!container) return;
 
                 if (data.length === 0) {
-                    container.innerHTML = `<div class="text-center py-12 text-coffee-600 font-black uppercase tracking-widest text-[14px]">No pending identity requests.</div>`;
+                    container.innerHTML = `<div class="text-center py-12 text-black font-black uppercase tracking-widest text-[14px]">No pending identity requests.</div>`;
                     return;
                 }
 
@@ -1651,18 +1651,18 @@
                         <div class="flex items-center gap-6">
                             <div class="w-16 h-16 bg-coffee-950 text-accent-gold rounded-2xl flex items-center justify-center font-black text-xl shadow-xl">${r.name.charAt(0).toUpperCase()}</div>
                             <div>
-                                <h4 class="text-lg font-black text-coffee-950 uppercase tracking-tighter">${r.name}</h4>
-                                <p class="text-[12px] font-bold text-coffee-600 uppercase tracking-wide mt-1">${r.role} &bull; ${r.date}</p>
+                                <h4 class="text-lg font-black text-black uppercase tracking-tighter">${r.name}</h4>
+                                <p class="text-[12px] font-bold text-black uppercase tracking-wide mt-1">${r.role} &bull; ${r.date}</p>
                             </div>
                         </div>
                         
                         <div class="flex-1 bg-white p-6 rounded-2xl border border-coffee-50 shadow-inner">
                             <div class="flex items-center gap-4">
-                                <div class="px-3 py-1 bg-coffee-50 text-coffee-700 rounded-lg text-[11px] font-bold uppercase tracking-wide">${r.field}</div>
+                                <div class="px-3 py-1 bg-coffee-50 text-black rounded-lg text-[11px] font-bold uppercase tracking-wide">${r.field}</div>
                                 <div class="flex items-center gap-3">
-                                    <span class="text-xs font-bold text-coffee-700 line-through">${r.old_value || 'Empty'}</span>
+                                    <span class="text-xs font-bold text-black line-through">${r.old_value || 'Empty'}</span>
                                     <svg class="w-4 h-4 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                                    <span class="text-sm font-black text-coffee-950">${r.new_value}</span>
+                                    <span class="text-sm font-black text-black">${r.new_value}</span>
                                 </div>
                             </div>
                         </div>
@@ -1862,17 +1862,17 @@
                     <div class="bg-coffee-50/50 border border-coffee-100/50 p-2.5 rounded-2xl mb-1.5 last:mb-0">
                         <div class="flex justify-between items-center mb-1">
                             <div>
-                                <p class="text-[10px] font-black text-coffee-700 uppercase tracking-widest mb-1">Produk</p>
-                                <p class="font-black text-coffee-950 text-[13px] leading-tight">${i.product}</p>
+                                <p class="text-[10px] font-black text-black uppercase tracking-widest mb-1">Produk</p>
+                                <p class="font-black text-black text-[13px] leading-tight">${i.product}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[10px] font-black text-coffee-700 uppercase tracking-widest mb-1">Kuantitas</p>
-                                <p class="font-black text-base text-coffee-950">${Math.round(i.qty)} <span class="text-[11px] text-coffee-600">KG</span></p>
+                                <p class="text-[10px] font-black text-black uppercase tracking-widest mb-1">Kuantitas</p>
+                                <p class="font-black text-base text-black">${Math.round(i.qty)} <span class="text-[11px] text-black">KG</span></p>
                             </div>
                         </div>
                         <div class="bg-white border border-coffee-100 rounded-xl px-3 py-1 flex items-center justify-between">
-                            <span class="text-[10px] font-black text-coffee-700 uppercase tracking-widest">Peta Rak:</span>
-                            <span class="font-mono text-[12px] font-black text-coffee-900 bg-coffee-100/50 px-2 py-0.5 rounded-lg">Blok ${blockNames.join(', ')}</span>
+                            <span class="text-[10px] font-black text-black uppercase tracking-widest">Peta Rak:</span>
+                            <span class="font-mono text-[12px] font-black text-black bg-coffee-100/50 px-2 py-0.5 rounded-lg">Blok ${blockNames.join(', ')}</span>
                         </div>
                         ${fifoInfo}
                     </div>`;
@@ -1895,8 +1895,8 @@
                     if (isDone) {
                         assignHTML = `
                         <div class="mb-2 bg-coffee-100/50 px-3 py-2 rounded-xl border border-coffee-200">
-                            <span class="text-[7px] font-black text-coffee-700 uppercase tracking-widest block mb-0.5">Ditangani Oleh</span>
-                            <span class="font-black text-xs text-coffee-950 uppercase tracking-tight">${o.assigned_operator || 'Internal System'}</span>
+                            <span class="text-[7px] font-black text-black uppercase tracking-widest block mb-0.5">Ditangani Oleh</span>
+                            <span class="font-black text-xs text-black uppercase tracking-tight">${o.assigned_operator || 'Internal System'}</span>
                         </div>`;
                     } else {
                         assignHTML = `
@@ -1908,14 +1908,14 @@
 
                     let statusText = o.status;
                     if (isError) statusText = "⚠️ Gagal QC"; else if (isWait) statusText = "⏳ Menunggu Admin"; else if (isAppr) statusText = "✅ Siap Kirim"; else if (isDone) statusText = "🎉 Selesai";
-                    act = `<div class="text-[12px] font-black text-coffee-700 uppercase tracking-widest mb-1.5 px-1">Status Operasional</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-xl text-xs font-black text-coffee-700 text-center cursor-not-allowed opacity-80 uppercase tracking-widest">${statusText}</div>`;
+                    act = `<div class="text-[12px] font-black text-black uppercase tracking-widest mb-1.5 px-1">Status Operasional</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-xl text-xs font-black text-black text-center cursor-not-allowed opacity-80 uppercase tracking-widest">${statusText}</div>`;
 
                 } else if (currentUser.role === 'wh_operator') {
                     let opName = o.assigned_operator || "Belum ada tugas";
                     assignHTML = `
                     <div class="mb-2 bg-coffee-50 px-3 py-2 rounded-xl border border-coffee-100">
-                        <span class="text-[7px] font-black text-coffee-600 uppercase tracking-widest block mb-0.5">Ditugaskan Kepada</span>
-                        <span class="font-black text-xs text-coffee-950 uppercase tracking-tight">${opName}</span>
+                        <span class="text-[7px] font-black text-black uppercase tracking-widest block mb-0.5">Ditugaskan Kepada</span>
+                        <span class="font-black text-xs text-black uppercase tracking-tight">${opName}</span>
                     </div>`;
 
                     if (o.assigned_operator === currentUser.name) {
@@ -1925,8 +1925,8 @@
                             <button onclick="updateOrderStatusWh(${o.id}, {value: 'Serahkan ke Jasa Kirim'})" class="w-full bg-emerald-600 text-white p-4 rounded-2xl text-[12px] font-black hover:bg-emerald-700 transition shadow-lg shadow-emerald-100 uppercase tracking-[0.2em]">🚀 Serahkan Kurir</button>`;
                         else if (isDone) act = `<div class="bg-emerald-50 text-emerald-700 p-4 rounded-2xl text-[12px] font-black text-center border border-emerald-100 uppercase tracking-widest">📦 Selesai & Terkirim</div>`;
                         else act = `
-                            <div class="text-[12px] font-black text-coffee-700 uppercase tracking-widest mb-2 px-1">Update Progres</div>
-                            <select onchange="updateOrderStatusWh(${o.id}, this)" class="w-full border-2 ${isError ? 'border-red-400 text-red-700 bg-red-50' : 'border-coffee-200 text-coffee-950 bg-white'} p-3 rounded-2xl text-[12px] font-black outline-none shadow-sm uppercase tracking-wider">
+                            <div class="text-[12px] font-black text-black uppercase tracking-widest mb-2 px-1">Update Progres</div>
+                            <select onchange="updateOrderStatusWh(${o.id}, this)" class="w-full border-2 ${isError ? 'border-red-400 text-red-700 bg-red-50' : 'border-coffee-200 text-black bg-white'} p-3 rounded-2xl text-[12px] font-black outline-none shadow-sm uppercase tracking-wider">
                                 <option value="Menunggu Diproses" ${o.status === 'Menunggu Diproses' ? 'selected' : ''}>📋 Antre Picking</option>
                                 <option value="Ambil Barang" ${o.status === 'Ambil Barang' ? 'selected' : ''}>🏃‍♂️ Ambil Barang</option>
                                 <option value="Packing" ${o.status === 'Packing' ? 'selected' : ''}>📦 Packing</option>
@@ -1939,7 +1939,7 @@
                     }
                 }
 
-                let checkboxHTML = (isDone) ? '' : `<input type="checkbox" class="order-batch-cb w-6 h-6 rounded-lg cursor-pointer border-coffee-200 text-coffee-900 focus:ring-coffee-900" value="${o.id}">`;
+                let checkboxHTML = (isDone) ? '' : `<input type="checkbox" class="order-batch-cb w-6 h-6 rounded-lg cursor-pointer border-coffee-200 text-black focus:ring-coffee-900" value="${o.id}">`;
                 let printBtn = '';
                 if (o.status === 'Packing' || o.status === 'QC' || isAppr || isDone) {
                     printBtn = `<button onclick="openShippingLabel(${o.id})" class="text-[12px] font-black bg-coffee-950 text-white px-4 py-2 rounded-xl hover:bg-black transition flex items-center gap-2 shadow-lg shadow-coffee-200 uppercase tracking-widest"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg> Label</button>`;
@@ -1953,15 +1953,15 @@
                             <div class="flex items-center gap-4">
                                 ${checkboxHTML}
                                 <div>
-                                    <span class="font-mono text-[11px] font-black text-coffee-950 bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#SHIP-${o.id}</span>
-                                    <p class="text-[10px] font-black text-coffee-600 mt-2 uppercase tracking-[0.3em]">${o.date}</p>
+                                    <span class="font-mono text-[11px] font-black text-black bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#SHIP-${o.id}</span>
+                                    <p class="text-[10px] font-black text-black mt-2 uppercase tracking-[0.3em]">${o.date}</p>
                                 </div>
                             </div>
                             ${printBtn}
                         </div>
                         ${assignHTML}
                         <div class="space-y-1 mb-2 flex-grow relative z-10 border-t border-coffee-50 pt-1.5">
-                            <div class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.2em] mb-1">Fulfillment Protocol</div>
+                            <div class="text-[10px] font-black text-black uppercase tracking-[0.2em] mb-1">Fulfillment Protocol</div>
                             ${itemsList}
                         </div>
                         <div class="mb-4 relative z-10">${getProgressTrackerHTML(o.status)}</div>
@@ -2000,20 +2000,20 @@
                 return `
                 <tr class="border-b border-coffee-50 hover:bg-accent-cream/30 transition-all duration-300 group">
                     <td class="p-8">
-                        <div class="font-black text-coffee-950 uppercase tracking-tighter text-sm">${prod}</div>
+                        <div class="font-black text-black uppercase tracking-tighter text-sm">${prod}</div>
                         <div class="text-[11px] text-accent-gold font-black mt-3 bg-coffee-950 inline-block px-4 py-1.5 rounded-xl uppercase tracking-widest shadow-xl">TERMINAL ${rackPrefix}</div>
                     </td>
                     <td class="p-8">
-                        <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-2">Digital Inventory</div>
-                        <div class="font-black text-2xl text-coffee-950 tracking-tighter">${stockVal} <span class="text-[12px] text-coffee-600">KG</span></div>
+                        <div class="text-[11px] font-black text-black uppercase tracking-[0.3em] mb-2">Digital Inventory</div>
+                        <div class="font-black text-2xl text-black tracking-tighter">${stockVal} <span class="text-[12px] text-black">KG</span></div>
                     </td>
                     <td class="p-8">
-                        <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-2">Physical Audit</div>
-                        <input type="number" id="opname-actual-${safeId}" class="w-32 bg-accent-cream border-2 border-transparent p-4 rounded-2xl focus:bg-white focus:border-accent-gold font-black text-coffee-950 outline-none transition-all duration-500 shadow-inner" placeholder="${stockVal}">
+                        <div class="text-[11px] font-black text-black uppercase tracking-[0.3em] mb-2">Physical Audit</div>
+                        <input type="number" id="opname-actual-${safeId}" class="w-32 bg-accent-cream border-2 border-transparent p-4 rounded-2xl focus:bg-white focus:border-accent-gold font-black text-black outline-none transition-all duration-500 shadow-inner" placeholder="${stockVal}">
                     </td>
                     <td class="p-8">
-                        <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-2">Discrepancy Notes</div>
-                        <input type="text" id="opname-reason-${safeId}" class="w-full bg-accent-cream border-2 border-transparent p-4 rounded-2xl focus:bg-white focus:border-accent-gold text-xs font-black text-coffee-950 outline-none transition-all duration-500 shadow-inner" placeholder="Log variance rationale...">
+                        <div class="text-[11px] font-black text-black uppercase tracking-[0.3em] mb-2">Discrepancy Notes</div>
+                        <input type="text" id="opname-reason-${safeId}" class="w-full bg-accent-cream border-2 border-transparent p-4 rounded-2xl focus:bg-white focus:border-accent-gold text-xs font-black text-black outline-none transition-all duration-500 shadow-inner" placeholder="Log variance rationale...">
                     </td>
                     <td class="p-8 text-center">
                         <button onclick="submitOpname('${prod}')" class="bg-coffee-950 text-white px-8 py-4 rounded-2xl text-[12px] font-black hover:bg-black shadow-2xl shadow-coffee-200 transition-all active:scale-95 uppercase tracking-[0.2em]">Update Ledger</button>
@@ -2041,7 +2041,7 @@
             if (!currentUser) return;
 
             const colorMap = {
-                'A': { empty: 'border-black text-coffee-600 bg-coffee-50/20', fill: 'border-black text-coffee-950 bg-white', full: 'bg-coffee-900 border-black text-white shadow-2xl', bar: 'bg-coffee-100 opacity-30' },
+                'A': { empty: 'border-black text-black bg-coffee-50/20', fill: 'border-black text-black bg-white', full: 'bg-coffee-900 border-black text-white shadow-2xl', bar: 'bg-coffee-100 opacity-30' },
                 'B': { empty: 'border-black text-amber-300 bg-amber-50/20', fill: 'border-black text-amber-950 bg-white', full: 'bg-amber-800 border-black text-white shadow-2xl', bar: 'bg-amber-100 opacity-30' },
                 'C': { empty: 'border-black text-stone-300 bg-stone-50/20', fill: 'border-black text-stone-950 bg-white', full: 'bg-stone-800 border-black text-white shadow-2xl', bar: 'bg-stone-100 opacity-30' },
                 'D': { empty: 'border-black text-orange-300 bg-orange-50/20', fill: 'border-black text-orange-950 bg-white', full: 'bg-orange-800 border-black text-white shadow-2xl', bar: 'bg-orange-100 opacity-30' }
@@ -2124,12 +2124,12 @@
                 if (stockData && stockData.batches && stockData.batches.length > 0) {
                     batchHtml = `
                     <div class="mt-6 border-t border-coffee-50 pt-5">
-                        <span class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.2em] block mb-3">Antrean FIFO (Per Batch)</span>
+                        <span class="text-[11px] font-black text-black uppercase tracking-[0.2em] block mb-3">Antrean FIFO (Per Batch)</span>
                         <div class="space-y-2">
                             ${stockData.batches.map(b => `
                                 <div class="flex justify-between items-center bg-coffee-50/50 px-4 py-2.5 rounded-xl border border-coffee-100/50">
-                                    <span class="text-[12px] font-black text-coffee-600 uppercase tracking-tight">📅 ${b.date}</span>
-                                    <span class="text-[12px] font-black text-coffee-950">${Math.round(b.qty)} KG</span>
+                                    <span class="text-[12px] font-black text-black uppercase tracking-tight">📅 ${b.date}</span>
+                                    <span class="text-[12px] font-black text-black">${Math.round(b.qty)} KG</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -2138,21 +2138,21 @@
 
                 const inputArea = canInbound ?
                     `<div class="flex gap-3 mt-6">
-                        <input type="number" id="add-stock-${safeId}" placeholder="+ Qty" class="w-full bg-white border-2 border-coffee-100 px-4 py-3 rounded-2xl text-sm font-black focus:outline-none focus:ring-4 focus:ring-coffee-50 focus:border-coffee-300 text-coffee-950 text-center transition">
+                        <input type="number" id="add-stock-${safeId}" placeholder="+ Qty" class="w-full bg-white border-2 border-coffee-100 px-4 py-3 rounded-2xl text-sm font-black focus:outline-none focus:ring-4 focus:ring-coffee-50 focus:border-coffee-300 text-black text-center transition">
                         <button onclick="addStockWh('${prod}')" class="${btnClass} px-6 py-3 rounded-2xl text-[12px] font-black uppercase tracking-widest transition shadow-lg shadow-coffee-100 active:scale-95">Inbound</button>
                     </div>` :
                     `<div class="bg-coffee-50/50 p-4 rounded-2xl border border-dashed border-coffee-200 text-center mt-6">
-                        <span class="text-[11px] font-black text-coffee-600 uppercase tracking-widest">Wewenang Operator Inbound</span>
+                        <span class="text-[11px] font-black text-black uppercase tracking-widest">Wewenang Operator Inbound</span>
                     </div>`;
 
                 return `
                 <div class="bg-white rounded-[2.5rem] shadow-sm border border-coffee-50 p-6 flex flex-col justify-between hover:shadow-4xl hover:-translate-y-2 transition-all duration-700 group relative overflow-hidden">
                     <div class="absolute -right-20 -top-20 w-48 h-48 bg-accent-cream rounded-full opacity-100 group-hover:scale-150 transition-transform duration-1000"></div>
                     <div class="relative z-10">
-                        <h4 class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.2em] mb-3 group-hover:text-accent-gold transition-colors">${prod}</h4>
+                        <h4 class="text-[10px] font-black text-black uppercase tracking-[0.2em] mb-3 group-hover:text-accent-gold transition-colors">${prod}</h4>
                         <div class="flex items-baseline gap-2 mb-4">
-                            <span class="text-4xl font-black ${stockVal < 100 ? 'text-red-600' : 'text-coffee-950'} tracking-tighter leading-none">${stockVal}</span>
-                            <span class="text-[11px] font-black text-coffee-200 uppercase tracking-[0.2em]">/ 1600 KG</span>
+                            <span class="text-4xl font-black ${stockVal < 100 ? 'text-red-600' : 'text-black'} tracking-tighter leading-none">${stockVal}</span>
+                            <span class="text-[11px] font-black text-black uppercase tracking-[0.2em]">/ 1600 KG</span>
                         </div>
                         ${batchHtml}
                     </div>
@@ -2202,11 +2202,11 @@
                 const canProcess = currentUser.job_role && currentUser.job_role.includes('Inbound');
 
                 if (canProcess && !isDone) {
-                    act = `<div class="text-[11px] font-black text-coffee-600 uppercase tracking-widest mb-2 px-1">Update Proses</div><select onchange="updateInboundTaskStatus(${t.id}, this)" class="w-full border-2 border-coffee-100 text-coffee-950 p-3 rounded-2xl text-sm font-black outline-none focus:ring-4 focus:ring-coffee-50 transition bg-white"><option value="Menunggu Bongkar Muat" ${t.status === 'Menunggu Bongkar Muat' ? 'selected' : ''}>🚚 Antrean</option><option value="QC Inbound" ${t.status === 'QC Inbound' ? 'selected' : ''}>🔍 QC Inbound</option><option value="Penempatan ke Rak" ${t.status === 'Penempatan ke Rak' ? 'selected' : ''}>📦 Penempatan</option><option value="Selesai Inbound">✅ Selesai</option></select>`;
+                    act = `<div class="text-[11px] font-black text-black uppercase tracking-widest mb-2 px-1">Update Proses</div><select onchange="updateInboundTaskStatus(${t.id}, this)" class="w-full border-2 border-coffee-100 text-black p-3 rounded-2xl text-sm font-black outline-none focus:ring-4 focus:ring-coffee-50 transition bg-white"><option value="Menunggu Bongkar Muat" ${t.status === 'Menunggu Bongkar Muat' ? 'selected' : ''}>🚚 Antrean</option><option value="QC Inbound" ${t.status === 'QC Inbound' ? 'selected' : ''}>🔍 QC Inbound</option><option value="Penempatan ke Rak" ${t.status === 'Penempatan ke Rak' ? 'selected' : ''}>📦 Penempatan</option><option value="Selesai Inbound">✅ Selesai</option></select>`;
                 } else if (isDone) {
                     act = `<div class="bg-emerald-50 text-emerald-700 p-4 rounded-2xl text-[12px] font-black text-center uppercase tracking-widest border border-emerald-100">✅ Selesai Inbound</div>`;
                 } else {
-                    act = `<div class="text-[11px] font-black text-coffee-600 uppercase tracking-widest mb-2 px-1">Status Saat Ini</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-2xl text-sm font-black text-coffee-900 text-center uppercase tracking-tight">${t.status}</div>`;
+                    act = `<div class="text-[11px] font-black text-black uppercase tracking-widest mb-2 px-1">Status Saat Ini</div><div class="bg-coffee-50 border border-coffee-100 p-3 rounded-2xl text-sm font-black text-black text-center uppercase tracking-tight">${t.status}</div>`;
                 }
 
                 return `
@@ -2215,22 +2215,22 @@
                         <div class="absolute -right-20 -top-20 w-48 h-48 bg-coffee-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                         <div class="flex justify-between items-start mb-8 relative z-10">
                             <div>
-                                <span class="font-mono text-[12px] font-black text-coffee-950 bg-coffee-50 px-4 py-2 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#INTAKE-${t.id}</span>
-                                <p class="text-[11px] font-black text-coffee-600 mt-4 uppercase tracking-[0.3em]">${t.created_at}</p>
+                                <span class="font-mono text-[12px] font-black text-black bg-coffee-50 px-4 py-2 rounded-xl border border-coffee-100 uppercase tracking-tighter shadow-sm">#INTAKE-${t.id}</span>
+                                <p class="text-[11px] font-black text-black mt-4 uppercase tracking-[0.3em]">${t.created_at}</p>
                             </div>
                             <div class="bg-coffee-950 text-accent-gold p-4 rounded-2xl shadow-xl">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
                             </div>
                         </div>
                         <div class="mb-8 bg-coffee-50/50 p-6 rounded-2xl border border-coffee-100/50 relative z-10">
-                            <span class="text-[10px] font-black text-coffee-600 uppercase tracking-[0.2em] block mb-2">Lead Personnel:</span>
-                            <span class="font-black text-sm text-coffee-950 uppercase tracking-tight">${t.operator_name}</span>
+                            <span class="text-[10px] font-black text-black uppercase tracking-[0.2em] block mb-2">Lead Personnel:</span>
+                            <span class="font-black text-sm text-black uppercase tracking-tight">${t.operator_name}</span>
                         </div>
                         <div class="space-y-6 mb-10 flex-grow relative z-10 border-t border-coffee-50 pt-6">
-                             <div class="text-[11px] font-black text-coffee-600 uppercase tracking-[0.3em] mb-4">Stock Manifest</div>
+                             <div class="text-[11px] font-black text-black uppercase tracking-[0.3em] mb-4">Stock Manifest</div>
                              <div class="flex justify-between items-end">
-                                 <span class="font-black text-coffee-950 text-lg uppercase tracking-tighter leading-none">${t.product_name}</span>
-                                 <span class="font-black text-3xl text-coffee-950 tracking-tighter leading-none">${Math.round(t.qty_kg)} <span class="text-[12px] text-coffee-600">KG</span></span>
+                                 <span class="font-black text-black text-lg uppercase tracking-tighter leading-none">${t.product_name}</span>
+                                 <span class="font-black text-3xl text-black tracking-tighter leading-none">${Math.round(t.qty_kg)} <span class="text-[12px] text-black">KG</span></span>
                              </div>
                         </div>
                         <div class="mt-auto relative z-10">${act}</div>
@@ -2251,23 +2251,23 @@
         function renderSdmTable() {
             const tbody = document.getElementById('sdm-table-body');
             if (!tbody) return;
-            if (sdmDataArray.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-coffee-600 font-black uppercase tracking-widest text-sm">Belum ada data karyawan terdaftar.</td></tr>`; return; }
+            if (sdmDataArray.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-black font-black uppercase tracking-widest text-sm">Belum ada data karyawan terdaftar.</td></tr>`; return; }
             tbody.innerHTML = sdmDataArray.map(sdm => {
                 const initial = sdm.name.charAt(0).toUpperCase();
                 let roleStyle = sdm.role.toLowerCase().includes('supervisor') ?
-                    "text-coffee-950 font-black tracking-widest" :
-                    "text-coffee-600 font-bold tracking-wide";
+                    "text-black font-black tracking-widest" :
+                    "text-black font-bold tracking-wide";
 
                 let statusHtml = sdm.status === 'Aktif' ?
                     `<span class="text-emerald-600 font-black text-[12px] flex items-center gap-2 uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Aktif Bekerja</span>` :
-                    `<span class="text-coffee-600 font-black text-[12px] uppercase tracking-widest bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100">Off-Shift</span>`;
+                    `<span class="text-black font-black text-[12px] uppercase tracking-widest bg-coffee-50 px-3 py-1.5 rounded-xl border border-coffee-100">Off-Shift</span>`;
 
                 return `
                 <tr class="border-b border-coffee-50 hover:bg-accent-cream/30 transition-all duration-300 group">
                     <td class="p-8">
                         <div class="flex items-center gap-5">
                             <div class="w-12 h-12 rounded-[1.25rem] bg-coffee-950 text-accent-gold flex justify-center items-center font-black shadow-xl group-hover:scale-110 transition-transform">${initial}</div>
-                            <div class="font-black text-coffee-950 uppercase tracking-tighter text-sm">${sdm.name}</div>
+                            <div class="font-black text-black uppercase tracking-tighter text-sm">${sdm.name}</div>
                         </div>
                     </td>
                     <td class="p-8">
@@ -2276,7 +2276,7 @@
                         </div>
                     </td>
                     <td class="p-8">${statusHtml}</td>
-                    <td class="p-8 font-black text-coffee-700 text-[12px] tracking-[0.2em] uppercase">${sdm.phone}</td>
+                    <td class="p-8 font-black text-black text-[12px] tracking-[0.2em] uppercase">${sdm.phone}</td>
                     <td class="p-8 text-center">
                         <div class="flex justify-center gap-3">
                             <button onclick="openSdmModal(${sdm.id})" class="p-4 bg-coffee-950 text-white rounded-xl hover:bg-black transition shadow-xl active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
@@ -2432,13 +2432,13 @@
             html += `</div></div>`;
 
             let statusText = currentStatus;
-            let textClass = "text-coffee-600";
+            let textClass = "text-black";
             if (isError) { statusText = "Gagal QC (Perbaiki)"; textClass = "text-red-600 font-black"; }
             else if (currentStatus === 'Minta Persetujuan/Approval Pengiriman') { statusText = "Validasi Admin..."; textClass = "text-accent-gold font-black animate-pulse"; }
             else if (isAdminApproved) { statusText = "Disetujui Admin!"; textClass = "text-emerald-600 font-black"; }
-            else if (currentStatus === 'Serahkan ke Jasa Kirim') { statusText = "Dalam Pengiriman 🚚"; textClass = "text-coffee-950 font-black"; }
+            else if (currentStatus === 'Serahkan ke Jasa Kirim') { statusText = "Dalam Pengiriman 🚚"; textClass = "text-black font-black"; }
             else if (currentStatus === 'Selesai') { statusText = "Pesanan Selesai 🎉"; textClass = "text-accent-gold font-black"; }
-            else if (currentIndex > -1) { textClass = "text-coffee-950 font-black"; }
+            else if (currentIndex > -1) { textClass = "text-black font-black"; }
 
             html += `<div class="text-[11px] text-center ${textClass} font-black uppercase tracking-[0.3em] mt-2">${statusText}</div>`;
             return html;
@@ -2471,16 +2471,16 @@
         }
 
         function getStatusBadge(status, wh) {
-            let color = "bg-coffee-50 text-coffee-700 border-coffee-100";
+            let color = "bg-coffee-50 text-black border-coffee-100";
             let icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
 
-            if (status === 'Menunggu Alokasi') { color = "bg-accent-cream text-coffee-700 border-coffee-100"; }
+            if (status === 'Menunggu Alokasi') { color = "bg-accent-cream text-black border-coffee-100"; }
             else if (status === 'Menunggu Picking/Inbound') { color = "bg-coffee-950 text-accent-gold border-white/5 shadow-xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>`; }
             else if (status === 'Proses Picking' || status === 'Dalam Proses Inbound') { color = "bg-coffee-950 text-white border-white/5 animate-pulse shadow-2xl"; icon = `<svg class="w-3 h-3 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>`; }
             else if (status === 'Selesai Picking' || status === 'Inbound Selesai') { color = "bg-emerald-600 text-white border-transparent shadow-xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`; }
-            else if (status === 'Minta Persetujuan/Approval Pengiriman') { color = "bg-accent-gold text-coffee-950 border-transparent shadow-xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`; }
+            else if (status === 'Minta Persetujuan/Approval Pengiriman') { color = "bg-accent-gold text-black border-transparent shadow-xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`; }
             else if (status === 'Serahkan ke Jasa Kirim') { color = "bg-coffee-950 text-accent-gold border-white/5 shadow-2xl"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>`; }
-            else if (status === 'Selesai') { color = "bg-white text-coffee-950 border-coffee-100 shadow-xl opacity-60"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`; }
+            else if (status === 'Selesai') { color = "bg-white text-black border-coffee-100 shadow-xl opacity-60"; icon = `<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`; }
 
             return `<span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] border shadow-sm transition-all duration-500 ${color}">${icon} ${status}</span>`;
         }
@@ -2492,50 +2492,50 @@
                 return `
                 <div class="flex justify-between items-center border-b border-coffee-50 py-4 last:border-0">
                     <div>
-                        <p class="font-black text-sm text-coffee-950 uppercase tracking-tight">${i.product}</p>
-                        <p class="text-[12px] text-coffee-700 font-bold uppercase tracking-widest mt-1">${Math.round(i.qty)} Kg x Rp ${price}K</p>
+                        <p class="font-black text-sm text-black uppercase tracking-tight">${i.product}</p>
+                        <p class="text-[12px] text-black font-bold uppercase tracking-widest mt-1">${Math.round(i.qty)} Kg x Rp ${price}K</p>
                     </div>
-                    <p class="font-black text-lg text-coffee-900">${Math.round(subtotal).toLocaleString('id-ID')} <span class="text-[12px] text-coffee-600 font-bold">K</span></p>
+                    <p class="font-black text-lg text-black">${Math.round(subtotal).toLocaleString('id-ID')} <span class="text-[12px] text-black font-bold">K</span></p>
                 </div>`;
             }).join('');
 
             let resiHTML = ''; if (order.awb_number) {
-                resiHTML = `<div class="bg-emerald-50/50 border-2 border-emerald-100 p-6 rounded-[2rem] mb-8 text-center relative overflow-hidden group"><div class="absolute -right-4 -top-4 w-12 h-12 bg-emerald-100 rounded-full opacity-100 group-hover:scale-150 transition-transform duration-700"></div><p class="text-[11px] uppercase font-black text-emerald-600 mb-2 tracking-[0.2em] relative z-10">Nomor Resi Pengiriman (${order.expedition})</p><p class="font-mono font-black text-2xl tracking-[0.3em] text-coffee-950 relative z-10">${order.awb_number}</p></div>`;
+                resiHTML = `<div class="bg-emerald-50/50 border-2 border-emerald-100 p-6 rounded-[2rem] mb-8 text-center relative overflow-hidden group"><div class="absolute -right-4 -top-4 w-12 h-12 bg-emerald-100 rounded-full opacity-100 group-hover:scale-150 transition-transform duration-700"></div><p class="text-[11px] uppercase font-black text-emerald-600 mb-2 tracking-[0.2em] relative z-10">Nomor Resi Pengiriman (${order.expedition})</p><p class="font-mono font-black text-2xl tracking-[0.3em] text-black relative z-10">${order.awb_number}</p></div>`;
             }
 
             let stampHTML = '<div class="inline-block border-2 border-amber-500 text-amber-600 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-widest text-xs scale-110 shadow-lg">Processing</div>';
             if (order.status === 'Selesai') {
                 stampHTML = '<div class="inline-block border-4 border-emerald-600 text-emerald-600 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-[0.3em] text-sm scale-110 shadow-2xl bg-white/150 backdrop-blur-sm">Delivered ✅</div>';
             } else if (order.status === 'Serahkan ke Jasa Kirim' || order.status === 'Disetujui Admin (Siap Kirim)') {
-                stampHTML = '<div class="inline-block border-4 border-coffee-900 text-coffee-900 px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-[0.3em] text-sm scale-110 shadow-2xl bg-white/150 backdrop-blur-sm">Paid & Shipped</div>';
+                stampHTML = '<div class="inline-block border-4 border-coffee-900 text-black px-6 py-2 font-black transform -rotate-12 opacity-80 rounded-xl uppercase tracking-[0.3em] text-sm scale-110 shadow-2xl bg-white/150 backdrop-blur-sm">Paid & Shipped</div>';
             }
 
             document.getElementById('invoice-content').innerHTML = `
                 <div class="text-center mb-10">
                     <div class="inline-block bg-coffee-950 text-white px-4 py-1.5 rounded-xl font-black text-[12px] uppercase tracking-[0.3em] mb-4">Official Invoice</div>
-                    <h2 class="text-4xl font-black text-coffee-950 tracking-tighter font-display uppercase">Sebiji Kopi</h2>
-                    <p class="text-[11px] text-coffee-600 uppercase tracking-[0.2em] font-black mt-2">Premium Warehouse Management System</p>
+                    <h2 class="text-4xl font-black text-black tracking-tighter font-display uppercase">Sebiji Kopi</h2>
+                    <p class="text-[11px] text-black uppercase tracking-[0.2em] font-black mt-2">Premium Warehouse Management System</p>
                 </div>
                 ${resiHTML}
                 <div class="grid grid-cols-2 gap-8 border-t border-b border-coffee-100 py-8 mb-8">
                     <div>
-                        <p class="text-[11px] text-coffee-600 font-black uppercase tracking-widest mb-2">Order Reference</p>
-                        <p class="font-mono font-black text-sm text-coffee-950">#ORD-${order.id}</p>
-                        <p class="text-[12px] font-black text-coffee-700 mt-1 uppercase tracking-tight">${order.date}</p>
+                        <p class="text-[11px] text-black font-black uppercase tracking-widest mb-2">Order Reference</p>
+                        <p class="font-mono font-black text-sm text-black">#ORD-${order.id}</p>
+                        <p class="text-[12px] font-black text-black mt-1 uppercase tracking-tight">${order.date}</p>
                     </div>
                     <div class="text-right">
-                        <p class="text-[11px] text-coffee-600 font-black uppercase tracking-widest mb-2">Customer Destination</p>
-                        <p class="font-black text-sm text-coffee-950 uppercase tracking-tight">${order.customer_name}</p>
-                        <p class="text-[12px] text-coffee-700 font-bold leading-relaxed mt-1 uppercase">${order.customer_address || '-'}</p>
-                        <p class="text-[11px] font-black text-coffee-600 mt-2 uppercase tracking-widest">Telp: ${order.customer_phone || '-'}</p>
+                        <p class="text-[11px] text-black font-black uppercase tracking-widest mb-2">Customer Destination</p>
+                        <p class="font-black text-sm text-black uppercase tracking-tight">${order.customer_name}</p>
+                        <p class="text-[12px] text-black font-bold leading-relaxed mt-1 uppercase">${order.customer_address || '-'}</p>
+                        <p class="text-[11px] font-black text-black mt-2 uppercase tracking-widest">Telp: ${order.customer_phone || '-'}</p>
                     </div>
                 </div>
                 <div class="bg-coffee-50/30 p-8 rounded-[2.5rem] border border-coffee-50 mb-8 relative">
-                    <p class="text-[11px] text-coffee-600 font-black uppercase tracking-widest mb-4">Item Details</p>
+                    <p class="text-[11px] text-black font-black uppercase tracking-widest mb-4">Item Details</p>
                     ${itemsTableRows}
                     <div class="flex justify-between items-center pt-6 mt-6 border-t border-coffee-100">
-                        <span class="text-[12px] font-black text-coffee-700 uppercase tracking-widest">Grand Total Payment</span>
-                        <span class="font-black text-2xl text-coffee-950 tracking-tighter">Rp ${Math.round(finalTotal).toLocaleString('id-ID')}.000</span>
+                        <span class="text-[12px] font-black text-black uppercase tracking-widest">Grand Total Payment</span>
+                        <span class="font-black text-2xl text-black tracking-tighter">Rp ${Math.round(finalTotal).toLocaleString('id-ID')}.000</span>
                     </div>
                 </div>
                 <div class="text-center mt-6 relative py-4">
@@ -2580,7 +2580,7 @@
             container.innerHTML = `
                 <div class="text-center py-16">
                     <div class="inline-block animate-spin w-12 h-12 border-4 border-coffee-200 border-t-accent-gold rounded-full mb-4"></div>
-                    <p class="font-black text-coffee-700 uppercase tracking-widest text-xs">Menganalisa data penjualan...</p>
+                    <p class="font-black text-black uppercase tracking-widest text-xs">Menganalisa data penjualan...</p>
                 </div>`;
 
             let url = `/api/ai/forecast?location=${encodeURIComponent(location)}&multiplier=${multiplier}`;
@@ -2614,18 +2614,18 @@
                     <div class="relative z-10">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                             <div>
-                                <span class="inline-block bg-accent-gold text-coffee-950 px-4 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.2em] mb-4 shadow-lg">AI Engine</span>
+                                <span class="inline-block bg-accent-gold text-black px-4 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.2em] mb-4 shadow-lg">AI Engine</span>
                                 <h3 class="text-2xl font-black font-display tracking-tight">Prediksi ${data.target_period}</h3>
-                                <p class="text-coffee-200 text-sm font-bold mt-2 opacity-80">Benchmark: Penjualan ${data.reference_period}</p>
+                                <p class="text-white/70 text-sm font-bold mt-2">Benchmark: Penjualan ${data.reference_period}</p>
                             </div>
                             <div class="flex gap-6">
                                 <div class="text-center">
-                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Total Produk</p>
+                                    <p class="text-[11px] font-bold text-white/60 uppercase tracking-widest mb-1">Total Produk</p>
                                     <p class="text-3xl font-black text-white">${data.suggestions.length}</p>
                                 </div>
                                 <div class="text-center">
-                                    <p class="text-[11px] font-bold text-coffee-600 uppercase tracking-widest mb-1">Perlu Restock</p>
-                                    <p class="text-3xl font-black text-accent-gold">${data.suggestions.filter(s => s.urgency === 'CRITICAL' || s.urgency === 'HIGH').length}</p>
+                                    <p class="text-[11px] font-bold text-white/60 uppercase tracking-widest mb-1">Perlu Restock</p>
+                                    <p class="text-3xl font-black text-white">${data.suggestions.filter(s => s.urgency === 'CRITICAL' || s.urgency === 'HIGH').length}</p>
                                 </div>
                             </div>
                         </div>
@@ -2645,26 +2645,26 @@
                                 <div class="flex items-center gap-4 mb-6 flex-wrap">
                                     <span class="${colors.badge} px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-xl border border-white/10">${colors.icon} ${s.urgency}</span>
                                     <span class="bg-coffee-950 text-white px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-xl border border-white/10">${s.type}</span>
-                                    ${isBestSeller ? '<span class="bg-accent-gold text-coffee-950 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-2xl shadow-accent-gold/30 border border-white/20">⭐ Top Seller</span>' : ''}
+                                    ${isBestSeller ? '<span class="bg-accent-gold text-black px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-2xl shadow-accent-gold/30 border border-white/20">⭐ Top Seller</span>' : ''}
                                 </div>
-                                <h4 class="font-black text-2xl text-coffee-950 uppercase tracking-tighter mb-4 font-display">${s.product}</h4>
+                                <h4 class="font-black text-2xl text-black uppercase tracking-tighter mb-4 font-display">${s.product}</h4>
                                 <p class="text-sm font-black ${colors.text} leading-relaxed opacity-80 uppercase tracking-tight">${s.message}</p>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 xl:gap-6 flex-shrink-0 w-full xl:w-auto">
                                 <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Target</p>
-                                    <p class="text-2xl font-black text-coffee-950 tracking-tighter">${Math.round(parseFloat(s.metrics.demand))}kg</p>
+                                    <p class="text-[10px] font-black text-black uppercase tracking-widest mb-3">Target</p>
+                                    <p class="text-2xl font-black text-black tracking-tighter">${Math.round(parseFloat(s.metrics.demand))}kg</p>
                                 </div>
                                 <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Stok</p>
-                                    <p class="text-2xl font-black text-coffee-950 tracking-tighter">${Math.round(parseFloat(s.metrics.stock))}kg</p>
+                                    <p class="text-[10px] font-black text-black uppercase tracking-widest mb-3">Stok</p>
+                                    <p class="text-2xl font-black text-black tracking-tighter">${Math.round(parseFloat(s.metrics.stock))}kg</p>
                                 </div>
                                 <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Gap</p>
+                                    <p class="text-[10px] font-black text-black uppercase tracking-widest mb-3">Gap</p>
                                     <p class="text-2xl font-black ${s.metrics.gap !== '0kg' ? 'text-red-600' : 'text-emerald-600'} tracking-tighter">${Math.round(parseFloat(s.metrics.gap))}kg</p>
                                 </div>
                                 <div class="text-center bg-white/150 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/50 group-hover:bg-white transition-colors duration-500">
-                                    <p class="text-[10px] font-black text-coffee-600 uppercase tracking-widest mb-3">Share</p>
+                                    <p class="text-[10px] font-black text-black uppercase tracking-widest mb-3">Share</p>
                                     <p class="text-2xl font-black text-accent-gold tracking-tighter">${Math.round(parseFloat(s.market_share))}%</p>
                                 </div>
                             </div>
