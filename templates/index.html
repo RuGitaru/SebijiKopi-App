@@ -140,6 +140,20 @@
             background: #a38d78;
         }
 
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(42, 29, 21, 0.1);
+            border-radius: 20px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(42, 29, 21, 0.3);
+        }
+
         .wh-nav-btn.active, .admin-nav-btn.active, .cust-nav-btn.active {
             background-color: rgba(255, 255, 255, 0.05);
             color: #fff;
@@ -194,6 +208,19 @@
         }
         .modal-overlay.active > div {
             transform: scale(1);
+        }
+
+        /* Specific style for Auth Modal (integrating into landing) */
+        #page-login.active {
+            display: flex !important;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(42, 29, 21, 0.4);
+            backdrop-filter: blur(12px);
+            opacity: 1;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -374,6 +401,9 @@
             if (!target) return;
 
             wrappers.forEach(w => {
+                if (w === target) return; 
+                if (pageId === 'page-login' && w.id === 'page-landing') return;
+
                 w.classList.remove('active');
                 setTimeout(() => { if (!w.classList.contains('active')) w.style.display = 'none'; }, 500);
             });
