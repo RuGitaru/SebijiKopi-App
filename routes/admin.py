@@ -141,3 +141,56 @@ def admin_delete_order(order_id):
     db.session.delete(order)
     db.session.commit()
     return jsonify({"success": True})
+
+@admin_bp.route('/api/admin/profile-requests', methods=['GET'])
+def list_profile_requests():
+    if session.get('role') != 'admin':
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    from models import ProfileChangeRequest
+    reqs = ProfileChangeRequest.query.filter_by(status='Menunggu').order_by(ProfileChangeRequest.requested_at.desc()).all()
+    
+    return jsonify([{
+        "id": r.id,
+        "user_id": r.user_id,
+        "username": r.user.username,
+        "name": r.user.name,
+        "role": r.user.role,
+        "field": r.field_name,
+        "old_value": r.old_value,
+        "new_value": r.new_value if r.field_name != 'password' else '********',
+        "date": r.requested_at.strftime('%Y-%m-%d %H:%M')
+    } for r in reqs])
+
+@admin_bp.route('/api/admin/profile-requests/<int:req_id>/approve', methods=['POST'])
+def approve_profile_request(req_id):
+    if session.get('role') != 'admin':
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    from models import ProfileChangeRequest, User
+    req = ProfileChangeRequest.query.get(req_id)
+    if not req:
+        return jsonify({"success": False, "message": "Request tidak ditemukan"}), 404
+    
+    user = User.query.get(req.user_id)
+    if user:
+        setattr(user, req.field_name, req.new_value)
+        req.status = 'Disetujui'
+        db.session.commit()
+        return jsonify({"success": True})
+    
+    return jsonify({"success": False, "message": "User tidak ditemukan"}), 404
+
+@admin_bp.route('/api/admin/profile-requests/<int:req_id>/reject', methods=['POST'])
+def reject_profile_request(req_id):
+    if session.get('role') != 'admin':
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    from models import ProfileChangeRequest
+    req = ProfileChangeRequest.query.get(req_id)
+    if req:
+        req.status = 'Ditolak'
+        db.session.commit()
+        return jsonify({"success": True})
+    
+    return jsonify({"success": False, "message": "Request tidak ditemukan"}), 404

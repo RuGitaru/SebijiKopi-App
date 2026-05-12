@@ -300,6 +300,7 @@
             }
             if (tabId === 'tab-reports') loadReportsData();
             if (tabId === 'tab-ai') loadAIForecast();
+            if (tabId === 'tab-profile') fillWhProfileForm();
         }
 
         function updateClock() {
@@ -339,60 +340,89 @@
             document.getElementById('prof-address').value = u.address || '';
             document.getElementById('prof-password').value = '';
             
-            // Header UI update
             document.getElementById('profile-name-header').innerText = u.name || 'User';
             document.getElementById('profile-username-header').innerText = '@' + (u.username || 'user');
             if(u.name) document.getElementById('profile-initial-circle').innerText = u.name.charAt(0).toUpperCase();
         }
 
-        function updateCustomerProfile() {
-            const btn = document.getElementById('btn-save-profile');
-            const ogText = btn.innerHTML;
+        function fillWhProfileForm() {
+            if (!currentUser) return;
+            const u = currentUser;
+            document.getElementById('wh-prof-name').value = u.name || '';
+            document.getElementById('wh-prof-email').value = u.email || '';
+            document.getElementById('wh-prof-phone').value = u.phone || '';
+            document.getElementById('wh-prof-address').value = u.address || '';
+            document.getElementById('wh-prof-password').value = '';
+            
+            document.getElementById('wh-profile-name-header').innerText = u.name || 'Staff';
+            document.getElementById('wh-profile-role-header').innerText = currentUser.job_role || currentUser.role;
+            if(u.name) document.getElementById('wh-profile-initial').innerText = u.name.charAt(0).toUpperCase();
+            
+            loadMyProfileRequests();
+        }
+
+        function submitProfileRequest() {
+            const isCustomer = currentUser.role === 'customer';
+            const prefix = isCustomer ? '' : 'wh-';
             
             const payload = {
-                name: document.getElementById('prof-name').value.trim(),
-                email: document.getElementById('prof-email').value.trim(),
-                phone: document.getElementById('prof-phone').value.trim(),
-                address: document.getElementById('prof-address').value.trim(),
-                password: document.getElementById('prof-password').value
+                name: document.getElementById(`${prefix}prof-name`).value.trim(),
+                email: document.getElementById(`${prefix}prof-email`).value.trim(),
+                phone: document.getElementById(`${prefix}prof-phone`).value.trim(),
+                address: document.getElementById(`${prefix}prof-address`).value.trim(),
+                password: document.getElementById(`${prefix}prof-password`).value
             };
 
-            const executeUpdate = () => {
-                btn.innerHTML = `<svg class="animate-spin w-5 h-5 mr-3" viewBox="0 0 24 24">...</svg> Memproses...`;
-                btn.disabled = true;
-
-                fetch('/api/customer/profile', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                }).then(res => res.json()).then(data => {
-                    if (data.success) {
-                        currentUser.name = data.user.name;
-                        currentUser.email = data.user.email;
-                        currentUser.phone = data.user.phone;
-                        currentUser.address = data.user.address;
-                        
-                        document.getElementById('cust-name-display').innerText = data.user.name;
-                        alert("Profil berhasil diperbarui!");
+            fetch('/api/profile/request', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(res => res.json()).then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    if (!isCustomer) loadMyProfileRequests();
+                    else {
+                        // Jika customer, data langsung terupdate di server, kita update session lokal
+                        currentUser.name = payload.name;
+                        currentUser.email = payload.email;
+                        currentUser.phone = payload.phone;
+                        currentUser.address = payload.address;
                         fillProfileForm();
-                    } else {
-                        alert("Gagal: " + data.message);
                     }
-                }).finally(() => {
-                    btn.innerHTML = ogText;
-                    btn.disabled = false;
-                });
-            };
+                } else {
+                    alert("Gagal: " + data.message);
+                }
+            });
+        }
 
-            if (payload.password) {
-                openConfirmModal(
-                    "Konfirmasi Ganti Sandi", 
-                    "Anda memasukkan kata sandi baru. Apakah Anda yakin ingin memperbarui keamanan akun Anda?", 
-                    executeUpdate
-                );
-            } else {
-                executeUpdate();
-            }
+        function loadMyProfileRequests() {
+            fetch('/api/profile/my-requests').then(res => res.json()).then(data => {
+                const container = document.getElementById('wh-pending-requests');
+                const list = document.getElementById('wh-requests-list');
+                if (!container || !list) return;
+
+                if (data.length === 0) {
+                    container.classList.add('hidden');
+                    return;
+                }
+
+                container.classList.remove('hidden');
+                list.innerHTML = data.map(r => `
+                    <div class="flex items-center justify-between bg-accent-cream/50 p-4 rounded-xl border border-coffee-50">
+                        <div class="flex flex-col">
+                            <span class="text-[8px] font-black uppercase text-coffee-300 tracking-widest">${r.date} &bull; ${r.field}</span>
+                            <span class="text-[11px] font-black text-coffee-950">${r.new_value}</span>
+                        </div>
+                        <span class="px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest ${r.status === 'Menunggu' ? 'bg-amber-100 text-amber-700' : (r.status === 'Disetujui' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700')}">
+                            ${r.status}
+                        </span>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function updateCustomerProfile() {
+            submitProfileRequest();
         }
 
         function navigateTo(pageId) {
@@ -1405,6 +1435,65 @@
                         sdmBody.innerHTML = empHtml || `<tr><td colspan="6" class="p-6 text-center text-slate-400">Belum ada data sdm.</td></tr>`;
                         renderPagination(data.employees.length, pg.size, pg.current, 'pagination-admin-sdm', 'adminSdm');
                     }
+                    loadAdminProfileRequests();
+                }
+            });
+        }
+
+        function loadAdminProfileRequests() {
+            fetch('/api/admin/profile-requests').then(res => res.json()).then(data => {
+                const container = document.getElementById('admin-profile-requests-container');
+                if (!container) return;
+
+                if (data.length === 0) {
+                    container.innerHTML = `<div class="text-center py-12 text-coffee-300 font-black uppercase tracking-widest text-[10px]">No pending identity requests.</div>`;
+                    return;
+                }
+
+                container.innerHTML = data.map(r => `
+                    <div class="bg-accent-cream/30 p-8 rounded-[2rem] border border-coffee-50 flex flex-col md:flex-row justify-between items-center gap-8 group hover:border-accent-gold/30 transition-all duration-500">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 bg-coffee-950 text-accent-gold rounded-2xl flex items-center justify-center font-black text-xl shadow-xl">${r.name.charAt(0).toUpperCase()}</div>
+                            <div>
+                                <h4 class="text-lg font-black text-coffee-950 uppercase tracking-tighter">${r.name}</h4>
+                                <p class="text-[9px] font-black text-coffee-300 uppercase tracking-widest mt-1">${r.role} &bull; ${r.date}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-1 bg-white p-6 rounded-2xl border border-coffee-50 shadow-inner">
+                            <div class="flex items-center gap-4">
+                                <div class="px-3 py-1 bg-coffee-50 text-coffee-400 rounded-lg text-[9px] font-black uppercase tracking-widest">${r.field}</div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs font-bold text-coffee-400 line-through">${r.old_value || 'Empty'}</span>
+                                    <svg class="w-4 h-4 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span class="text-sm font-black text-coffee-950">${r.new_value}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button onclick="approveProfileRequest(${r.id})" class="bg-emerald-600 text-white px-8 py-4 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-emerald-700 shadow-xl shadow-emerald-100 transition-all active:scale-95">Approve</button>
+                            <button onclick="rejectProfileRequest(${r.id})" class="bg-white text-red-500 border border-red-100 px-8 py-4 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-red-50 transition-all active:scale-95">Reject</button>
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function approveProfileRequest(reqId) {
+            fetch(`/api/admin/profile-requests/${reqId}/approve`, { method: 'POST' }).then(res => res.json()).then(data => {
+                if (data.success) {
+                    alert("Perubahan disetujui!");
+                    loadAdminProfileRequests();
+                }
+            });
+        }
+
+        function rejectProfileRequest(reqId) {
+            fetch(`/api/admin/profile-requests/${reqId}/reject`, { method: 'POST' }).then(res => res.json()).then(data => {
+                if (data.success) {
+                    alert("Perubahan ditolak.");
+                    loadAdminProfileRequests();
                 }
             });
         }
@@ -1827,7 +1916,7 @@
             let accentColor = "text-accent-gold";
             let btnClass = "bg-coffee-950 hover:bg-black text-white";
             
-            const canInbound = currentUser.role === 'wh_supervisor' || (currentUser.job_role && currentUser.job_role.includes('Inbound'));
+            const canInbound = (currentUser.job_role && currentUser.job_role.includes('Inbound'));
 
             container.innerHTML = PRODUCT_LIST.map(prod => {
                 const stockData = dbStocks[currentUser.location][prod]; 

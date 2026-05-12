@@ -8,6 +8,7 @@ from routes.customer import customer_bp
 from routes.admin import admin_bp
 from routes.warehouse import warehouse_bp
 from routes.ai import ai_bp
+from routes.profile import profile_bp
 
 app = Flask(__name__)
 app.secret_key = "sebiji_kopi_super_secure_key"
@@ -22,6 +23,7 @@ app.register_blueprint(customer_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(warehouse_bp)
 app.register_blueprint(ai_bp)
+app.register_blueprint(profile_bp)
 
 # Rute khusus untuk menampilkan halaman HTML
 @app.route('/')

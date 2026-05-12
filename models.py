@@ -72,3 +72,15 @@ class InboundTask(db.Model):
     operator_name = db.Column(db.String(100), nullable=False)
     status = db.Column(db.String(50), default='Menunggu Bongkar Muat')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class ProfileChangeRequest(db.Model):
+    __tablename__ = 'profile_change_requests'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    field_name = db.Column(db.String(50), nullable=False) # 'name', 'email', 'phone', 'address', 'password'
+    old_value = db.Column(db.Text, nullable=True)
+    new_value = db.Column(db.Text, nullable=False)
+    status = db.Column(db.String(20), default='Menunggu') # 'Menunggu', 'Disetujui', 'Ditolak'
+    requested_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    user = db.relationship('User', backref=db.backref('change_requests', lazy=True))

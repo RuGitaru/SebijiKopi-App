@@ -82,11 +82,10 @@ def warehouse_batch_update():
 
 @warehouse_bp.route('/api/warehouse/inbound', methods=['POST'])
 def warehouse_inbound():
-    # Validasi: Harus SPV atau Operator Inbound
-    is_spv = session.get('role') == 'wh_supervisor'
+    # Validasi: HANYA Operator Inbound yang dapat mendaftarkan inbound baru.
     is_inbound = 'Inbound' in (session.get('job_role') or '')
-    if not (is_spv or is_inbound):
-        return jsonify({"error": "Akses ditolak. Hanya SPV atau Operator Inbound yang dapat mendaftarkan inbound baru."}), 403
+    if not is_inbound:
+        return jsonify({"error": "Akses ditolak. Hanya Operator Inbound yang dapat mendaftarkan inbound baru."}), 403
     
     data = request.get_json()
     from models import InboundTask, User
